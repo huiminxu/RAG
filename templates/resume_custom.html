@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ name }} - 个人简历</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: #ffffff;
+      color: #333333;
+      font-size: 12px;
+      line-height: 1.6;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+    }
+
+    /* ===== TOP HEADER ===== */
+    .header {
+      position: relative;
+      background: #ffffff;
+      padding: 20px 30px 16px 30px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      border-bottom: none;
+    }
+
+    .header-photo {
+      width: 90px;
+      height: 110px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      flex-shrink: 0;
+    }
+
+    .header-photo-placeholder {
+      width: 90px;
+      height: 110px;
+      background: #e0e0e0;
+      border: 2px solid #ddd;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 11px;
+    }
+
+    .header-center {
+      flex: 1;
+      padding-top: 4px;
+    }
+
+    .header-name {
+      font-size: 26px;
+      font-weight: bold;
+      color: #2c3e50;
+      text-align: center;
+      margin-bottom: 12px;
+      letter-spacing: 4px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 20px;
+    }
+
+    .info-list li {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: #444;
+    }
+
+    .info-list li::before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-top: 5px solid transparent;
+      border-bottom: 5px solid transparent;
+      border-left: 7px solid #3d5a80;
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #2c3e50;
+      min-width: 36px;
+      display: inline-block;
+    }
+
+    /* TOP-RIGHT decorative block */
+    .header-deco {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      background: #3d5a80;
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+
+    .header-deco-text {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 120px;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding: 10px 10px 0 0;
+      pointer-events: none;
+    }
+
+    .deco-resume-en {
+      font-size: 11px;
+      color: #ffffff;
+      font-weight: 600;
+      letter-spacing: 2px;
+    }
+
+    .deco-resume-zh {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .main {
+      padding: 0 30px 20px 30px;
+    }
+
+    /* ===== SECTION TITLE ===== */
+    .section {
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      background: #3d5a80;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 5px 12px;
+      margin-bottom: 10px;
+      letter-spacing: 2px;
+    }
+
+    .section-title::before {
+      content: "";
+      display: inline-block;
+      width: 0;
+      height: 0;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
+      border-left: 8px solid #ffffff;
+      margin-right: 8px;
+    }
+
+    /* ===== EDUCATION ===== */
+    .edu-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .edu-table tr td {
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #333;
+    }
+
+    .edu-table tr td:first-child {
+      width: 130px;
+      color: #555;
+    }
+
+    .edu-table tr td:nth-child(2) {
+      font-weight: 600;
+      color: #2c3e50;
+    }
+
+    /* ===== SKILLS ===== */
+    .skills-content {
+      padding: 4px 8px;
+      font-size: 12px;
+      color: #333;
+      line-height: 2;
+    }
+
+    .skill-tag {
+      display: inline;
+    }
+
+    .skill-separator {
+      color: #3d5a80;
+      margin: 0 4px;
+      font-weight: bold;
+    }
+
+    /* ===== EXPERIENCE ===== */
+    .exp-item {
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 4px 16px;
+      padding: 4px 8px;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+
+    .exp-company {
+      font-weight: bold;
+      color: #2c3e50;
+      font-size: 12px;
+    }
+
+    .exp-role {
+      color: #555;
+      font-size: 12px;
+    }
+
+    .exp-period {
+      color: #3d5a80;
+      font-size: 12px;
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .exp-desc {
+      grid-column: 1 / -1;
+      color: #666;
+      font-size: 11px;
+      padding-left: 4px;
+    }
+
+    /* ===== PROJECTS ===== */
+    .proj-item {
+      padding: 4px 8px 8px 8px;
+      margin-bottom: 6px;
+    }
+
+    .proj-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .proj-name {
+      font-size: 12.5px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .proj-role {
+      font-size: 11.5px;
+      color: #3d5a80;
+      font-weight: 600;
+    }
+
+    .proj-role-label {
+      color: #555;
+      font-size: 11px;
+    }
+
+    .proj-detail-list {
+      list-style: none;
+      padding-left: 4px;
+    }
+
+    .proj-detail-list li {
+      font-size: 11.5px;
+      color: #444;
+      padding: 2px 0 2px 18px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .proj-detail-list li::before {
+      content: "■";
+      position: absolute;
+      left: 0;
+      color: #2c3e50;
+      font-size: 8px;
+      top: 5px;
+    }
+
+    .proj-sub-list {
+      list-style: none;
+      padding-left: 16px;
+      margin-top: 2px;
+    }
+
+    .proj-sub-list li {
+      font-size: 11px;
+      color: #555;
+      padding: 1px 0 1px 14px;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .proj-sub-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #3d5a80;
+      font-size: 14px;
+      top: -1px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #3d5a80;
+      color: #ffffff;
+      text-align: center;
+      padding: 8px 0;
+      font-size: 13px;
+      letter-spacing: 4px;
+      margin-top: 10px;
+    }
+
+    /* ===== DIVIDER LINE ===== */
+    .section-divider {
+      border: none;
+      border-top: 1px solid #dde3ea;
+      margin: 0 0 10px 0;
+    }
+
+    /* ===== PRINT ===== */
+    @media print {
+      body {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 0;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .header-deco,
+      .header-deco-text {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .section-title {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .footer {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      a {
+        color: #3d5a80;
+        text-decoration: none;
+      }
+    }
+
+    a {
+      color: #3d5a80;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <div class="header-photo-placeholder">照片</div>
+
+    <div class="header-center">
+      <div class="header-name">{{ name }}</div>
+      <ul class="info-list">
+        <li><span class="info-label">民　族：</span>{{ info.ethnicity }}</li>
+        <li><span class="info-label">年　龄：</span>{{ info.age }}</li>
+        <li><span class="info-label">电　话：</span>{{ info.phone }}</li>
+        <li><span class="info-label">邮　件：</span>{{ info.email }}</li>
+        <li><span class="info-label">住　址：</span>{{ info.location }}</li>
+        <li><span class="info-label">英语水平：</span>{{ info.english_level }}</li>
+      </ul>
+    </div>
+
+    <!-- Decorative top-right triangle -->
+    <div class="header-deco"></div>
+    <div class="header-deco-text">
+      <span class="deco-resume-en">RESUME</span>
+      <span class="deco-resume-zh">个人简历</span>
+    </div>
+  </div>
+
+  <!-- ===== MAIN ===== -->
+  <div class="main">
+
+    <!-- EDUCATION -->
+    <div class="section">
+      <div class="section-title">教育背景</div>
+      <table class="edu-table">
+        {% for edu in education %}
+        <tr>
+          <td>{{ edu.period }}</td>
+          <td>{{ edu.school }}</td>
+          <td>{{ edu.major }}</td>
+          <td>{{ edu.degree }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section">
+      <div class="section-title">技能</div>
+      <div class="skills-content">
+        {% for skill in skills %}
+        <span class="skill-tag">{{ skill }}</span>{% if not loop.last %}<span class="skill-separator">|</span>{% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <div class="section-title">工作经历</div>
+      {% for exp in experience %}
+      <div class="exp-item">
+        <span class="exp-company">{{ exp.company }}</span>
+        <span class="exp-role">{{ exp.role }}</span>
+        <span class="exp-period">{{ exp.period }}</span>
+        {% if exp.desc %}
+        <div class="exp-desc">{{ exp.desc }}</div>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section">
+      <div class="section-title">项目经验</div>
+      {% for proj in projects %}
+      <div class="proj-item">
+        <div class="proj-header">
+          <span class="proj-name">{{ proj.name }}</span>
+          <span class="proj-role"><span class="proj-role-label">参与角色：</span>{{ proj.role }}</span>
+        </div>
+        <ul class="proj-detail-list">
+          {% for d in proj.desc %}
+          <li>{{ d }}</li>
+          {% endfor %}
+          {% if proj.tech %}
+          <li>技术栈：{{ proj.tech }}</li>
+          {% endif %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">感谢您的阅读</div>
+
+</body>
+</html>
