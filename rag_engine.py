@@ -81,6 +81,13 @@ PROMPT_TEMPLATE = """基于以下参考文档回答用户的问题。如果文�
 
 
 def query(question: str, k: int = 3):
+    if not KB_DIR.exists():
+        return {"answer": "kb/ 目录不存在，请先创建知识库目录。", "sources": []}
+
+    kb_files = list(KB_DIR.glob("**/*.md"))
+    if not kb_files:
+        return {"answer": "知识库里还没有 .md 文件，请先添加文档。", "sources": []}
+
     vectorstore = get_vectorstore()
     retriever = vectorstore.similarity_search_with_score(question, k=k)
 

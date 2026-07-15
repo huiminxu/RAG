@@ -19,6 +19,9 @@ from resume_html import (render_resume_html, generate_resume_pdf_from_html,
 # from trends import get_all_trends  # 暂时关闭
 
 st.set_page_config(page_title="RAG 知识库问答", page_icon="📚", layout="wide")
+st.write("APP LOADED")
+
+KB_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_kb_categories():
     categories = {}
