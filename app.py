@@ -22,6 +22,8 @@ st.set_page_config(page_title="RAG 知识库问答", page_icon="📚", layout="w
 
 def get_kb_categories():
     categories = {}
+    if not KB_DIR.exists():
+        return categories
     for sub in sorted(KB_DIR.iterdir()):
         if sub.is_dir():
             files = list(sub.glob("*.md"))
