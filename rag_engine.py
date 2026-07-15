@@ -34,7 +34,10 @@ def get_text_splitter():
 
 
 def get_embeddings():
-    return FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    print("Loading Embeddings...")
+    return FastEmbedEmbeddings(
+        model_name="BAAI/bge-small-en-v1.5"
+    )
 
 
 def build_vectorstore():
