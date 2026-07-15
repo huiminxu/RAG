@@ -16,7 +16,7 @@ from resume import (parse_pdf_resume, save_resume, load_resume, save_version,
                     generate_optimized_resume, extract_kb_skills)
 from resume_html import (render_resume_html, generate_resume_pdf_from_html,
                          generate_template_from_pdf, list_templates)
-from trends import get_all_trends
+# from trends import get_all_trends  # 暂时关闭
 
 st.set_page_config(page_title="RAG 知识库问答", page_icon="📚", layout="wide")
 
@@ -50,7 +50,7 @@ with st.sidebar:
             rebuild_index()
         st.success("索引重建完成！")
 
-tab_chat, tab_exam, tab_interview, tab_import, tab_resource, tab_progress, tab_resume, tab_trends = st.tabs(["💬 知识库问答", "📝 面试卷生成", "🎙️ 模拟面试", "📥 音视频导入", "📚 资源导入", "📈 学习进度", "📄 简历优化", "🔥 技术趋势"])
+tab_chat, tab_exam, tab_interview, tab_import, tab_resource, tab_progress, tab_resume = st.tabs(["💬 知识库问答", "📝 面试卷生成", "🎙️ 模拟面试", "📥 音视频导入", "📚 资源导入", "📈 学习进度", "📄 简历优化"])
 
 with tab_chat:
     st.title("📚 RAG 知识库问答系统")
@@ -712,103 +712,6 @@ with tab_resume:
                 if ver.get("suggestions"):
                     st.markdown(f"**改进建议:** {ver['suggestions'][:200]}")
 
-with tab_trends:
-    st.title("🔥 技术趋势")
-    st.caption("聚合 GitHub / Hacker News / Dev.to / YouTube 热门资源，快速了解技术前沿")
-
-    col_lang, col_custom, col_since, col_refresh = st.columns([2, 2, 2, 1])
-    with col_lang:
-        trend_language = st.selectbox(
-            "语言/领域",
-            ["", "JavaScript", "TypeScript", "Python", "Vue", "React", "Go", "Rust", "AI", "Agent", "LLM", "大模型", "英语", "__custom__"],
-            format_func=lambda x: {"": "全部", "__custom__": "🔍 自定义..."}.get(x, x),
-            key="trend_lang",
-        )
-    with col_custom:
-        if trend_language == "__custom__":
-            custom_kw = st.text_input("关键词", placeholder="Docker、微服务、GPT...", key="trend_custom")
-        else:
-            custom_kw = ""
-            st.text_input("关键词", placeholder="选择「自定义」后输入", disabled=True, key="trend_custom_disabled")
-    with col_since:
-        trend_since = st.selectbox(
-            "时间范围",
-            ["daily", "weekly", "monthly"],
-            index=1,
-            format_func=lambda x: {"daily": "今天", "weekly": "本周", "monthly": "本月"}[x],
-            key="trend_since",
-        )
-    with col_refresh:
-        st.write("")
-        st.write("")
-        refresh = st.button("🔄 刷新", key="trend_refresh")
-
-    trend_keyword = custom_kw.strip() if trend_language == "__custom__" else trend_language
-    if trend_language == "__custom__" and not trend_keyword:
-        st.info("请输入关键词后查看结果")
-        st.stop()
-
-    @st.cache_data(ttl=3600, show_spinner=False)
-    def _cached_trends(language, since):
-        return get_all_trends(language=language, since=since, limit=10)
-
-    if refresh:
-        _cached_trends.clear()
-
-    with st.spinner("正在获取最新技术趋势..."):
-        trends = _cached_trends(trend_keyword, trend_since)
-
-    # GitHub Trending
-    st.subheader("⭐ GitHub 热门项目")
-    if trends["github"]:
-        for repo in trends["github"]:
-            topics_str = " ".join(f"`{t}`" for t in repo["topics"]) if repo["topics"] else ""
-            st.markdown(
-                f"**[{repo['name']}]({repo['url']})** — {repo['description'][:80]}\n\n"
-                f"⭐ {repo['stars']:,} | 🍴 {repo['forks']:,} | 🏷️ {repo['language']} {topics_str}"
-            )
-            st.divider()
-    else:
-        st.info("暂无数据（GitHub API 有速率限制，稍后重试）")
-
-    # Hacker News
-    st.subheader("📰 Hacker News 热门讨论")
-    if trends["hackernews"]:
-        for item in trends["hackernews"]:
-            st.markdown(
-                f"**[{item['title']}]({item['url']})** — "
-                f"🔥 {item['score']} | 💬 {item['comments']} 评论 | {item['time']}"
-            )
-    else:
-        st.info("暂无数据")
-
-    # Dev.to
-    st.subheader("📝 Dev.to 热门文章")
-    if trends["devto"]:
-        for article in trends["devto"]:
-            tags_str = " ".join(f"`{t}`" for t in article["tags"][:4]) if article["tags"] else ""
-            st.markdown(
-                f"**[{article['title']}]({article['url']})**\n\n"
-                f"❤️ {article['reactions']} | 💬 {article['comments']} | {tags_str} | {article['published_at']}"
-            )
-            st.divider()
-    else:
-        st.info("暂无数据")
-
-    # Bilibili
-    st.subheader("📺 B站技术视频")
-    if trends["bilibili"]:
-        for video in trends["bilibili"]:
-            col_thumb, col_info = st.columns([1, 3])
-            with col_thumb:
-                if video.get("thumbnail"):
-                    st.image(video["thumbnail"], width=160)
-            with col_info:
-                play_str = f"▶️ {video['play']:,}" if isinstance(video.get("play"), int) else f"▶️ {video.get('play', 0)}"
-                st.markdown(
-                    f"**[{video['title']}]({video['url']})**\n\n"
-                    f"👤 {video['author']} | {play_str} | 💬 {video.get('danmaku', 0)} | ⏱️ {video.get('duration', '')} | {video['published']}"
-                )
-            st.divider()
-    else:
-        st.info("暂无 B站 数据")
+# --- 技术趋势 Tab 暂时关闭（排查白屏问题） ---
+# with tab_trends:
+#     pass
