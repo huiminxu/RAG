@@ -62,12 +62,16 @@ def get_vectorstore():
     return build_vectorstore()
 
 
-def get_llm():
-    return ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=1024,
-    )
+def get_llm(max_tokens: int = 1024):
+    kwargs = {
+        "model": "claude-sonnet-4-6",
+        "api_key": os.getenv("ANTHROPIC_API_KEY"),
+        "max_tokens": max_tokens,
+    }
+    base_url = os.getenv("ANTHROPIC_BASE_URL")
+    if base_url:
+        kwargs["base_url"] = base_url
+    return ChatAnthropic(**kwargs)
 
 
 PROMPT_TEMPLATE = """基于以下参考文档回答用户的问题。如果文档中没有相关信息，请如实说明。
@@ -205,11 +209,7 @@ def get_interview_system_prompt(selected_files: list[str] = None, num_questions:
 
 
 def interview_chat(system_prompt: str, messages: list[dict]):
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=2048,
-    )
+    llm = get_llm(max_tokens=2048)
     from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 
     lc_messages = [SystemMessage(content=system_prompt)]
@@ -310,11 +310,7 @@ def analyze_transcript(transcript: str, category: str = None):
 
 请用中文回答，分析要具体、有可操作性。"""
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=2048,
-    )
+    llm = get_llm(max_tokens=2048)
     response = llm.invoke(prompt)
     return response.content
 
@@ -605,11 +601,7 @@ def organize_content(raw_content: str, title: str, source_type: str, url: str, c
 
 请用中文输出（术语保留英文原文）。内容要精炼有价值，不要水。"""
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=4096,
-    )
+    llm = get_llm(max_tokens=4096)
     response = llm.invoke(prompt)
     return response.content
 
@@ -649,11 +641,7 @@ def generate_learning_report(progress_summary: str) -> str:
 
 请用中文回答，分析要基于数据，建议要具体可操作。"""
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=2048,
-    )
+    llm = get_llm(max_tokens=2048)
     response = llm.invoke(prompt)
     return response.content
 

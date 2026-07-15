@@ -95,14 +95,10 @@ def generate_template_from_pdf(pdf_bytes: bytes, template_name: str = "custom") 
 
     img_b64 = base64.b64encode(png_bytes).decode()
 
-    from langchain_anthropic import ChatAnthropic
     from langchain_core.messages import HumanMessage
+    from rag_engine import get_llm
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=8192,
-    )
+    llm = get_llm(max_tokens=8192)
 
     msg = HumanMessage(content=[
         {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}"}},

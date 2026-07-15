@@ -4,10 +4,11 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from langchain_anthropic import ChatAnthropic
 from dotenv import load_dotenv
 
 load_dotenv()
+
+from rag_engine import get_llm
 
 BASE_DIR = Path(__file__).parent
 KB_DIR = BASE_DIR / "kb"
@@ -163,11 +164,7 @@ def generate_optimized_resume(
         interview_data=interview_data or "（暂无面试记录）",
     )
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=8192,
-    )
+    llm = get_llm(max_tokens=8192)
     response = llm.invoke(prompt)
     content = response.content
 
@@ -237,11 +234,7 @@ STRUCTURED_PROMPT = """请将以下简历内容提取为严格的 JSON 格式（
 def _extract_structured_from_markdown(md_content: str) -> dict | None:
     prompt = STRUCTURED_PROMPT.format(resume_md=md_content[:3000])
     try:
-        llm = ChatAnthropic(
-            model="claude-sonnet-4-6",
-            api_key=os.getenv("ANTHROPIC_API_KEY"),
-            max_tokens=2048,
-        )
+        llm = get_llm(max_tokens=2048)
         resp = llm.invoke(prompt)
         content = resp.content
         json_match = re.search(r'```json\s*(\{.+\})\s*```', content, re.DOTALL)
@@ -354,11 +347,7 @@ def classify_template_fields(spans: list[dict]) -> dict:
 
     prompt = CLASSIFY_PROMPT.format(spans_text=spans_text)
 
-    llm = ChatAnthropic(
-        model="claude-sonnet-4-6",
-        api_key=os.getenv("ANTHROPIC_API_KEY"),
-        max_tokens=4096,
-    )
+    llm = get_llm(max_tokens=4096)
     response = llm.invoke(prompt)
     content = response.content
 

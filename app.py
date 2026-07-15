@@ -615,9 +615,9 @@ with tab_resume:
         img_b64 = base64.b64encode(img_bytes).decode()
         mime = f"image/{jd_image.type.split('/')[-1]}" if "/" in (jd_image.type or "") else f"image/{jd_image.name.split('.')[-1]}"
         with st.spinner("AI 正在识别图片中的 JD 内容..."):
-            from langchain_anthropic import ChatAnthropic
             from langchain_core.messages import HumanMessage
-            llm = ChatAnthropic(model="claude-sonnet-4-6", api_key=os.getenv("ANTHROPIC_API_KEY"), max_tokens=2048)
+            from rag_engine import get_llm
+            llm = get_llm(max_tokens=2048)
             msg = HumanMessage(content=[
                 {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{img_b64}"}},
                 {"type": "text", "text": "请提取这张图片中的职位描述（JD）内容，原样输出文本，保留格式。如果有职位名称、要求、职责等信息请完整提取。"},
