@@ -170,67 +170,88 @@ def fetch_bilibili_tech(limit: int = 10, keyword: str = "") -> list[dict]:
         return []
 
 
-YOUTUBE_TECH_CHANNELS = {
-    "Fireship": "UCsBjURrPoezykLs9EqgamOA",
-    "freeCodeCamp": "UC8butISFwT-Wl7EV0hUK0BQ",
-    "Traversy Media": "UC29ju8bIPH5as8OGnQzwJyA",
-    "Web Dev Simplified": "UCFbNIlppjAuEX4znoulh0Cw",
-    "ThePrimeagen": "UC8ENHE5xdFSwx71u3fDH5Xw",
-    "ArjanCodes": "UCVhQ2NnY5Rskt6UjCUkJ_DA",
-    "NetworkChuck": "UC9x0AN7BWHpCDHSm9NiJFJQ",
-    "sentdex": "UCfzlCWGWYyIQ0aLC5w48gBQ",
-}
-
-
 def fetch_youtube_tech(keyword: str = "", limit: int = 10) -> list[dict]:
-    """Fetch latest videos from curated tech YouTube channels via RSS (no API key)."""
-    import xml.etree.ElementTree as ET
+    """Fetch tech videos from YouTube Data API v3 (requires YOUTUBE_API_KEY)."""
+    import os
+    api_key = os.getenv("YOUTUBE_API_KEY", "")
+    if not api_key:
+        return []
 
-    results = []
-    channels = list(YOUTUBE_TECH_CHANNELS.items())
+    search_kw = keyword if keyword else "programming tutorial"
+    params = {
+        "part": "snippet",
+        "q": search_kw,
+        "type": "video",
+        "order": "date",
+        "relevanceLanguage": "en",
+        "maxResults": limit,
+        "key": api_key,
+    }
 
-    for name, channel_id in channels:
-        if len(results) >= limit:
-            break
-        try:
-            url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
-            resp = requests.get(url, timeout=10)
-            resp.raise_for_status()
-            root = ET.fromstring(resp.text)
-            ns = {"atom": "http://www.w3.org/2005/Atom", "media": "http://search.yahoo.com/mrss/"}
+    try:
+        resp = requests.get("https://www.googleapis.com/youtube/v3/search", params=params, timeout=15)
+        resp.raise_for_status()
+        items = resp.json().get("items", [])
 
-            for entry in root.findall("atom:entry", ns)[:2]:
-                title = entry.find("atom:title", ns).text or ""
-                if keyword and keyword.lower() not in title.lower():
-                    continue
-                vid_url = entry.find("atom:link", ns).attrib.get("href", "")
-                vid_id = vid_url.split("v=")[-1] if "v=" in vid_url else ""
-                published = entry.find("atom:published", ns).text[:10] if entry.find("atom:published", ns) is not None else ""
-                media_group = entry.find("media:group", ns)
-                views = 0
-                if media_group is not None:
-                    community = media_group.find("media:community", ns)
-                    if community is not None:
-                        stats = community.find("media:statistics", ns)
-                        if stats is not None:
-                            views = int(stats.attrib.get("views", 0))
+        video_ids = [item["id"]["videoId"] for item in items if item.get("id", {}).get("videoId")]
+        stats = _fetch_youtube_stats(video_ids, api_key) if video_ids else {}
 
-                results.append({
-                    "title": title,
-                    "url": vid_url,
-                    "author": name,
-                    "views": views,
-                    "published": published,
-                    "duration": "",
-                    "thumbnail": f"https://i.ytimg.com/vi/{vid_id}/mqdefault.jpg" if vid_id else "",
-                })
-                if len(results) >= limit:
-                    break
-        except Exception:
-            continue
+        results = []
+        for item in items:
+            vid_id = item.get("id", {}).get("videoId", "")
+            if not vid_id:
+                continue
+            snippet = item.get("snippet", {})
+            stat = stats.get(vid_id, {})
+            results.append({
+                "title": snippet.get("title", ""),
+                "url": f"https://www.youtube.com/watch?v={vid_id}",
+                "author": snippet.get("channelTitle", ""),
+                "views": int(stat.get("viewCount", 0)),
+                "published": snippet.get("publishedAt", "")[:10],
+                "duration": stat.get("duration_fmt", ""),
+                "thumbnail": f"https://i.ytimg.com/vi/{vid_id}/mqdefault.jpg",
+            })
+        return results
+    except Exception:
+        return []
 
-    results.sort(key=lambda x: x.get("published", ""), reverse=True)
-    return results[:limit]
+
+def _fetch_youtube_stats(video_ids: list, api_key: str) -> dict:
+    """Fetch view counts and durations for a list of video IDs."""
+    params = {
+        "part": "statistics,contentDetails",
+        "id": ",".join(video_ids),
+        "key": api_key,
+    }
+    try:
+        resp = requests.get("https://www.googleapis.com/youtube/v3/videos", params=params, timeout=10)
+        resp.raise_for_status()
+        result = {}
+        for item in resp.json().get("items", []):
+            vid_id = item["id"]
+            stats = item.get("statistics", {})
+            duration_iso = item.get("contentDetails", {}).get("duration", "")
+            result[vid_id] = {
+                "viewCount": stats.get("viewCount", "0"),
+                "duration_fmt": _parse_iso_duration(duration_iso),
+            }
+        return result
+    except Exception:
+        return {}
+
+
+def _parse_iso_duration(iso: str) -> str:
+    """Convert ISO 8601 duration (PT1H2M3S) to readable format."""
+    import re
+    m = re.match(r"PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?", iso)
+    if not m:
+        return ""
+    h, mi, s = m.group(1), m.group(2), m.group(3)
+    h, mi, s = int(h or 0), int(mi or 0), int(s or 0)
+    if h:
+        return f"{h}:{mi:02d}:{s:02d}"
+    return f"{mi}:{s:02d}"
 
 
 def _ts_to_date(ts) -> str:

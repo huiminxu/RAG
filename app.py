@@ -875,7 +875,11 @@ with tab_trends:
                         card = f'<div class="trend-card">{thumb}<h4><a href="{video["url"]}" target="_blank">{title}</a></h4><div class="meta"><span>👤 {author}</span><span>👁️ {views}</span><span>⏱️ {video.get("duration", "")}</span><span>📅 {video.get("published", "")}</span></div><div style="clear:both;"></div></div>'
                         st.markdown(card, unsafe_allow_html=True)
                 else:
-                    st.info("暂无 YouTube 数据（本地网络无法访问 YouTube）")
+                    import os
+                    if not os.getenv("YOUTUBE_API_KEY"):
+                        st.info("需配置 YOUTUBE_API_KEY\n\n[获取 Key →](https://console.cloud.google.com/apis/library/youtube.googleapis.com)")
+                    else:
+                        st.info("暂无 YouTube 数据")
 
         # Dev.to (bottom-left)
         with row2_left:
