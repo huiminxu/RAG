@@ -1,0 +1,63 @@
+/* === 浅色主题 - 文档预览对话框 === */
+.preview-path {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #5a3e4b;
+    padding: 4px 12px;
+    border-radius: 14px;
+    font-size: 12px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+[data-testid="stDialog"] > div > div {
+    background: linear-gradient(135deg, #fff5f2 0%, #fff7f8 40%, #f3f7ff 100%) !important;
+}
+[data-testid="stDialog"] [data-testid="stVerticalBlockBorderWrapper"] {
+    border: 1px solid rgba(255,154,158,0.15) !important;
+    border-radius: 10px !important;
+    background: rgba(255,255,255,0.6) !important;
+}
+[data-testid="stDialog"] .stMarkdown,
+[data-testid="stDialog"] .stMarkdown p,
+[data-testid="stDialog"] .stMarkdown li,
+[data-testid="stDialog"] .stMarkdown span {
+    color: #1a1a1a !important;
+    -webkit-text-fill-color: #1a1a1a !important;
+    font-size: 15px !important;
+    line-height: 1.75 !important;
+}
+[data-testid="stDialog"] .stMarkdown h1,
+[data-testid="stDialog"] .stMarkdown h2,
+[data-testid="stDialog"] .stMarkdown h3 {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+}
+[data-testid="stDialog"] .stButton > button {
+    border-radius: 6px !important;
+    padding: 0 16px !important;
+    font-size: 13px !important;
+    min-height: unset !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    background: #fff !important;
+    color: #333 !important;
+    border: 1px solid #ddd !important;
+}
+[data-testid="stDialog"] .stButton > button p {
+    margin: 0 !important;
+    line-height: 32px !important;
+    color: #333 !important;
+    -webkit-text-fill-color: #333 !important;
+}
+[data-testid="stDialog"] .stButton > button:hover {
+    background: #fff0f0 !important;
+    border-color: #ff9a9e !important;
+}
+/* 来源高亮段落 */
+.source-highlight {
+    background: linear-gradient(135deg, rgba(255,154,158,0.15) 0%, rgba(254,207,239,0.15) 100%);
+    border-left: 4px solid #ff9a9e;
+    padding: 8px 16px;
+    margin: 12px 0;
+    border-radius: 0 10px 10px 0;
+}

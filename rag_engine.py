@@ -27,36 +27,47 @@ def load_documents():
 
 def get_text_splitter():
     return RecursiveCharacterTextSplitter(
-        chunk_size=500,
-        chunk_overlap=50,
+        chunk_size=200,
+        chunk_overlap=30,
         separators=["\n## ", "\n### ", "\n\n", "\n", " "],
     )
 
 
+_embeddings = None
+_vectorstore = None
+
+
 def get_embeddings():
-    return FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
-
-
-def build_vectorstore():
-    docs = load_documents()
-    splitter = get_text_splitter()
-    chunks = splitter.split_documents(docs)
-
-    vectorstore = Chroma.from_documents(
-        documents=chunks,
-        embedding=get_embeddings(),
-        persist_directory=str(CHROMA_DIR),
-    )
-    return vectorstore
+    global _embeddings
+    if _embeddings is None:
+        _embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
+    return _embeddings
 
 
 def get_vectorstore():
+    global _vectorstore
+    if _vectorstore is not None:
+        return _vectorstore
+    emb = get_embeddings()
     if CHROMA_DIR.exists() and any(CHROMA_DIR.iterdir()):
-        return Chroma(
-            persist_directory=str(CHROMA_DIR),
-            embedding_function=get_embeddings(),
-        )
-    return build_vectorstore()
+        try:
+            vs = Chroma(persist_directory=str(CHROMA_DIR), embedding_function=emb)
+            vs.get(limit=1)
+            _vectorstore = vs
+            return _vectorstore
+        except Exception:
+            import shutil
+            shutil.rmtree(CHROMA_DIR, ignore_errors=True)
+            CHROMA_DIR.mkdir(parents=True, exist_ok=True)
+    docs = load_documents()
+    splitter = get_text_splitter()
+    chunks = splitter.split_documents(docs)
+    _vectorstore = Chroma.from_documents(documents=chunks, embedding=emb, persist_directory=str(CHROMA_DIR))
+    return _vectorstore
+
+
+def build_vectorstore():
+    return get_vectorstore()
 
 
 def get_llm(max_tokens: int = 1024):
@@ -71,17 +82,28 @@ def get_llm(max_tokens: int = 1024):
     return ChatAnthropic(**kwargs)
 
 
-PROMPT_TEMPLATE = """基于以下参考文档回答用户的问题。如果文档中没有相关信息，请如实说明。
+PROMPT_TEMPLATE = """基于以下参考文档回答用户的问题。优先使用文档中的信息，如果文档中没有相关内容，请结合你的通用知识回答，并在末尾注明"（此回答基于通用知识，非知识库内容）"。
 
 参考文档：
 {context}
 
-用户问题：{question}
+{history}用户问题：{question}
 
 请用中文回答："""
 
 
-def query(question: str, k: int = 3):
+def _format_history(chat_history: list, max_turns: int = 5) -> str:
+    if not chat_history:
+        return ""
+    recent = chat_history[-(max_turns * 2):]
+    lines = []
+    for msg in recent:
+        role = "用户" if msg["role"] == "user" else "助手"
+        lines.append(f"{role}：{msg['content'][:200]}")
+    return "对话历史：\n" + "\n".join(lines) + "\n\n"
+
+
+def query(question: str, k: int = 3, chat_history: list = None):
     if not KB_DIR.exists():
         return {"answer": "kb/ 目录不存在，请先创建知识库目录。", "sources": []}
 
@@ -94,13 +116,19 @@ def query(question: str, k: int = 3):
 
     context_parts = []
     sources = []
+    seen_sources = {}
     for doc, score in retriever:
-        source = Path(doc.metadata.get("source", "unknown")).name
-        context_parts.append(f"[来源: {source}]\n{doc.page_content}")
-        sources.append({"source": source, "content": doc.page_content, "score": score})
+        source_path = doc.metadata.get("source", "unknown")
+        source_name = Path(source_path).name
+        context_parts.append(f"[来源: {source_name}]\n{doc.page_content}")
+        if (1 - score) >= 0.2:
+            if source_path not in seen_sources or score < seen_sources[source_path]["score"]:
+                seen_sources[source_path] = {"source": source_name, "path": source_path, "content": doc.page_content, "score": score}
+    sources = list(seen_sources.values())
 
     context = "\n\n---\n\n".join(context_parts)
-    prompt = PROMPT_TEMPLATE.format(context=context, question=question)
+    history = _format_history(chat_history)
+    prompt = PROMPT_TEMPLATE.format(context=context, history=history, question=question)
 
     llm = get_llm()
     response = llm.invoke(prompt)
@@ -643,27 +671,18 @@ def generate_learning_report(progress_summary: str) -> str:
     return response.content
 
 
-def extract_kb_skills() -> str:
-    skills = set()
-    if KB_DIR.exists():
-        for md_file in KB_DIR.rglob("*.md"):
-            text = md_file.read_text(encoding="utf-8")
-            for line in text.split("\n"):
-                line = line.strip()
-                if line.startswith("# ") or line.startswith("## "):
-                    heading = line.lstrip("#").strip()
-                    if heading and len(heading) < 50:
-                        skills.add(heading)
-                elif line.startswith("- ") or line.startswith("* "):
-                    item = line.lstrip("-* ").strip()
-                    if 2 < len(item) < 30 and not item.startswith("http"):
-                        skills.add(item)
-    return "、".join(sorted(skills)[:50]) if skills else ""
-
 
 def rebuild_index():
-    import shutil
-
-    if CHROMA_DIR.exists():
-        shutil.rmtree(CHROMA_DIR)
-    return build_vectorstore()
+    global _vectorstore
+    vs = get_vectorstore()
+    # Clear existing data
+    existing = vs.get()
+    if existing["ids"]:
+        vs.delete(ids=existing["ids"])
+    # Re-add fresh documents
+    docs = load_documents()
+    splitter = get_text_splitter()
+    chunks = splitter.split_documents(docs)
+    vs.add_documents(chunks)
+    _vectorstore = vs
+    return vs

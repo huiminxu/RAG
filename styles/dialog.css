@@ -1,0 +1,76 @@
+/* === 深色主题 - 文档预览对话框 === */
+[data-testid="stDialog"] [data-testid="stDialogTitle"] {
+    background: linear-gradient(135deg, #c084fc 0%, #e9d5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+.preview-path {
+    background: linear-gradient(135deg, #6b21a8 0%, #7c3aed 100%);
+    color: #e9d5ff;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: inline-block;
+}
+[data-testid="stDialog"] p,
+[data-testid="stDialog"] li,
+[data-testid="stDialog"] span,
+[data-testid="stDialog"] h1,
+[data-testid="stDialog"] h2,
+[data-testid="stDialog"] h3 {
+    color: #e0d0f0 !important;
+    -webkit-text-fill-color: #e0d0f0 !important;
+}
+[data-testid="stDialog"] .stMarkdown {
+    color: #e0d0f0 !important;
+}
+/* 深色 - 对话框右上角关闭按钮 */
+[data-testid="stDialog"] button[aria-label="Close"],
+[data-testid="stDialog"] [data-testid="stDialogDismissBtn"] {
+    color: #c084fc !important;
+    border-color: rgba(124,58,237,0.4) !important;
+    background: rgba(124,58,237,0.15) !important;
+}
+[data-testid="stDialog"] button[aria-label="Close"]:hover,
+[data-testid="stDialog"] [data-testid="stDialogDismissBtn"]:hover {
+    background: rgba(124,58,237,0.3) !important;
+    border-color: #a855f7 !important;
+}
+[data-testid="stDialog"] button[aria-label="Close"] svg,
+[data-testid="stDialog"] [data-testid="stDialogDismissBtn"] svg {
+    fill: #c084fc !important;
+    color: #c084fc !important;
+}
+/* 深色 - 对话框按钮 */
+[data-testid="stDialog"] .stButton > button {
+    border-radius: 6px !important;
+    padding: 0 16px !important;
+    font-size: 13px !important;
+    min-height: unset !important;
+    height: 32px !important;
+    line-height: 32px !important;
+    background: rgba(124,58,237,0.2) !important;
+    color: #e9d5ff !important;
+    border: 1px solid rgba(124,58,237,0.4) !important;
+}
+[data-testid="stDialog"] .stButton > button p {
+    margin: 0 !important;
+    line-height: 32px !important;
+    color: #e9d5ff !important;
+    -webkit-text-fill-color: #e9d5ff !important;
+}
+[data-testid="stDialog"] .stButton > button:hover {
+    background: rgba(124,58,237,0.35) !important;
+    border-color: #a855f7 !important;
+    box-shadow: 0 0 10px rgba(168,85,247,0.2) !important;
+}
+/* 来源高亮段落 */
+.source-highlight {
+    background: rgba(192,132,252,0.15);
+    border-left: 4px solid #c084fc;
+    padding: 8px 16px;
+    margin: 12px 0;
+    border-radius: 0 10px 10px 0;
+}
