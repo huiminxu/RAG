@@ -38,6 +38,17 @@ def get_kb_categories():
     return categories
 
 
+@st.dialog("📄 文档预览", width="large")
+def show_file_preview(file_path: str):
+    from pathlib import Path
+    p = Path(file_path)
+    if p.exists():
+        st.caption(f"📂 {p.parent.name}/{p.name}")
+        st.markdown(p.read_text(encoding="utf-8"))
+    else:
+        st.error("文件不存在")
+
+
 with st.sidebar:
     st.header("📂 知识库文档")
     categories = get_kb_categories()
@@ -46,25 +57,9 @@ with st.sidebar:
             st.markdown(f"**{cat}/** ({len(files)} 篇)")
             for f in files:
                 if st.button(f"📄 {f.name}", key=f"kb_{cat}_{f.name}", use_container_width=True):
-                    st.session_state.preview_file = str(f)
+                    show_file_preview(str(f))
     else:
         st.warning("kb/ 目录下没有找到 .md 文件")
-
-    if st.session_state.get("preview_file"):
-        from pathlib import Path
-        preview_path = Path(st.session_state.preview_file)
-        if preview_path.exists():
-            st.divider()
-            col_title, col_close = st.columns([4, 1])
-            with col_title:
-                st.markdown(f"**{preview_path.name}**")
-            with col_close:
-                if st.button("✕", key="close_preview"):
-                    st.session_state.pop("preview_file", None)
-                    st.rerun()
-            with st.container(height=300):
-                content = preview_path.read_text(encoding="utf-8")
-                st.markdown(content)
 
     st.divider()
     with st.expander("⚙️ 分类管理"):
