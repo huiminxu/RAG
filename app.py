@@ -875,7 +875,7 @@ with tab_trends:
                         card = f'<div class="trend-card">{thumb}<h4><a href="{video["url"]}" target="_blank">{title}</a></h4><div class="meta"><span>👤 {author}</span><span>👁️ {views}</span><span>⏱️ {video.get("duration", "")}</span><span>📅 {video.get("published", "")}</span></div><div style="clear:both;"></div></div>'
                         st.markdown(card, unsafe_allow_html=True)
                 else:
-                    st.info("暂无 YouTube 数据")
+                    st.info("暂无 YouTube 数据（本地网络无法访问 YouTube）")
 
         # Dev.to (bottom-left)
         with row2_left:
