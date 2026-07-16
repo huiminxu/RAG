@@ -38,15 +38,20 @@ def get_kb_categories():
     return categories
 
 
-@st.dialog("📄 文档预览", width="large")
+@st.dialog("📄 文档编辑", width="large")
 def show_file_preview(file_path: str):
     from pathlib import Path
     p = Path(file_path)
-    if p.exists():
-        st.caption(f"📂 {p.parent.name}/{p.name}")
-        st.markdown(p.read_text(encoding="utf-8"))
-    else:
+    if not p.exists():
         st.error("文件不存在")
+        return
+    st.caption(f"📂 {p.parent.name}/{p.name}")
+    content = p.read_text(encoding="utf-8")
+    edited = st.text_area("内容", value=content, height=400, key="file_editor")
+    if st.button("💾 保存", type="primary"):
+        p.write_text(edited, encoding="utf-8")
+        st.success("已保存！")
+        st.rerun()
 
 
 with st.sidebar:
