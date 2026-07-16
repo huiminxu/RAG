@@ -53,9 +53,25 @@ def fetch_github_trending(language: str = "", since: str = "weekly", limit: int 
         return []
 
 
-def fetch_hackernews_top(limit: int = 10) -> list[dict]:
-    """Fetch top stories from Hacker News."""
+def fetch_hackernews_top(limit: int = 10, keyword: str = "") -> list[dict]:
+    """Fetch from Hacker News. Uses Algolia search API when keyword is provided."""
     try:
+        if keyword:
+            params = {"query": keyword, "tags": "story", "hitsPerPage": limit}
+            resp = requests.get("https://hn.algolia.com/api/v1/search", params=params, timeout=10)
+            resp.raise_for_status()
+            hits = resp.json().get("hits", [])
+            return [
+                {
+                    "title": h.get("title", ""),
+                    "url": h.get("url") or f"https://news.ycombinator.com/item?id={h.get('objectID', '')}",
+                    "score": h.get("points", 0),
+                    "comments": h.get("num_comments", 0),
+                    "time": datetime.fromtimestamp(h.get("created_at_i", 0)).strftime("%Y-%m-%d %H:%M"),
+                }
+                for h in hits[:limit]
+            ]
+
         resp = requests.get("https://hacker-news.firebaseio.com/v0/topstories.json", timeout=10)
         resp.raise_for_status()
         ids = resp.json()[:limit]
@@ -76,14 +92,18 @@ def fetch_hackernews_top(limit: int = 10) -> list[dict]:
         return []
 
 
-def fetch_devto_trending(tag: str = "", limit: int = 10) -> list[dict]:
-    """Fetch trending articles from Dev.to."""
-    params = {"top": 7, "per_page": limit}
-    if tag:
-        params["tag"] = tag
-
+def fetch_devto_trending(tag: str = "", limit: int = 10, keyword: str = "") -> list[dict]:
+    """Fetch from Dev.to. Uses search when keyword is provided."""
     try:
-        resp = requests.get("https://dev.to/api/articles", params=params, timeout=10)
+        if keyword:
+            params = {"q": keyword, "per_page": limit}
+            resp = requests.get("https://dev.to/api/articles", params=params, timeout=10)
+        else:
+            params = {"top": 7, "per_page": limit}
+            if tag:
+                params["tag"] = tag
+            resp = requests.get("https://dev.to/api/articles", params=params, timeout=10)
+
         resp.raise_for_status()
         articles = resp.json()
         return [
@@ -280,8 +300,8 @@ def get_all_trends(language: str = "", since: str = "weekly", limit: int = 10) -
 
     with ThreadPoolExecutor(max_workers=5) as executor:
         f_github = executor.submit(fetch_github_trending, language, since, limit)
-        f_hn = executor.submit(fetch_hackernews_top, limit)
-        f_devto = executor.submit(fetch_devto_trending, devto_tag, limit)
+        f_hn = executor.submit(fetch_hackernews_top, limit, language)
+        f_devto = executor.submit(fetch_devto_trending, devto_tag, limit, language)
         f_bili = executor.submit(fetch_bilibili_tech, limit, bili_kw)
         f_yt = executor.submit(fetch_youtube_tech, yt_kw, limit)
 
