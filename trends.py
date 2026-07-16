@@ -286,24 +286,15 @@ def _ts_to_date(ts) -> str:
 
 
 def get_all_trends(language: str = "", since: str = "weekly", limit: int = 10) -> dict:
-    """Aggregate all sources concurrently."""
-    tag_map = {"javascript": "javascript", "typescript": "typescript", "python": "python",
-               "vue": "vue", "react": "react", "go": "go", "rust": "rust",
-               "ai": "ai", "agent": "ai", "llm": "ai", "大模型": "ai", "英语": ""}
-    devto_tag = tag_map.get(language.lower(), "")
-    bili_map = {"ai": "AI 人工智能", "agent": "AI Agent 智能体", "llm": "大模型 LLM", "大模型": "大模型 LLM", "英语": "英语学习"}
-    bili_kw = bili_map.get(language.lower(), language) if language else ""
-
-    yt_map = {"ai": "AI machine learning tutorial", "agent": "AI agent development", "llm": "LLM tutorial",
-              "大模型": "LLM 大模型 tutorial", "英语": "English learning programming"}
-    yt_kw = yt_map.get(language.lower(), f"{language} programming") if language else ""
+    """Aggregate all sources concurrently. All sources use the same keyword for search."""
+    keyword = language
 
     with ThreadPoolExecutor(max_workers=5) as executor:
-        f_github = executor.submit(fetch_github_trending, language, since, limit)
-        f_hn = executor.submit(fetch_hackernews_top, limit, language)
-        f_devto = executor.submit(fetch_devto_trending, devto_tag, limit, language)
-        f_bili = executor.submit(fetch_bilibili_tech, limit, bili_kw)
-        f_yt = executor.submit(fetch_youtube_tech, yt_kw, limit)
+        f_github = executor.submit(fetch_github_trending, keyword, since, limit)
+        f_hn = executor.submit(fetch_hackernews_top, limit, keyword)
+        f_devto = executor.submit(fetch_devto_trending, "", limit, keyword)
+        f_bili = executor.submit(fetch_bilibili_tech, limit, keyword)
+        f_yt = executor.submit(fetch_youtube_tech, keyword, limit)
 
     return {
         "github": f_github.result(),
