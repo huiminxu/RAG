@@ -38,7 +38,7 @@ def get_kb_categories():
     return categories
 
 
-@st.dialog("📄 文档编辑", width="large")
+@st.dialog("📄 文档预览", width="large")
 def show_file_preview(file_path: str):
     from pathlib import Path
     p = Path(file_path)
@@ -47,27 +47,82 @@ def show_file_preview(file_path: str):
         return
     st.caption(f"📂 {p.parent.name}/{p.name}")
     content = p.read_text(encoding="utf-8")
-    edited = st.text_area("内容", value=content, height=400, key="file_editor")
-    if st.button("💾 保存", type="primary"):
-        p.write_text(edited, encoding="utf-8")
-        st.success("已保存！")
-        st.rerun()
+
+    if "file_edit_mode" not in st.session_state:
+        st.session_state.file_edit_mode = False
+
+    if not st.session_state.file_edit_mode:
+        st.markdown(content)
+        if st.button("✏️ 编辑"):
+            st.session_state.file_edit_mode = True
+            st.rerun()
+    else:
+        edited = st.text_area("内容", value=content, height=400, key="file_editor")
+        col1, col2 = st.columns(2)
+        with col1:
+            if st.button("取消"):
+                st.session_state.file_edit_mode = False
+                st.rerun()
+        with col2:
+            if st.button("确认", type="primary"):
+                p.write_text(edited, encoding="utf-8")
+                st.session_state.file_edit_mode = False
+                st.success("已保存！")
+                st.rerun()
 
 
 with st.sidebar:
-    st.header("📂 知识库文档")
+    st.markdown("""
+    <style>
+    .kb-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .cat-label {
+        background: #f0f2f6;
+        padding: 6px 10px;
+        border-radius: 6px;
+        margin: 8px 0 4px 0;
+        font-size: 13px;
+        color: #555;
+        border-left: 3px solid #667eea;
+    }
+    .file-count {
+        color: #888;
+        font-size: 12px;
+    }
+    div[data-testid="stSidebar"] .stButton > button {
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        transition: all 0.2s;
+    }
+    div[data-testid="stSidebar"] .stButton > button:hover {
+        border-color: #667eea;
+        background: #f8f9ff;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="kb-header">📂 知识库文档</div>', unsafe_allow_html=True)
     categories = get_kb_categories()
     if categories:
+        total_files = sum(len(fs) for fs in categories.values())
+        st.caption(f"共 {len(categories)} 个分类 · {total_files} 篇文档")
         for cat, files in categories.items():
-            st.markdown(f"**{cat}/** ({len(files)} 篇)")
+            st.markdown(f'<div class="cat-label">📁 {cat} <span class="file-count">({len(files)} 篇)</span></div>', unsafe_allow_html=True)
             for f in files:
                 if st.button(f"📄 {f.name}", key=f"kb_{cat}_{f.name}", use_container_width=True):
                     show_file_preview(str(f))
     else:
-        st.warning("kb/ 目录下没有找到 .md 文件")
+        st.info("📭 kb/ 目录下没有找到 .md 文件")
 
-    st.divider()
-    with st.expander("⚙️ 分类管理"):
+    st.markdown("<br>", unsafe_allow_html=True)
+    with st.expander("⚙️ 分类管理", expanded=False):
         new_cat = st.text_input("新分类名称", placeholder="例如: docker", key="new_cat")
         if st.button("➕ 新增分类", key="add_cat") and new_cat.strip():
             safe_name = new_cat.strip().replace(" ", "_")
@@ -108,8 +163,8 @@ with st.sidebar:
                         st.session_state.pop("confirm_delete_cat", None)
                         st.rerun()
 
-    st.divider()
-    if st.button("🔄 重建索引"):
+    st.markdown("<br>", unsafe_allow_html=True)
+    if st.button("🔄 重建索引", use_container_width=True):
         with st.spinner("正在重建向量索引..."):
             rebuild_index()
         st.success("索引重建完成！")
