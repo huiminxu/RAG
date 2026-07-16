@@ -50,6 +50,48 @@ with st.sidebar:
         st.warning("kb/ 目录下没有找到 .md 文件")
 
     st.divider()
+    with st.expander("⚙️ 分类管理"):
+        new_cat = st.text_input("新分类名称", placeholder="例如: docker", key="new_cat")
+        if st.button("➕ 新增分类", key="add_cat") and new_cat.strip():
+            safe_name = new_cat.strip().replace(" ", "_")
+            (KB_DIR / safe_name).mkdir(parents=True, exist_ok=True)
+            st.success(f"已创建分类: {safe_name}")
+            st.rerun()
+
+        existing_cats = sorted([d.name for d in KB_DIR.iterdir() if d.is_dir()])
+        if existing_cats:
+            st.markdown("---")
+            selected_cat = st.selectbox("选择分类", existing_cats, key="manage_cat")
+            col_rename, col_del = st.columns(2)
+            with col_rename:
+                rename_to = st.text_input("重命名为", value=selected_cat, key="rename_cat")
+                if st.button("✏️ 重命名", key="do_rename") and rename_to.strip() and rename_to.strip() != selected_cat:
+                    safe_rename = rename_to.strip().replace(" ", "_")
+                    (KB_DIR / selected_cat).rename(KB_DIR / safe_rename)
+                    st.success(f"{selected_cat} → {safe_rename}")
+                    st.rerun()
+            with col_del:
+                st.write("")
+                if st.button("🗑️ 删除", key="do_delete", type="secondary"):
+                    st.session_state.confirm_delete_cat = selected_cat
+
+            if st.session_state.get("confirm_delete_cat") == selected_cat:
+                file_count = len(list((KB_DIR / selected_cat).glob("*.md")))
+                st.warning(f"确认删除「{selected_cat}」？（含 {file_count} 个文件，不可恢复）")
+                c1, c2 = st.columns(2)
+                with c1:
+                    if st.button("确认删除", key="confirm_del", type="primary"):
+                        import shutil
+                        shutil.rmtree(KB_DIR / selected_cat)
+                        st.session_state.pop("confirm_delete_cat", None)
+                        st.success(f"已删除: {selected_cat}")
+                        st.rerun()
+                with c2:
+                    if st.button("取消", key="cancel_del"):
+                        st.session_state.pop("confirm_delete_cat", None)
+                        st.rerun()
+
+    st.divider()
     if st.button("🔄 重建索引"):
         with st.spinner("正在重建向量索引..."):
             rebuild_index()
