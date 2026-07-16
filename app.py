@@ -109,7 +109,7 @@ with st.sidebar:
             rebuild_index()
         st.success("索引重建完成！")
 
-tab_chat, tab_trends, tab_resource, tab_import, tab_exam, tab_interview, tab_resume, tab_progress = st.tabs(["💬 知识库问答", "🔥 技术趋势", "📚 资源导入", "📥 音视频导入", "📝 智能出题", "🎙️ AI 模拟面试", "📄 简历优化", "📈 学习进度"])
+tab_chat, tab_trends, tab_resource, tab_import, tab_exam, tab_interview, tab_resume, tab_progress = st.tabs(["💬 知识库问答", "🔥 技术趋势", "📚 资源导入", "📥 音视频导入", "📝 智能出题", "🎙️ AI 对练", "📄 文档助手", "📈 学习进度"])
 
 with tab_chat:
     st.title("📚 RAG 知识库问答系统")
