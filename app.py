@@ -45,9 +45,26 @@ with st.sidebar:
         for cat, files in categories.items():
             st.markdown(f"**{cat}/** ({len(files)} 篇)")
             for f in files:
-                st.markdown(f"&nbsp;&nbsp;&nbsp;&nbsp;`{f.name}`")
+                if st.button(f"📄 {f.name}", key=f"kb_{cat}_{f.name}", use_container_width=True):
+                    st.session_state.preview_file = str(f)
     else:
         st.warning("kb/ 目录下没有找到 .md 文件")
+
+    if st.session_state.get("preview_file"):
+        from pathlib import Path
+        preview_path = Path(st.session_state.preview_file)
+        if preview_path.exists():
+            st.divider()
+            col_title, col_close = st.columns([4, 1])
+            with col_title:
+                st.markdown(f"**{preview_path.name}**")
+            with col_close:
+                if st.button("✕", key="close_preview"):
+                    st.session_state.pop("preview_file", None)
+                    st.rerun()
+            with st.container(height=300):
+                content = preview_path.read_text(encoding="utf-8")
+                st.markdown(content)
 
     st.divider()
     with st.expander("⚙️ 分类管理"):
