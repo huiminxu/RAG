@@ -571,9 +571,9 @@ with tab_progress:
     with col4:
         st.metric("学习天数", f"{stats['total_study_days']} 天")
 
+    import pandas as pd
     if stats["recent_scores"]:
         st.subheader("📊 面试评分趋势")
-        import pandas as pd
         score_df = pd.DataFrame({
             "次数": list(range(1, len(stats["recent_scores"]) + 1)),
             "分数": stats["recent_scores"],
