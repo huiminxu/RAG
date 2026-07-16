@@ -1,5 +1,6 @@
 import io
 import os
+import html as html_lib
 import streamlit as st
 import streamlit.components.v1 as components
 from pathlib import Path
@@ -759,58 +760,157 @@ with tab_trends:
     if refresh:
         _cached_trends.clear()
 
+    CARD_CSS = """
+    <style>
+    .trend-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 12px;
+        background: #fafafa;
+        transition: box-shadow 0.2s;
+    }
+    .trend-card:hover {
+        box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    .trend-card h4 {
+        margin: 0 0 8px 0;
+        font-size: 15px;
+    }
+    .trend-card h4 a {
+        color: #1a73e8;
+        text-decoration: none;
+    }
+    .trend-card .desc {
+        color: #555;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+    .trend-card .meta {
+        color: #888;
+        font-size: 12px;
+    }
+    .trend-card .meta span {
+        margin-right: 12px;
+    }
+    .trend-card .tags {
+        margin-top: 6px;
+    }
+    .trend-card .tags code {
+        background: #e8f0fe;
+        color: #1a73e8;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 11px;
+        margin-right: 4px;
+    }
+    .bili-card {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    .bili-card img {
+        width: 160px;
+        border-radius: 6px;
+        flex-shrink: 0;
+    }
+    </style>
+    """
+
     if st.button("📡 加载趋势数据", type="primary", key="trend_load") or st.session_state.get("trends_loaded"):
         st.session_state.trends_loaded = True
         with st.spinner("正在获取最新技术趋势..."):
             trends = _cached_trends(trend_keyword, trend_since)
 
-        st.subheader("⭐ GitHub 热门项目")
-        if trends["github"]:
-            for repo in trends["github"]:
-                topics_str = " ".join(f"`{t}`" for t in repo["topics"]) if repo["topics"] else ""
-                st.markdown(
-                    f"**[{repo['name']}]({repo['url']})** — {repo['description'][:80]}\n\n"
-                    f"⭐ {repo['stars']:,} | 🍴 {repo['forks']:,} | 🏷️ {repo['language']} {topics_str}"
-                )
-                st.divider()
-        else:
-            st.info("暂无数据（GitHub API 有速率限制，稍后重试）")
+        st.markdown(CARD_CSS, unsafe_allow_html=True)
 
-        st.subheader("📰 Hacker News 热门讨论")
-        if trends["hackernews"]:
-            for item in trends["hackernews"]:
-                st.markdown(
-                    f"**[{item['title']}]({item['url']})** — "
-                    f"🔥 {item['score']} | 💬 {item['comments']} 评论 | {item['time']}"
-                )
-        else:
-            st.info("暂无数据")
+        # 3+2 grid layout
+        row1_left, row1_mid, row1_right = st.columns(3)
+        row2_left, row2_mid, row2_right = st.columns(3)
 
-        st.subheader("📝 Dev.to 热门文章")
-        if trends["devto"]:
-            for article in trends["devto"]:
-                tags_str = " ".join(f"`{t}`" for t in article["tags"][:4]) if article["tags"] else ""
-                st.markdown(
-                    f"**[{article['title']}]({article['url']})**\n\n"
-                    f"❤️ {article['reactions']} | 💬 {article['comments']} | {tags_str} | {article['published_at']}"
-                )
-                st.divider()
-        else:
-            st.info("暂无数据")
+        # GitHub (top-left)
+        with row1_left:
+            st.markdown("#### ⭐ GitHub 热门项目")
+            with st.container(height=420):
+                if trends["github"]:
+                    for repo in trends["github"]:
+                        desc = html_lib.escape(repo['description'][:80]) if repo['description'] else ""
+                        topics_html = "".join(f"<code>{html_lib.escape(t)}</code>" for t in repo["topics"]) if repo["topics"] else ""
+                        parts = [
+                            '<div class="trend-card">',
+                            f'<h4><a href="{repo["url"]}" target="_blank">{html_lib.escape(repo["name"])}</a></h4>',
+                        ]
+                        if desc:
+                            parts.append(f'<div class="desc">{desc}</div>')
+                        parts.append(f'<div class="meta"><span>⭐ {repo["stars"]:,}</span><span>🍴 {repo["forks"]:,}</span><span>🏷️ {repo["language"]}</span></div>')
+                        if topics_html:
+                            parts.append(f'<div class="tags">{topics_html}</div>')
+                        parts.append('</div>')
+                        st.markdown("".join(parts), unsafe_allow_html=True)
+                else:
+                    st.info("暂无数据")
 
-        st.subheader("📺 B站技术视频")
-        if trends["bilibili"]:
-            for video in trends["bilibili"]:
-                col_thumb, col_info = st.columns([1, 3])
-                with col_thumb:
-                    if video.get("thumbnail"):
-                        st.image(video["thumbnail"], width=160)
-                with col_info:
-                    play_str = f"▶️ {video['play']:,}" if isinstance(video.get("play"), int) else f"▶️ {video.get('play', 0)}"
-                    st.markdown(
-                        f"**[{video['title']}]({video['url']})**\n\n"
-                        f"👤 {video['author']} | {play_str} | 💬 {video.get('danmaku', 0)} | ⏱️ {video.get('duration', '')} | {video['published']}"
-                    )
-                st.divider()
-        else:
-            st.info("暂无 B站 数据")
+        # Hacker News (top-mid)
+        with row1_mid:
+            st.markdown("#### 📰 Hacker News 热门")
+            with st.container(height=420):
+                if trends["hackernews"]:
+                    for item in trends["hackernews"]:
+                        title = html_lib.escape(item['title'])
+                        card = f'<div class="trend-card"><h4><a href="{item["url"]}" target="_blank">{title}</a></h4><div class="meta"><span>🔥 {item["score"]}</span><span>💬 {item["comments"]} 评论</span><span>🕐 {item["time"]}</span></div></div>'
+                        st.markdown(card, unsafe_allow_html=True)
+                else:
+                    st.info("暂无数据")
+
+        # YouTube (top-right)
+        with row1_right:
+            st.markdown("#### ▶️ YouTube 技术视频")
+            with st.container(height=420):
+                if trends.get("youtube"):
+                    for video in trends["youtube"]:
+                        title = html_lib.escape(video['title'])
+                        author = html_lib.escape(video.get('author', ''))
+                        views = f"{video['views']:,}" if isinstance(video.get("views"), int) else str(video.get("views", 0))
+                        thumb = f'<img src="{video["thumbnail"]}" referrerpolicy="no-referrer" style="width:120px;border-radius:6px;margin-right:10px;float:left;" />' if video.get("thumbnail") else ""
+                        card = f'<div class="trend-card">{thumb}<h4><a href="{video["url"]}" target="_blank">{title}</a></h4><div class="meta"><span>👤 {author}</span><span>👁️ {views}</span><span>⏱️ {video.get("duration", "")}</span><span>📅 {video.get("published", "")}</span></div><div style="clear:both;"></div></div>'
+                        st.markdown(card, unsafe_allow_html=True)
+                else:
+                    st.info("暂无 YouTube 数据")
+
+        # Dev.to (bottom-left)
+        with row2_left:
+            st.markdown("#### 📝 Dev.to 热门文章")
+            with st.container(height=420):
+                if trends["devto"]:
+                    for article in trends["devto"]:
+                        title = html_lib.escape(article['title'])
+                        desc = html_lib.escape(article.get('description', '')[:80])
+                        tags_html = "".join(f"<code>{html_lib.escape(t)}</code>" for t in article["tags"][:4]) if article["tags"] else ""
+                        parts = [
+                            '<div class="trend-card">',
+                            f'<h4><a href="{article["url"]}" target="_blank">{title}</a></h4>',
+                        ]
+                        if desc:
+                            parts.append(f'<div class="desc">{desc}</div>')
+                        parts.append(f'<div class="meta"><span>❤️ {article["reactions"]}</span><span>💬 {article["comments"]}</span><span>📅 {article["published_at"]}</span></div>')
+                        if tags_html:
+                            parts.append(f'<div class="tags">{tags_html}</div>')
+                        parts.append('</div>')
+                        st.markdown("".join(parts), unsafe_allow_html=True)
+                else:
+                    st.info("暂无数据")
+
+        # Bilibili (bottom-mid)
+        with row2_mid:
+            st.markdown("#### 📺 B站技术视频")
+            with st.container(height=420):
+                if trends["bilibili"]:
+                    for video in trends["bilibili"]:
+                        play_str = f"{video['play']:,}" if isinstance(video.get("play"), int) else str(video.get("play", 0))
+                        title = html_lib.escape(video['title'])
+                        author = html_lib.escape(video.get('author', ''))
+                        thumb = f'<img src="{video["thumbnail"]}" referrerpolicy="no-referrer" style="width:120px;border-radius:6px;margin-right:10px;float:left;" />' if video.get("thumbnail") else ""
+                        card = f'<div class="trend-card">{thumb}<h4><a href="{video["url"]}" target="_blank">{title}</a></h4><div class="meta"><span>👤 {author}</span><span>▶️ {play_str}</span><span>💬 {video.get("danmaku", 0)}</span><span>⏱️ {video.get("duration", "")}</span></div><div style="clear:both;"></div></div>'
+                        st.markdown(card, unsafe_allow_html=True)
+                else:
+                    st.info("暂无 B站 数据")

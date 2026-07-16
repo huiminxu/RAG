@@ -170,6 +170,51 @@ def fetch_bilibili_tech(limit: int = 10, keyword: str = "") -> list[dict]:
         return []
 
 
+def fetch_youtube_tech(keyword: str = "", limit: int = 10) -> list[dict]:
+    """Fetch tech videos from YouTube via Invidious API (no API key needed)."""
+    INVIDIOUS_INSTANCES = [
+        "https://vid.puffyan.us",
+        "https://invidious.fdn.fr",
+        "https://invidious.privacyredirect.com",
+    ]
+
+    search_kw = keyword if keyword else "programming tutorial"
+    params = {"q": search_kw, "sort_by": "upload_date", "type": "video", "page": 1}
+
+    for instance in INVIDIOUS_INSTANCES:
+        try:
+            resp = requests.get(f"{instance}/api/v1/search", params=params, timeout=15)
+            resp.raise_for_status()
+            items = resp.json()
+            results = []
+            for item in items[:limit]:
+                if item.get("type") != "video":
+                    continue
+                vid_id = item.get("videoId", "")
+                results.append({
+                    "title": item.get("title", ""),
+                    "url": f"https://www.youtube.com/watch?v={vid_id}",
+                    "author": item.get("author", ""),
+                    "views": item.get("viewCount", 0),
+                    "published": item.get("publishedText", ""),
+                    "duration": _format_duration(item.get("lengthSeconds", 0)),
+                    "thumbnail": f"https://i.ytimg.com/vi/{vid_id}/mqdefault.jpg" if vid_id else "",
+                })
+            return results
+        except Exception:
+            continue
+    return []
+
+
+def _format_duration(seconds: int) -> str:
+    if not seconds:
+        return ""
+    h, m, s = seconds // 3600, (seconds % 3600) // 60, seconds % 60
+    if h:
+        return f"{h}:{m:02d}:{s:02d}"
+    return f"{m}:{s:02d}"
+
+
 def _ts_to_date(ts) -> str:
     if not ts:
         return ""
@@ -190,15 +235,21 @@ def get_all_trends(language: str = "", since: str = "weekly", limit: int = 10) -
     bili_map = {"ai": "AI 人工智能", "agent": "AI Agent 智能体", "llm": "大模型 LLM", "大模型": "大模型 LLM", "英语": "英语学习"}
     bili_kw = bili_map.get(language.lower(), language) if language else ""
 
-    with ThreadPoolExecutor(max_workers=4) as executor:
+    yt_map = {"ai": "AI machine learning tutorial", "agent": "AI agent development", "llm": "LLM tutorial",
+              "大模型": "LLM 大模型 tutorial", "英语": "English learning programming"}
+    yt_kw = yt_map.get(language.lower(), f"{language} programming") if language else ""
+
+    with ThreadPoolExecutor(max_workers=5) as executor:
         f_github = executor.submit(fetch_github_trending, language, since, limit)
         f_hn = executor.submit(fetch_hackernews_top, limit)
         f_devto = executor.submit(fetch_devto_trending, devto_tag, limit)
         f_bili = executor.submit(fetch_bilibili_tech, limit, bili_kw)
+        f_yt = executor.submit(fetch_youtube_tech, yt_kw, limit)
 
     return {
         "github": f_github.result(),
         "hackernews": f_hn.result(),
         "devto": f_devto.result(),
         "bilibili": f_bili.result(),
+        "youtube": f_yt.result(),
     }
