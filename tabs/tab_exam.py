@@ -18,12 +18,11 @@ def render():
         )
         selected_files = selected if selected else None
 
-    col1, col2 = st.columns(2)
+    qa_tab, code_tab = st.tabs(["🗣️ 问答题（10 道）", "✍️ 笔试题（5 道）"])
 
-    with col1:
-        st.subheader("🗣️ 问答题（10 道）")
-        st.markdown("适合面试官口头提问，覆盖知识库核心知识点")
-        if st.button("生成问答题", key="gen_qa"):
+    with qa_tab:
+        st.caption("适合面试官口头提问，覆盖知识库核心知识点")
+        if st.button("生成问答题", key="gen_qa", use_container_width=True):
             with st.spinner("🌼 正在生成问答题..."):
                 try:
                     result = generate_exam("qa", selected_files)
@@ -32,6 +31,7 @@ def render():
                     st.error(f"生成失败: {str(e)}")
 
         if "qa_result" in st.session_state:
+            st.divider()
             st.markdown(st.session_state.qa_result)
             st.download_button(
                 "⬇️ 下载问答题",
@@ -40,10 +40,9 @@ def render():
                 mime="text/markdown",
             )
 
-    with col2:
-        st.subheader("✍️ 笔试题（5 道）")
-        st.markdown("包含代码题和概念题，适合书面考试")
-        if st.button("生成笔试题", key="gen_code"):
+    with code_tab:
+        st.caption("包含代码题和概念题，适合书面考试")
+        if st.button("生成笔试题", key="gen_code", use_container_width=True):
             with st.spinner("🌼 正在生成笔试题..."):
                 try:
                     result = generate_exam("code", selected_files)
@@ -52,6 +51,7 @@ def render():
                     st.error(f"生成失败: {str(e)}")
 
         if "code_result" in st.session_state:
+            st.divider()
             st.markdown(st.session_state.code_result)
             st.download_button(
                 "⬇️ 下载笔试题",

@@ -290,50 +290,71 @@ body {
         {% if info.english_level %}<li><span class="label">英语：</span><span class="value">{{ info.english_level }}</span></li>{% endif %}
       </ul>
 
-      <div class="section-title">教育背景</div>
-      {% for edu in education %}
-      <div class="edu-item">
-        <div class="period">{{ edu.period }}</div>
-        <div class="school">{{ edu.school }}</div>
-        <div class="detail">{{ edu.major }} · {{ edu.degree }}</div>
-      </div>
-      {% endfor %}
-
-      <div class="section-title">技能</div>
+      {% for section in sections %}
+      {% if section.type == "tags" %}
+      <div class="section-title">{{ section.title }}</div>
       <div class="skills-list">
-        {% for skill in skills %}
-        <span class="skill-tag">{{ skill }}</span>
+        {% for item in section.items %}
+        <span class="skill-tag">{{ item }}</span>
         {% endfor %}
       </div>
+      {% elif section.type == "timeline" and "教育" in section.title %}
+      <div class="section-title">{{ section.title }}</div>
+      {% for item in section.items %}
+      <div class="edu-item">
+        <div class="period">{{ item.period }}</div>
+        <div class="school">{{ item.title }}</div>
+        <div class="detail">{{ item.subtitle }}</div>
+      </div>
+      {% endfor %}
+      {% elif section.type == "list" %}
+      <div class="section-title">{{ section.title }}</div>
+      <ul class="info-list">
+        {% for item in section.items %}
+        <li><span class="value">{{ item }}</span></li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+      {% endfor %}
     </div>
 
     <div class="main">
-      <div class="section-title">工作经历</div>
-      {% for exp in experience %}
+      {% for section in sections %}
+      {% if section.type == "timeline" and "教育" not in section.title %}
+      <div class="section-title">{{ section.title }}</div>
+      {% for item in section.items %}
       <div class="exp-item">
         <div class="exp-header">
-          <span class="exp-company">{{ exp.company }}</span>
-          <span class="exp-period">{{ exp.period }}</span>
+          <span class="exp-company">{{ item.title }}</span>
+          <span class="exp-period">{{ item.period }}</span>
         </div>
-        <div class="exp-role">{{ exp.role }}</div>
-        {% if exp.desc %}<div class="exp-desc">{{ exp.desc }}</div>{% endif %}
+        <div class="exp-role">{{ item.subtitle }}</div>
+        {% if item.desc %}<div class="exp-desc">{{ item.desc }}</div>{% endif %}
       </div>
       {% endfor %}
 
-      <div class="section-title">项目经验</div>
-      {% for proj in projects %}
+      {% elif section.type == "detailed" %}
+      <div class="section-title">{{ section.title }}</div>
+      {% for item in section.items %}
       <div class="proj-item">
         <div class="proj-header">
-          <span class="proj-name">{{ proj.name }}</span>
-          <span class="proj-role">{{ proj.role }}</span>
+          <span class="proj-name">{{ item.name }}</span>
+          <span class="proj-role">{{ item.role }}</span>
         </div>
-        {% if proj.tech %}<div class="proj-tech">技术栈：{{ proj.tech }}</div>{% endif %}
+        {% if item.tech %}<div class="proj-tech">技术栈：{{ item.tech }}</div>{% endif %}
         <ul class="proj-desc">
-          {% for d in proj.desc %}
+          {% for d in item.desc %}
           <li>{{ d }}</li>
           {% endfor %}
         </ul>
       </div>
+      {% endfor %}
+
+      {% elif section.type == "text" %}
+      <div class="section-title">{{ section.title }}</div>
+      <p style="font-size: 9pt; color: #444; line-height: 1.6;">{{ section.content }}</p>
+
+      {% endif %}
       {% endfor %}
     </div>
   </div>

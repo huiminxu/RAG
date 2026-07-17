@@ -20,14 +20,19 @@ def render_resume_html(data: dict, theme: str = "default") -> str:
     template_str = template_path.read_text(encoding="utf-8")
     template = Template(template_str)
 
+    if "sections" not in data:
+        data = _migrate_to_sections(data)
+
+    sections = data.get("sections", [])
+    for sec in sections:
+        if "items" not in sec and sec.get("type") != "text":
+            sec["items"] = []
+
     context = {
         "name": data.get("name", ""),
         "title": data.get("title", "个人简历"),
         "info": data.get("info", {}),
-        "education": data.get("education", []),
-        "skills": data.get("skills", []),
-        "experience": data.get("experience", []),
-        "projects": _normalize_projects(data.get("projects", [])),
+        "sections": sections,
     }
 
     return template.render(**context)
@@ -44,6 +49,40 @@ def _normalize_projects(projects: list) -> list:
             proj["desc"] = []
         normalized.append(proj)
     return normalized
+
+
+def _migrate_to_sections(data: dict) -> dict:
+    """Convert old fixed-field format to sections format for backward compatibility."""
+    sections = []
+    if data.get("education"):
+        items = []
+        for edu in data["education"]:
+            items.append({
+                "period": edu.get("period", ""),
+                "title": edu.get("school", ""),
+                "subtitle": f"{edu.get('major', '')} · {edu.get('degree', '')}",
+            })
+        sections.append({"title": "教育背景", "type": "timeline", "items": items})
+    if data.get("skills"):
+        sections.append({"title": "专业技能", "type": "tags", "items": data["skills"]})
+    if data.get("experience"):
+        items = []
+        for exp in data["experience"]:
+            items.append({
+                "period": exp.get("period", ""),
+                "title": exp.get("company", ""),
+                "subtitle": exp.get("role", ""),
+                "desc": exp.get("desc", ""),
+            })
+        sections.append({"title": "工作经历", "type": "timeline", "items": items})
+    if data.get("projects"):
+        items = _normalize_projects(data["projects"])
+        sections.append({"title": "项目经验", "type": "detailed", "items": items})
+    if data.get("certificates"):
+        sections.append({"title": "证书与荣誉", "type": "list", "items": data["certificates"]})
+    if data.get("self_evaluation"):
+        sections.append({"title": "自我评价", "type": "text", "content": data["self_evaluation"]})
+    return {**data, "sections": sections}
 
 
 def generate_resume_pdf_from_html(data: dict, theme: str = "default") -> bytes | None:
@@ -66,10 +105,16 @@ TEMPLATE_GEN_PROMPT = """你是一名前端开发专家。请根据这张简历�
    - {{ name }} — 姓名
    - {{ title }} — 目标职位
    - {{ info.phone }} / {{ info.email }} / {{ info.age }} / {{ info.location }} / {{ info.ethnicity }} / {{ info.english_level }}
-   - {% for edu in education %} {{ edu.period }} / {{ edu.school }} / {{ edu.major }} / {{ edu.degree }} {% endfor %}
-   - {% for skill in skills %} {{ skill }} {% endfor %}
-   - {% for exp in experience %} {{ exp.company }} / {{ exp.role }} / {{ exp.period }} / {{ exp.desc }} {% endfor %}
-   - {% for proj in projects %} {{ proj.name }} / {{ proj.role }} / {{ proj.tech }} / {% for d in proj.desc %} {{ d }} {% endfor %} {% endfor %}
+   - sections 是一个数组，每个 section 有 title、type、items/content：
+     {% for section in sections %}
+       {{ section.title }} — 区块标题
+       type="timeline": items 有 period/title/subtitle/desc
+       type="detailed": items 有 name/role/tech/desc(数组)
+       type="tags": items 是字符串数组
+       type="list": items 是字符串数组
+       type="text": content 是一段文字
+     {% endfor %}
+   - 根据 section.type 选择合适的渲染方式（时间线、标签、列表等）
 4. 尽可能还原截图中的：
    - 整体布局（单栏/双栏/顶部标题栏）
    - 配色方案（背景色、标题色、文字色）

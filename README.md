@@ -197,12 +197,44 @@ rag/
 └── chroma_db/         # ChromaDB 向量数据库（自动生成）
 ```
 
+## 模型选择指南
+
+侧边栏支持多模型切换，各功能推荐如下：
+
+| Tab | 核心任务 | 推荐模型 | 理由 |
+|-----|----------|----------|------|
+| 🌸 知识问答 | 理解+回答 | sonnet-4-6 / deepseek-v4-flash | 日常用 flash 省钱，复杂问题切 sonnet |
+| 🌺 技术趋势 | API 聚合 | — | 纯 API 抓取，不调用 LLM |
+| 🌻 资源导入 | 内容整理/转录分析 | haiku-4-5 / deepseek-v4-flash | 格式化工作，便宜快速的就够 |
+| 🌼 智能出题 | 生成题目 | sonnet-4-6 / glm-5 | 需要理解力+中文表达 |
+| 🌹 AI 对练 | 面试官角色 | sonnet-4-6 / opus | 需要追问和评分能力 |
+| 🍀 文档助手 | 简历优化 | opus / gpt-5.5 | 创作质量要求最高 |
+| 🌱 学习进度 | 生成报告 | sonnet-4-6 / haiku-4-5 | 数据总结，不需要太强 |
+
+**可用模型一览：**
+
+| 模型 | 定位 | 价格（输入/输出 per 1M tokens） |
+|------|------|------|
+| claude-sonnet-4-6 | 均衡之选，速度快质量高，性价比最佳 | $3 / $15 |
+| claude-sonnet-5 | Sonnet 最新版，推理更强 | $2 / $10 |
+| claude-haiku-4-5 | 最快最便宜，简单任务首选 | $1 / $5 |
+| claude-opus-4-6 | 最强推理，复杂分析/创作 | $5 / $25 |
+| claude-opus-4-7 | Opus 进化版，深度思考 | $5 / $25 |
+| claude-opus-4-8 | Opus 最新，顶级智能 | $5 / $25 |
+| gpt-5.5 | OpenAI 旗舰，多模态强 | $5 / $30 |
+| glm-5 | 智谱 GLM，中文理解优秀 | $1 / $3.2 |
+| kimi-k2.5 | 月之暗面，超长上下文 | $0.6 / $3 |
+| deepseek-v4-pro | DeepSeek 旗舰，代码/数学强 | $0.43 / $0.87 |
+| deepseek-v4-flash | DeepSeek 快速版，极致性价比 | $0.14 / $0.28 |
+
+> 💡 日常推荐：**claude-sonnet-4-6**（默认）。省钱场景用 **deepseek-v4-flash**，高质量创作用 **opus / gpt-5.5**。
+
 ## 技术栈
 
 | 组件 | 技术 |
 |------|------|
 | 框架 | LangChain |
-| LLM | Anthropic Claude (claude-sonnet-4-6) |
+| LLM | 多模型支持（侧边栏切换，默认 claude-sonnet-4-6） |
 | Embedding | FastEmbed (ONNX Runtime) |
 | 向量数据库 | ChromaDB（chunk_size=200, overlap=30） |
 | Web UI | Streamlit |
@@ -225,7 +257,7 @@ rag/
 
 **Q: 如何更换模型？**
 
-编辑 `rag_engine.py` 中 `get_llm()` 函数的 `model` 参数，可选值参考你的 API Key 权限。
+在侧边栏「🤖 模型」下拉框中选择即可实时切换，支持 11 个模型。如需新增模型，编辑 `rag_engine.py` 中的 `AVAILABLE_MODELS` 字典。
 
 **Q: 知识库支持什么格式？**
 

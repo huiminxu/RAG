@@ -1,6 +1,6 @@
 import streamlit as st
 from pathlib import Path
-from rag_engine import rebuild_index, KB_DIR
+from rag_engine import rebuild_index, KB_DIR, AVAILABLE_MODELS, MODEL_LIST, DEFAULT_MODEL
 from styles import load_dialog_css
 
 
@@ -85,6 +85,18 @@ def render_sidebar():
             if st.button(_label, key="theme_toggle", help="切换主题"):
                 st.session_state.dark_mode = not st.session_state.dark_mode
                 st.rerun()
+
+        current_model = st.session_state.get("selected_model", DEFAULT_MODEL)
+        if current_model not in MODEL_LIST:
+            current_model = DEFAULT_MODEL
+        st.selectbox(
+            "🤖 模型",
+            options=MODEL_LIST,
+            index=MODEL_LIST.index(current_model),
+            format_func=lambda m: f"{m}",
+            key="selected_model",
+        )
+        st.caption(f"💡 {AVAILABLE_MODELS.get(current_model, '')}")
 
         st.markdown('<div class="kb-header">📂 知识库文档</div>', unsafe_allow_html=True)
         categories = get_kb_categories()

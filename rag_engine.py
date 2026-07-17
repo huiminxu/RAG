@@ -70,9 +70,32 @@ def build_vectorstore():
     return get_vectorstore()
 
 
+AVAILABLE_MODELS = {
+    "claude-sonnet-4-6": "均衡之选，速度快质量高，性价比最佳",
+    "claude-sonnet-5": "Sonnet 最新版，推理更强",
+    "claude-haiku-4-5": "最快最便宜，简单任务首选",
+    "claude-opus-4-6": "最强推理，复杂分析/创作",
+    "claude-opus-4-7": "Opus 进化版，深度思考",
+    "claude-opus-4-8": "Opus 最新，顶级智能",
+    "gpt-5.5": "OpenAI 旗舰，多模态强",
+    "glm-5": "智谱 GLM，中文理解优秀",
+    "kimi-k2.5": "月之暗面，超长上下文",
+    "deepseek-v4-pro": "DeepSeek 旗舰，代码/数学强",
+    "deepseek-v4-flash": "DeepSeek 快速版，极致性价比",
+}
+
+MODEL_LIST = list(AVAILABLE_MODELS.keys())
+DEFAULT_MODEL = "claude-sonnet-4-6"
+
+
 def get_llm(max_tokens: int = 1024):
+    try:
+        import streamlit as st
+        model = st.session_state.get("selected_model", DEFAULT_MODEL)
+    except Exception:
+        model = DEFAULT_MODEL
     kwargs = {
-        "model": "claude-sonnet-4-6",
+        "model": model,
         "api_key": os.getenv("ANTHROPIC_API_KEY"),
         "max_tokens": max_tokens,
     }
