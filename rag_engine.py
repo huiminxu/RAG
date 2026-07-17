@@ -695,6 +695,70 @@ def generate_learning_report(progress_summary: str) -> str:
 
 
 
+def extract_key_concepts(text: str) -> str:
+    prompt = f"""你是一位学习导师。请从以下文档中提炼 3-5 个核心概念。
+
+对每个概念，请给出：
+1. **概念名称**
+2. **一句话解释**（简洁明了）
+3. **文中关键段落**（引用原文相关内容）
+
+文档内容：
+{text[:6000]}
+
+请用中文回答，格式清晰，用 markdown 列表。"""
+
+    llm = get_llm(max_tokens=2048)
+    response = llm.invoke(prompt)
+    return response.content
+
+
+def extract_concepts_structured(text: str) -> list[dict]:
+    prompt = f"""你是一位学习导师。请从以下文档中提炼 3-5 个核心概念，以 JSON 数组格式返回。
+
+每个概念包含：
+- "name": 概念名称（简短）
+- "explanation": 一句话解释
+
+只返回 JSON 数组，不要其他文字。示例格式：
+[{{"name": "概念A", "explanation": "解释A"}}, {{"name": "概念B", "explanation": "解释B"}}]
+
+文档内容：
+{text[:6000]}
+
+请直接返回 JSON 数组："""
+
+    llm = get_llm(max_tokens=1024)
+    response = llm.invoke(prompt)
+    content = response.content.strip()
+    if content.startswith("```"):
+        content = content.split("\n", 1)[1].rsplit("```", 1)[0].strip()
+    import json
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        return []
+
+
+def generate_deep_questions(text: str, notes: str = "") -> str:
+    notes_section = f"\n\n用户的阅读笔记：\n{notes}" if notes else ""
+    prompt = f"""你是一位学习导师。基于以下文档内容{' 和用户笔记' if notes else ''}，生成 3-5 个深入思考的问题。
+
+这些问题应该：
+- 帮助检验对核心概念的理解深度
+- 引导思考概念之间的关联
+- 鼓励将知识应用到实际场景
+
+文档内容：
+{text[:6000]}{notes_section}
+
+请用中文回答，每个问题后附一句提示（帮助思考方向）。"""
+
+    llm = get_llm(max_tokens=2048)
+    response = llm.invoke(prompt)
+    return response.content
+
+
 def rebuild_index():
     global _vectorstore
     vs = get_vectorstore()

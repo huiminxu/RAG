@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 from audio_recorder_streamlit import audio_recorder
 import speech_recognition as sr
 from rag_engine import list_kb_files, get_interview_system_prompt, interview_chat, KB_DIR
-from progress import record_interview
+from progress import record_interview, add_review_card
 
 
 def tts_speak(text: str):
@@ -108,6 +108,7 @@ def render():
                 score = int(score_match.group(1)) if score_match else 0
                 iv_cats = st.session_state.get("iv_selected_cats", [])
                 record_interview(score, 5, iv_cats, final_reply[-200:])
+                _add_low_score_to_review(final_reply)
                 st.rerun()
 
         for msg in st.session_state.interview_messages:
@@ -165,3 +166,28 @@ def render():
                         st.error(f"语音识别服务出错: {e}")
                     except Exception as e:
                         st.error(f"出错了: {e}")
+
+
+def _add_low_score_to_review(final_reply: str):
+    """Parse interview score table and add low-scoring questions to review."""
+    import re
+    rows = re.findall(
+        r"\|\s*\d+\s*\|\s*(.+?)\s*\|\s*(\d+)\s*\|\s*(.+?)\s*\|",
+        final_reply,
+    )
+    added = 0
+    for question, score_str, feedback in rows:
+        try:
+            s = int(score_str)
+        except ValueError:
+            continue
+        if s <= 6:
+            add_review_card(
+                front=question.strip(),
+                back=feedback.strip(),
+                source="interview",
+                source_ref=f"面试 {__import__('datetime').date.today().isoformat()}",
+            )
+            added += 1
+    if added > 0:
+        st.toast(f"已将 {added} 道低分题加入复习队列")

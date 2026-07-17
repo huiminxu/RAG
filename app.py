@@ -22,16 +22,17 @@ if st.session_state.get("preview_file"):
 
 # Tabs
 from tabs import tab_chat, tab_exam, tab_interview
-from tabs import tab_resource, tab_progress, tab_resume, tab_trends
+from tabs import tab_resource, tab_progress, tab_resume, tab_trends, tab_study_space
 
 tab_objs = st.tabs([
     "🌸 知识问答",
     "🌺 技术趋势",
+    "📖 学习空间",
     "🌻 资源导入",
     "🌼 智能出题",
     "🌹 AI 对练",
     "🍀 文档助手",
-    "🌱 学习进度",
+    "📈 学习进度",
 ])
 
 with tab_objs[0]:
@@ -39,12 +40,14 @@ with tab_objs[0]:
 with tab_objs[1]:
     tab_trends.render()
 with tab_objs[2]:
-    tab_resource.render()
+    tab_study_space.render()
 with tab_objs[3]:
-    tab_exam.render()
+    tab_resource.render()
 with tab_objs[4]:
-    tab_interview.render()
+    tab_exam.render()
 with tab_objs[5]:
-    tab_resume.render()
+    tab_interview.render()
 with tab_objs[6]:
+    tab_resume.render()
+with tab_objs[7]:
     tab_progress.render()

@@ -1,5 +1,5 @@
 import json
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
@@ -72,6 +72,13 @@ def get_stats() -> dict:
     for item in interviews + resources:
         study_days.add(item["date"][:10])
 
+    reading_notes = data.get("reading_notes", {})
+    files_with_notes = len(reading_notes)
+    total_notes = sum(len(notes) for notes in reading_notes.values())
+    for notes in reading_notes.values():
+        for n in notes:
+            study_days.add(n["date"][:10])
+
     return {
         "total_interviews": len(interviews),
         "total_resources": len(resources),
@@ -83,7 +90,158 @@ def get_stats() -> dict:
         "today_activities": today_count,
         "total_study_days": len(study_days),
         "study_days": sorted(study_days),
+        "files_read": files_with_notes,
+        "total_notes": total_notes,
     }
+
+
+def load_todos() -> list:
+    data = _load()
+    return data.get("todos", [])
+
+
+def save_todo(title: str, priority: str = "medium"):
+    data = _load()
+    if "todos" not in data:
+        data["todos"] = []
+    data["todos"].append({
+        "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
+        "title": title,
+        "priority": priority,
+        "done": False,
+        "created": datetime.now().isoformat(),
+    })
+    _save(data)
+
+
+def toggle_todo(todo_id: str):
+    data = _load()
+    for t in data.get("todos", []):
+        if t["id"] == todo_id:
+            t["done"] = not t["done"]
+            break
+    _save(data)
+
+
+def delete_todo(todo_id: str):
+    data = _load()
+    data["todos"] = [t for t in data.get("todos", []) if t["id"] != todo_id]
+    _save(data)
+
+
+def load_meeting_rooms() -> list:
+    data = _load()
+    return data.get("meeting_rooms", [])
+
+
+def save_meeting_room(name: str, url: str):
+    data = _load()
+    if "meeting_rooms" not in data:
+        data["meeting_rooms"] = []
+    data["meeting_rooms"].append({
+        "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
+        "name": name,
+        "url": url,
+    })
+    _save(data)
+
+
+def delete_meeting_room(room_id: str):
+    data = _load()
+    data["meeting_rooms"] = [r for r in data.get("meeting_rooms", []) if r["id"] != room_id]
+    _save(data)
+
+
+def save_reading_note(file_key: str, content: str):
+    data = _load()
+    if "reading_notes" not in data:
+        data["reading_notes"] = {}
+    if file_key not in data["reading_notes"]:
+        data["reading_notes"][file_key] = []
+    data["reading_notes"][file_key].append({
+        "date": datetime.now().isoformat(),
+        "content": content,
+    })
+    _save(data)
+
+
+def load_reading_notes(file_key: str) -> list:
+    data = _load()
+    return data.get("reading_notes", {}).get(file_key, [])
+
+
+REVIEW_INTERVALS = [1, 3, 7, 14, 30, 60]
+
+
+def add_review_card(front: str, back: str, source: str, source_ref: str = ""):
+    data = _load()
+    if "review_cards" not in data:
+        data["review_cards"] = []
+    data["review_cards"].append({
+        "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
+        "front": front,
+        "back": back,
+        "source": source,
+        "source_ref": source_ref,
+        "created": datetime.now().isoformat(),
+        "next_review": date.today().isoformat(),
+        "level": 0,
+        "ease_factor": 1.0,
+        "reviews": 0,
+        "last_review": None,
+    })
+    _save(data)
+
+
+def get_due_cards(target_date: str = None) -> list:
+    if target_date is None:
+        target_date = date.today().isoformat()
+    data = _load()
+    cards = data.get("review_cards", [])
+    return [c for c in cards if c["next_review"] <= target_date]
+
+
+def review_card(card_id: str, rating: str):
+    data = _load()
+    for card in data.get("review_cards", []):
+        if card["id"] == card_id:
+            card["reviews"] += 1
+            card["last_review"] = date.today().isoformat()
+
+            if rating == "forgot":
+                card["level"] = 0
+                card["ease_factor"] = max(0.5, card["ease_factor"] - 0.2)
+                card["next_review"] = (date.today() + timedelta(days=1)).isoformat()
+            elif rating == "fuzzy":
+                interval = REVIEW_INTERVALS[min(card["level"], len(REVIEW_INTERVALS) - 1)]
+                card["next_review"] = (date.today() + timedelta(days=interval)).isoformat()
+            else:  # remembered
+                card["level"] = min(card["level"] + 1, len(REVIEW_INTERVALS) - 1)
+                card["ease_factor"] = min(2.5, card["ease_factor"] + 0.1)
+                interval = REVIEW_INTERVALS[card["level"]]
+                days = max(1, int(interval * card["ease_factor"]))
+                card["next_review"] = (date.today() + timedelta(days=days)).isoformat()
+            break
+    _save(data)
+
+
+def get_review_stats() -> dict:
+    data = _load()
+    cards = data.get("review_cards", [])
+    today = date.today().isoformat()
+    due = sum(1 for c in cards if c["next_review"] <= today)
+    mastered = sum(1 for c in cards if c["level"] >= 4)
+    return {
+        "total_cards": len(cards),
+        "due_today": due,
+        "mastered": mastered,
+    }
+
+
+def delete_review_card(card_id: str):
+    data = _load()
+    data["review_cards"] = [c for c in data.get("review_cards", []) if c["id"] != card_id]
+    _save(data)
 
 
 def get_progress_summary() -> str:
