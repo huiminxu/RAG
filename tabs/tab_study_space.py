@@ -99,39 +99,40 @@ def _render_todo():
     """Learning plan / todo list."""
     todos = load_todos()
 
-    col_input, col_btn = st.columns([5, 1])
-    with col_input:
-        new_todo = st.text_input(
-            "添加计划",
-            placeholder="输入学习计划...",
-            key="new_todo_input",
-            label_visibility="collapsed",
-        )
-    with col_btn:
-        if st.button("➕", key="add_todo", use_container_width=True):
-            if new_todo.strip():
-                save_todo(new_todo.strip())
-                st.rerun()
+    with st.form("todo_form", clear_on_submit=True):
+        col_input, col_btn = st.columns([6, 1])
+        with col_input:
+            new_todo = st.text_input(
+                "添加计划",
+                placeholder="输入学习计划...",
+                label_visibility="collapsed",
+            )
+        with col_btn:
+            submitted = st.form_submit_button("➕", use_container_width=True)
+        if submitted and new_todo.strip():
+            save_todo(new_todo.strip())
+            st.rerun()
 
     if not todos:
-        st.caption("暂无计划，添加一个开始吧")
+        st.caption("暂无计划，输入内容按回车即可添加")
     else:
         done_count = sum(1 for t in todos if t["done"])
         st.caption(f"完成 {done_count}/{len(todos)}")
 
         for t in todos:
-            col_check, col_text, col_del = st.columns([1, 8, 1])
-            with col_check:
-                checked = st.checkbox("done", value=t["done"], key=f"todo_{t['id']}", label_visibility="collapsed")
-                if checked != t["done"]:
-                    toggle_todo(t["id"])
-                    st.rerun()
-            with col_text:
-                if t["done"]:
-                    st.markdown(f"~~{t['title']}~~")
-                else:
-                    st.markdown(t["title"])
-            with col_del:
-                if st.button("🗑️", key=f"del_{t['id']}"):
-                    delete_todo(t["id"])
-                    st.rerun()
+            with st.container(border=True):
+                col_status, col_title, col_del = st.columns([1, 10, 1])
+                with col_status:
+                    checked = st.checkbox("done", value=t["done"], key=f"todo_{t['id']}", label_visibility="collapsed")
+                    if checked != t["done"]:
+                        toggle_todo(t["id"])
+                        st.rerun()
+                with col_title:
+                    if t["done"]:
+                        st.markdown(f"<p style='font-size:1.15rem;color:#aaa;text-decoration:line-through;margin:0.4rem 0'>{t['title']}</p>", unsafe_allow_html=True)
+                    else:
+                        st.markdown(f"<p style='font-size:1.15rem;margin:0.4rem 0'>{t['title']}</p>", unsafe_allow_html=True)
+                with col_del:
+                    if st.button("🗑️", key=f"del_{t['id']}"):
+                        delete_todo(t["id"])
+                        st.rerun()
