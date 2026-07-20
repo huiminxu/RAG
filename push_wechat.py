@@ -1,8 +1,8 @@
 """
-每周技术资讯推送到微信（via PushPlus）
+每周技术资讯推送到微信（via Server酱）
 
 用法：
-  1. 在 .env 中配置 PUSHPLUS_TOKEN
+  1. 在 .env 中配置 SERVERCHAN_KEY（从 sct.ftqq.com 获取 SendKey）
   2. UI 内点击「推送到微信」按钮
   3. 或命令行：python push_wechat.py [关键词]
 """
@@ -14,8 +14,8 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-PUSHPLUS_TOKEN = os.getenv("PUSHPLUS_TOKEN", "")
-PUSHPLUS_URL = "https://www.pushplus.plus/send"
+SERVERCHAN_KEY = os.getenv("SERVERCHAN_KEY", "")
+SERVERCHAN_URL = "https://sctapi.ftqq.com/{key}.send"
 
 
 def generate_weekly_digest(language: str = "") -> str:
@@ -89,25 +89,24 @@ def generate_weekly_digest(language: str = "") -> str:
 
 
 def push_to_wechat(title: str, content: str) -> dict:
-    """通过 PushPlus 推送消息到微信。"""
-    if not PUSHPLUS_TOKEN:
-        return {"success": False, "msg": "未配置 PUSHPLUS_TOKEN，请在 .env 中添加"}
+    """通过 Server酱 推送消息到微信。"""
+    if not SERVERCHAN_KEY:
+        return {"success": False, "msg": "未配置 SERVERCHAN_KEY，请在 .env 中添加（从 sct.ftqq.com 获取）"}
 
+    url = SERVERCHAN_URL.format(key=SERVERCHAN_KEY)
     payload = {
-        "token": PUSHPLUS_TOKEN,
         "title": title,
-        "content": content,
-        "template": "html",
+        "desp": content,
     }
 
     try:
-        resp = requests.post(PUSHPLUS_URL, json=payload, timeout=15)
+        resp = requests.post(url, json=payload, timeout=15)
         resp.raise_for_status()
         result = resp.json()
-        if result.get("code") == 200:
+        if result.get("code") == 0:
             return {"success": True, "msg": "推送成功，请查看微信"}
         else:
-            return {"success": False, "msg": result.get("msg", "推送失败")}
+            return {"success": False, "msg": result.get("message", "推送失败")}
     except Exception as e:
         return {"success": False, "msg": f"请求失败：{e}"}
 
