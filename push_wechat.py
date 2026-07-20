@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-SERVERCHAN_KEY = os.getenv("SERVERCHAN_KEY", "")
+SERVERCHAN_KEYS = [k.strip() for k in os.getenv("SERVERCHAN_KEY", "").split(",") if k.strip()]
 SERVERCHAN_URL = "https://sctapi.ftqq.com/{key}.send"
 
 
@@ -87,26 +87,33 @@ def generate_weekly_digest(language: str = "") -> str:
 
 
 def push_to_wechat(title: str, content: str) -> dict:
-    """通过 Server酱 推送消息到微信。"""
-    if not SERVERCHAN_KEY:
-        return {"success": False, "msg": "未配置 SERVERCHAN_KEY，请在 .env 中添加（从 sct.ftqq.com 获取）"}
+    """通过 Server酱 推送消息到微信（支持多人）。"""
+    if not SERVERCHAN_KEYS:
+        return {"success": False, "msg": "未配置 SERVERCHAN_KEY，请在 .env 中添加（多人用逗号分隔）"}
 
-    url = SERVERCHAN_URL.format(key=SERVERCHAN_KEY)
-    payload = {
-        "title": title,
-        "desp": content,
-    }
+    success_count = 0
+    errors = []
 
-    try:
-        resp = requests.post(url, json=payload, timeout=15)
-        resp.raise_for_status()
-        result = resp.json()
-        if result.get("code") == 0:
-            return {"success": True, "msg": "推送成功，请查看微信"}
-        else:
-            return {"success": False, "msg": result.get("message", "推送失败")}
-    except Exception as e:
-        return {"success": False, "msg": f"请求失败：{e}"}
+    for key in SERVERCHAN_KEYS:
+        url = SERVERCHAN_URL.format(key=key)
+        payload = {"title": title, "desp": content}
+        try:
+            resp = requests.post(url, json=payload, timeout=15)
+            resp.raise_for_status()
+            result = resp.json()
+            if result.get("code") == 0:
+                success_count += 1
+            else:
+                errors.append(result.get("message", "未知错误"))
+        except Exception as e:
+            errors.append(str(e))
+
+    if success_count == len(SERVERCHAN_KEYS):
+        return {"success": True, "msg": f"推送成功，已发送给 {success_count} 人"}
+    elif success_count > 0:
+        return {"success": True, "msg": f"部分成功：{success_count}/{len(SERVERCHAN_KEYS)} 人"}
+    else:
+        return {"success": False, "msg": f"推送失败：{'; '.join(errors)}"}
 
 
 def weekly_push(language: str = "") -> dict:
