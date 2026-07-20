@@ -271,3 +271,14 @@ def render():
                         st.markdown(card, unsafe_allow_html=True)
                 else:
                     st.info("暂无 B站 数据")
+
+        # --- 推送到微信 ---
+        st.divider()
+        if st.button("📬 推送本周资讯到微信", key="push_wechat_btn"):
+            from push_wechat import weekly_push
+            with st.spinner("正在推送到微信..."):
+                result = weekly_push(trend_keyword)
+            if result["success"]:
+                st.success(result["msg"])
+            else:
+                st.error(result["msg"])
