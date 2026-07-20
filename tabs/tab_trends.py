@@ -177,7 +177,22 @@ def render():
 
     CARD_CSS = CARD_CSS_DARK if st.session_state.dark_mode else CARD_CSS_LIGHT
 
-    if st.button("📡 加载趋势数据", type="primary", key="trend_load") or st.session_state.get("trends_loaded"):
+    col_load, col_push = st.columns([1, 1])
+    with col_load:
+        load_clicked = st.button("📡 加载趋势数据", type="primary", key="trend_load", use_container_width=True)
+    with col_push:
+        push_clicked = st.button("📬 推送本周资讯到微信", key="push_wechat_btn", use_container_width=True)
+
+    if push_clicked:
+        from push_wechat import weekly_push
+        with st.spinner("正在获取数据并推送到微信..."):
+            result = weekly_push(trend_keyword)
+        if result["success"]:
+            st.success(result["msg"])
+        else:
+            st.error(result["msg"])
+
+    if load_clicked or st.session_state.get("trends_loaded"):
         st.session_state.trends_loaded = True
         with st.spinner("🌺 正在获取最新技术趋势..."):
             trends = _cached_trends(trend_keyword, trend_since)
@@ -272,13 +287,3 @@ def render():
                 else:
                     st.info("暂无 B站 数据")
 
-        # --- 推送到微信 ---
-        st.divider()
-        if st.button("📬 推送本周资讯到微信", key="push_wechat_btn"):
-            from push_wechat import weekly_push
-            with st.spinner("正在推送到微信..."):
-                result = weekly_push(trend_keyword)
-            if result["success"]:
-                st.success(result["msg"])
-            else:
-                st.error(result["msg"])
