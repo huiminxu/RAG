@@ -19,73 +19,71 @@ SERVERCHAN_URL = "https://sctapi.ftqq.com/{key}.send"
 
 
 def generate_weekly_digest(language: str = "") -> str:
-    """聚合技术趋势数据，生成 HTML 摘要。"""
+    """聚合技术趋势数据，生成 Markdown 摘要。"""
     from trends import get_all_trends
 
     data = get_all_trends(language=language, since="weekly", limit=8)
     today = date.today().isoformat()
     keyword_label = language if language else "全栈"
 
-    html_parts = [
-        f"<h2>📊 本周技术热点（{keyword_label}）</h2>",
-        f"<p style='color:#888'>生成日期：{today}</p>",
+    lines = [
+        f"## 📊 本周技术热点（{keyword_label}）",
+        f"> 生成日期：{today}",
+        "",
     ]
 
     # GitHub
     github = data.get("github", [])
     if github:
-        html_parts.append("<h3>🐙 GitHub 热门项目</h3><ol>")
-        for r in github[:6]:
+        lines.append("### 🐙 GitHub 热门项目")
+        lines.append("")
+        for i, r in enumerate(github[:6], 1):
             stars = r.get("stars", 0)
             star_label = f"{stars/1000:.1f}k" if stars >= 1000 else str(stars)
             desc = r.get("description", "")[:60]
-            html_parts.append(
-                f"<li><a href=\"{r['url']}\">{r['name']}</a> ⭐{star_label} — {desc}</li>"
-            )
-        html_parts.append("</ol>")
+            lines.append(f"{i}. [{r['name']}]({r['url']}) ⭐{star_label} — {desc}")
+        lines.append("")
 
     # HackerNews
     hn = data.get("hackernews", [])
     if hn:
-        html_parts.append("<h3>📰 HackerNews 热议</h3><ol>")
-        for h in hn[:6]:
-            html_parts.append(
-                f"<li><a href=\"{h['url']}\">{h['title']}</a> ({h.get('score', 0)} points)</li>"
-            )
-        html_parts.append("</ol>")
+        lines.append("### 📰 HackerNews 热议")
+        lines.append("")
+        for i, h in enumerate(hn[:6], 1):
+            lines.append(f"{i}. [{h['title']}]({h['url']}) ({h.get('score', 0)} points)")
+        lines.append("")
 
     # Dev.to
     devto = data.get("devto", [])
     if devto:
-        html_parts.append("<h3>✍️ Dev.to 精选</h3><ol>")
-        for a in devto[:5]:
-            html_parts.append(
-                f"<li><a href=\"{a['url']}\">{a['title']}</a> ❤️{a.get('reactions', 0)}</li>"
-            )
-        html_parts.append("</ol>")
+        lines.append("### ✍️ Dev.to 精选")
+        lines.append("")
+        for i, a in enumerate(devto[:5], 1):
+            lines.append(f"{i}. [{a['title']}]({a['url']}) ❤️{a.get('reactions', 0)}")
+        lines.append("")
 
     # YouTube
     yt = data.get("youtube", [])
     if yt:
-        html_parts.append("<h3>🎬 YouTube 推荐</h3><ol>")
-        for v in yt[:5]:
-            html_parts.append(
-                f"<li><a href=\"{v.get('url', '')}\">{v.get('title', '')}</a> — {v.get('channel', '')}</li>"
-            )
-        html_parts.append("</ol>")
+        lines.append("### 🎬 YouTube 推荐")
+        lines.append("")
+        for i, v in enumerate(yt[:5], 1):
+            lines.append(f"{i}. [{v.get('title', '')}]({v.get('url', '')}) — {v.get('channel', '')}")
+        lines.append("")
 
     # Bilibili
     bili = data.get("bilibili", [])
     if bili:
-        html_parts.append("<h3>📺 B站技术视频</h3><ol>")
-        for b in bili[:5]:
-            html_parts.append(
-                f"<li><a href=\"{b.get('url', '')}\">{b.get('title', '')}</a> ▶️{b.get('play', 0)}</li>"
-            )
-        html_parts.append("</ol>")
+        lines.append("### 📺 B站技术视频")
+        lines.append("")
+        for i, b in enumerate(bili[:5], 1):
+            play = b.get("play", 0)
+            lines.append(f"{i}. [{b.get('title', '')}]({b.get('url', '')}) ▶️{play}")
+        lines.append("")
 
-    html_parts.append("<hr><p style='color:#aaa;font-size:12px'>由 RAG 学习助手自动生成</p>")
-    return "\n".join(html_parts)
+    lines.append("---")
+    lines.append("*由 RAG 学习助手自动生成*")
+    return "\n".join(lines)
 
 
 def push_to_wechat(title: str, content: str) -> dict:
