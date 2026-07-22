@@ -662,6 +662,8 @@ def save_resource_to_kb(content: str, name: str, category: str) -> str:
         safe_name = "resource"
     output_path = target_dir / f"{safe_name}.md"
     output_path.write_text(content, encoding="utf-8")
+    from git_sync import auto_commit
+    auto_commit([str(output_path.relative_to(Path(__file__).parent))])
     return str(output_path)
 
 

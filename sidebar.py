@@ -69,6 +69,8 @@ def show_file_preview(file_path: str):
         with col2:
             if st.button("确认", type="primary", use_container_width=True):
                 p.write_text(edited, encoding="utf-8")
+                from git_sync import auto_commit
+                auto_commit([str(p.relative_to(KB_DIR.parent))])
                 st.session_state.file_edit_mode = False
                 st.session_state.pop("preview_file", None)
                 st.success("已保存！")

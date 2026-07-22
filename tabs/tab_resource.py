@@ -198,6 +198,8 @@ def _render_file_import():
                 safe_name = st.session_state.import_name.replace(" ", "_")
                 output_path = target_dir / f"{safe_name}.md"
                 output_path.write_text(st.session_state.import_transcript, encoding="utf-8")
+                from git_sync import auto_commit
+                auto_commit([str(output_path.relative_to(KB_DIR.parent))])
                 record_resource(safe_name, st.session_state.import_category, "audio_video")
                 st.success(f"已保存: `{st.session_state.import_category}/{safe_name}.md`")
                 st.info('请点击侧边栏的「重建索引」按钮更新检索数据库')
@@ -249,6 +251,8 @@ def _render_manual_write():
                 safe_name += ".md"
             output_path = target_dir / safe_name
             output_path.write_text(manual_content, encoding="utf-8")
+            from git_sync import auto_commit
+            auto_commit([str(output_path.relative_to(KB_DIR.parent))])
             record_resource(safe_name, manual_category, "manual")
             st.session_state.manual_saved = f"已保存: `{manual_category}/{safe_name}`"
             st.session_state["manual_doc_name"] = ""

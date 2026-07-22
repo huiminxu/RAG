@@ -14,6 +14,8 @@ def _load() -> dict:
 
 def _save(data: dict):
     PROGRESS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    from git_sync import auto_commit
+    auto_commit(["progress.json"])
 
 
 def record_interview(score: int, num_questions: int, categories: list[str], details: str = ""):
