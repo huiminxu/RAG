@@ -70,10 +70,13 @@ pip install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 cp .env.example .env
 ```
 
-编辑 `.env` 文件，填入你的 Anthropic API Key：
+编辑 `.env` 文件，填入配置：
 
 ```
 ANTHROPIC_API_KEY=sk-ant-xxxxx
+YOUTUBE_API_KEY=AIzaSyXXX          # YouTube 数据抓取（可选）
+SERVERCHAN_KEY=SCTxxx,SCTyyy       # Server酱推送（可选，多人逗号分隔）
+GIT_TOKEN=                         # GitHub PAT，Streamlit Cloud 数据持久化用（本地留空）
 ```
 
 ### 4. 添加知识库文档
@@ -183,6 +186,53 @@ python -m streamlit run app.py --server.headless true
 - **分类管理**：新增/重命名/删除分类
 - **重建索引**：添加新文档后点击侧边栏「重建索引」按钮更新向量数据库
 
+## 微信推送（Server酱）
+
+系统支持将每周技术资讯自动推送到微信，通过 [Server酱](https://sct.ftqq.com/) 实现。
+
+### 功能
+
+- **手动推送**：在「技术趋势」Tab 点击「📬 推送本周资讯到微信」按钮
+- **定时推送**：GitHub Actions 每周一北京时间 9:00 自动推送
+- **多人推送**：支持逗号分隔多个 SendKey，同时推送给多人
+- **Markdown 格式**：推送内容为结构化 Markdown，微信内可读性好
+
+### 配置
+
+1. 打开 [sct.ftqq.com](https://sct.ftqq.com/)，微信扫码登录
+2. 复制你的 SendKey（格式 `SCTxxx`）
+3. 在 `.env` 中添加（多人用逗号分隔）：
+   ```
+   SERVERCHAN_KEY=SCTxxx,SCTyyy
+   ```
+4. GitHub Actions 自动推送需在仓库 Settings → Secrets 中添加 `SERVERCHAN_KEY`
+
+## 数据自动持久化（Git Sync）
+
+Streamlit Cloud 文件系统是临时的，每次重启都从 GitHub 拉取代码。本系统通过 `git_sync.py` 模块实现运行时数据自动同步：
+
+- **自动 commit + push**：修改学习进度、知识库文件时自动推送到 GitHub
+- **5 秒防抖**：频繁操作合并为一次提交，避免过多 commit
+- **后台异步**：不阻塞 UI 操作
+- **静默降级**：本地开发无 GIT_TOKEN 时自动跳过
+
+### 配置
+
+1. 创建 GitHub Personal Access Token（Fine-grained，repo Contents 读写权限）
+2. Streamlit Cloud Secrets 中添加：
+   ```
+   GIT_TOKEN = "github_pat_xxx"
+   ```
+3. GitHub Actions 需在 Settings → Secrets 中添加 `GIT_TOKEN`
+
+## GitHub Actions
+
+| Workflow | 触发 | 功能 |
+|----------|------|------|
+| Weekly Tech Digest Push | 每周一 09:00（北京时间）/ 手动 | 自动获取本周技术热点并推送到微信 |
+
+配置方法：仓库 Settings → Secrets and variables → Actions → New repository secret，添加 `SERVERCHAN_KEY` 和 `YOUTUBE_API_KEY`。
+
 ## 项目结构
 
 ```
@@ -207,6 +257,8 @@ rag/
 │   ├── tab_reading.py # 精读笔记
 │   ├── tab_studyroom.py # 自习室（Jitsi + 腾讯会议）
 │   └── tab_progress.py # 学习进度
+├── .github/workflows/ # GitHub Actions 自动化
+│   └── weekly_push.yml # 每周技术资讯推送
 ├── app.py             # Streamlit 应用入口（9 个 Tab + 双主题）
 ├── sidebar.py         # 侧边栏（KB 管理 + 文档预览）
 ├── rag_engine.py      # RAG 核心：向量检索、文档加载、资源抓取、AI 分析
@@ -214,6 +266,8 @@ rag/
 ├── resume_html.py     # HTML 简历渲染（Jinja2 模板 + PDF Vision 模板生成）
 ├── trends.py          # 技术趋势聚合（GitHub/HN/Dev.to/B站 API）
 ├── progress.py        # 学习进度追踪（面试/资源/查询记录 + 统计）
+├── push_wechat.py     # 微信推送（Server酱，支持多人）
+├── git_sync.py        # 数据自动持久化（防抖 + 后台 commit+push）
 ├── requirements.txt   # Python 依赖
 ├── .env.example       # 环境变量模板
 └── chroma_db/         # ChromaDB 向量数据库（自动生成）
@@ -265,6 +319,9 @@ rag/
 | PDF 解析 | PyPDF2 + PyMuPDF |
 | HTML 简历 | Jinja2 + WeasyPrint + Claude Vision |
 | 技术趋势 | GitHub API / HN Firebase API / Dev.to API / Bilibili API |
+| 微信推送 | Server酱（sctapi.ftqq.com） |
+| 数据持久化 | git_sync（自动 commit+push，5s 防抖） |
+| CI/CD | GitHub Actions（定时推送） |
 | 视频转录 | SpeechRecognition + pydub |
 | 网页抓取 | trafilatura + BeautifulSoup |
 | YouTube | youtube-transcript-api |
