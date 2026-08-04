@@ -282,3 +282,100 @@ def get_progress_summary() -> str:
             summary += f"- {cat}: {count} 篇\n"
 
     return summary
+
+
+# ─── English Learning ───────────────────────────────────────
+
+def save_english_note(source_key: str, content: str, source_title: str = ""):
+    data = _load()
+    if "english_notes" not in data:
+        data["english_notes"] = {}
+    if source_key not in data["english_notes"]:
+        data["english_notes"][source_key] = []
+    data["english_notes"][source_key].append({
+        "date": datetime.now().isoformat(),
+        "content": content,
+        "source_title": source_title,
+    })
+    _save(data)
+
+
+def load_english_notes(source_key: str):
+    data = _load()
+    if not source_key:
+        return sum(len(v) for v in data.get("english_notes", {}).values())
+    return data.get("english_notes", {}).get(source_key, [])
+
+
+def save_english_material(title: str, url: str, source: str, time_goal_min: int = 30):
+    data = _load()
+    if "english_materials" not in data:
+        data["english_materials"] = []
+    data["english_materials"].append({
+        "id": datetime.now().strftime("%Y%m%d%H%M%S%f"),
+        "date_added": datetime.now().isoformat(),
+        "title": title,
+        "url": url,
+        "source": source,
+        "time_goal_min": time_goal_min,
+        "time_spent_min": 0,
+        "completed": False,
+    })
+    _save(data)
+
+
+def load_english_materials() -> list:
+    data = _load()
+    return data.get("english_materials", [])
+
+
+def complete_english_material(material_id: str):
+    data = _load()
+    for m in data.get("english_materials", []):
+        if m["id"] == material_id:
+            m["completed"] = True
+            break
+    _save(data)
+
+
+def delete_english_material(material_id: str):
+    data = _load()
+    data["english_materials"] = [m for m in data.get("english_materials", []) if m["id"] != material_id]
+    _save(data)
+
+
+def save_english_recording(duration_seconds: int, topic: str):
+    data = _load()
+    if "english_recordings" not in data:
+        data["english_recordings"] = []
+    data["english_recordings"].append({
+        "date": datetime.now().isoformat(),
+        "duration_seconds": duration_seconds,
+        "topic": topic,
+    })
+    _save(data)
+
+
+def load_english_recordings() -> list:
+    data = _load()
+    return data.get("english_recordings", [])
+
+
+def save_english_session(category: str, activity: str, start_iso: str, description: str = ""):
+    data = _load()
+    if "english_sessions" not in data:
+        data["english_sessions"] = []
+    data["english_sessions"].append({
+        "date": date.today().isoformat(),
+        "start": start_iso,
+        "end": datetime.now().isoformat(),
+        "category": category,
+        "activity": activity,
+        "description": description,
+    })
+    _save(data)
+
+
+def load_english_sessions() -> list:
+    data = _load()
+    return data.get("english_sessions", [])
