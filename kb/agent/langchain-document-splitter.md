@@ -235,3 +235,100 @@ HTML 标题分割 → 中文递归字符分割
 [1]: https://reference.langchain.com/python/langchain-text-splitters/character/RecursiveCharacterTextSplitter?utm_source=chatgpt.com "RecursiveCharacterTextSplitter | langchain_text_splitters"
 [2]: https://reference.langchain.com/python/langchain-text-splitters/langchain_text_splitters?utm_source=chatgpt.com "langchain_text_splitters | LangChain Reference"
 [3]: https://github.com/langchain-ai/langchain/blob/master/libs/text-splitters/langchain_text_splitters/json.py?utm_source=chatgpt.com "langchain/libs/text-splitters/langchain_text_splitters/json.py at ..."
+
+
+这两个术语通常表示 **Transformer 架构在不同 NLP 任务中的应用**，区别在于它们解决的问题不同。
+
+| 名称        | 英文                                              | 解释                                  | 输入          | 输出     | 应用场景               |
+| --------- | ----------------------------------------------- | ----------------------------------- | ----------- | ------ | ------------------ |
+| **问答转换器** | Question Answering Transformer (QA Transformer) | 利用 Transformer 模型理解问题和上下文，并生成或抽取答案。 | 问题 + 文档/上下文 | 答案     | 智能客服、知识问答、RAG、搜索问答 |
+| **翻译转换器** | Translation Transformer                         | 利用 Transformer 模型将一种语言转换成另一种语言。     | 源语言文本       | 目标语言文本 | 机器翻译、多语言系统         |
+
+### 1. 问答转换器（Question Answering Transformer）
+
+**定义：**
+一种基于 Transformer 的问答模型，能够理解用户提出的问题，并根据提供的上下文生成答案或从上下文中抽取答案。
+
+**工作流程：**
+
+```
+问题：Transformer 是什么？
+
+上下文：
+Transformer 是 Google 在 2017 年提出的深度学习模型……
+
+        ↓
+
+模型
+
+        ↓
+
+答案：
+Transformer 是 Google 于 2017 年提出的一种深度学习模型。
+```
+
+**典型应用：**
+
+* ChatGPT
+* RAG（检索增强生成）
+* 企业知识库问答
+* 智能客服
+* 阅读理解（SQuAD）
+
+---
+
+### 2. 翻译转换器（Translation Transformer）
+
+**定义：**
+一种基于 Transformer 的机器翻译模型，将输入文本从一种语言转换为另一种语言。
+
+**工作流程：**
+
+```
+输入：
+I love artificial intelligence.
+
+        ↓
+
+Transformer
+
+        ↓
+
+输出：
+我喜欢人工智能。
+```
+
+**典型应用：**
+
+* Google Translate
+* DeepL
+* 百度翻译
+* 多语言内容生成
+
+---
+
+### 两者区别
+
+| 对比项      | 问答转换器                   | 翻译转换器                    |
+| -------- | ----------------------- | ------------------------ |
+| **目标**   | 回答问题                    | 翻译语言                     |
+| **输入**   | 问题 + 上下文                | 源语言文本                    |
+| **输出**   | 问题答案                    | 目标语言文本                   |
+| **核心能力** | 理解问题、检索信息、推理            | 理解语义、跨语言映射               |
+| **典型任务** | Question Answering (QA) | Machine Translation (MT) |
+
+### 与 Transformer 的关系
+
+需要注意的是，**Transformer 是一种模型架构，而不是具体任务**。因此：
+
+* **问答转换器** = 用于问答任务的 Transformer 模型
+* **翻译转换器** = 用于机器翻译任务的 Transformer 模型
+
+更符合 AI 领域的专业表达通常是：
+
+* **QA Transformer（问答 Transformer）**
+* **Translation Transformer（翻译 Transformer）**
+* **Transformer-based Question Answering Model（基于 Transformer 的问答模型）**
+* **Transformer-based Machine Translation Model（基于 Transformer 的机器翻译模型）**
+
+在学术论文和开源项目中，通常保留 **Transformer** 英文名称，而不是将其直译为“转换器”。
