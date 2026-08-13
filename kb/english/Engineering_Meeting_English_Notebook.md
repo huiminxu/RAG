@@ -711,3 +711,477 @@ We may need a short-term mitigation.
 We should align with the existing standard.
 
 Once everything looks good, we'll hand it over to QA.
+
+
+
+Meeting #3 – Daily Standup, Release Planning & Testing Priorities
+Topic 1. Deployment & Production Release
+📌 Meeting Background
+
+The team reviewed several frontend and backend changes that had already been tested or were close to completion. Some changes were ready to be deployed to production, while others still needed frontend replacement work or regression testing before release.
+
+💬 Original Chinese
+
+这个功能已经测完了，今天可以部署一下，发到生产环境上面。
+
+🇺🇸 Natural English
+
+This feature has already been tested, so we can deploy it to production today.
+
+Alternative Expressions
+This is ready for production.
+Testing is complete, so we can release it today.
+We can push this to production today.
+💬 Original Chinese
+
+功能没有改变，只是把侧边栏从那个仓库里面去掉。
+
+🇺🇸 Natural English
+
+There are no functional changes. We only removed the sidebar implementation from that repository.
+
+Alternative Expressions
+The functionality remains unchanged.
+This is purely an implementation change.
+There is no user-facing behavior change.
+🧠 Vocabulary
+Word / Phrase	中文	Example
+deploy	部署	We can deploy this today.
+production	生产环境	Push it to production.
+functional change	功能变化	There are no functional changes.
+implementation change	实现层面的修改	This is only an implementation change.
+user-facing	用户可见的	There are no user-facing changes.
+regression testing	回归测试	We still need regression testing.
+⭐ Native Meeting Expressions
+
+✔ This is ready for production.
+
+✔ There are no functional changes.
+
+✔ This is purely an implementation change.
+
+✔ Let's push this to production today.
+
+Topic 2. Refactoring & Regression Testing
+📌 Meeting Background
+
+The refactoring work had largely been completed, but the team still needed to identify all frontend call sites, replace the existing implementation, and then perform regression testing before moving forward.
+
+💬 Original Chinese
+
+重构的话，代码已经开发完了。
+
+🇺🇸 Natural English
+
+The refactoring work is already complete from a development perspective.
+
+Alternative Expressions
+The refactor is code-complete.
+Development for the refactor is finished.
+The implementation is done.
+💬 Original Chinese
+
+我需要找一下全局的调用位置，看除了这个模块之外还有没有其他地方也在用。
+
+🇺🇸 Natural English
+
+I still need to identify all the call sites and check whether any other modules are using it.
+
+Alternative Expressions
+I need to trace all usages across the codebase.
+I need to check for other references.
+I want to make sure we don't miss any call sites.
+💬 Original Chinese
+
+替换完之后我们就可以提测了。
+
+🇺🇸 Natural English
+
+Once the replacements are done, we can hand it over for testing.
+
+Alternative Expressions
+Then it'll be ready for QA.
+After that, we can move it into testing.
+Once that's complete, we can submit it for QA.
+⭐ Useful Expressions
+code-complete — 代码开发完成
+call site — 调用位置
+trace all usages — 找出所有使用位置
+hand over to QA — 交给 QA
+regression testing — 回归测试
+Topic 3. Retry / Re-search Feature
+📌 Meeting Background
+
+The team discussed a new SQP feature that allows users to retry or re-run a search. The backend had added a new API, and testing still needed to be coordinated. The team also clarified that the feature did not have to be released immediately.
+
+💬 Original Chinese
+
+SQP 加了一个重新 Search 的功能。
+
+🇺🇸 Natural English
+
+We added a retry option that allows users to run the search again.
+
+Alternative Expressions
+We added a re-search feature.
+Users can now retry the search.
+We introduced a retry flow for failed searches.
+💬 Original Chinese
+
+后端加了一个接口。
+
+🇺🇸 Natural English
+
+We added a new backend endpoint for this.
+
+Alternative Expressions
+The backend now exposes a new API.
+A new backend API has been added.
+💬 Original Chinese
+
+这个这周一定要发布吗？
+
+🇺🇸 Natural English
+
+Does this have to be released this week?
+
+Alternative Expressions
+Is this release required this week?
+Is this time-sensitive?
+Do we need to get this out this week?
+💬 Original Chinese
+
+不用，这周测完下周发也可以。
+
+🇺🇸 Natural English
+
+No, that's not necessary. We can finish testing this week and release it next week.
+
+⭐ Very Useful Pattern
+
+We can finish testing this week and release it next week.
+
+这个句型在项目会议里非常实用。
+
+Topic 4. Crawler Optimization & Batch API
+📌 Meeting Background
+
+The crawler team provided a new batch API. Load testing showed some improvement, but issues remained. Once the API becomes stable, the team plans to switch to it because it should reduce network communication overhead.
+
+💬 Original Chinese
+
+昨天给我们提供了一个批量接口。
+
+🇺🇸 Natural English
+
+They provided us with a new batch API yesterday.
+
+💬 Original Chinese
+
+我昨天压测了一下，比之前有提升，但是还有一些问题。
+
+🇺🇸 Natural English
+
+I ran a load test yesterday. The performance has improved compared with before, but there are still a few issues.
+
+Alternative Expressions
+We're seeing some improvement, but it's not fully stable yet.
+Performance is better, but there are still some outstanding issues.
+The optimization helped, but there is still room for improvement.
+💬 Original Chinese
+
+等接口稳定了，我们换成这个接口，可以减少一些网络交互。
+
+🇺🇸 Natural English
+
+Once the API is stable, we'll switch to it, which should reduce the amount of network communication.
+
+More Natural Technical Version
+
+Once the API is stable, we'll migrate to it to reduce network overhead.
+
+⭐ Useful Phrase
+
+reduce network overhead
+
+= 减少网络交互带来的额外开销
+
+Topic 5. Dependency & Blocker
+📌 Meeting Background
+
+One API could not be tested because it depended on a new System API endpoint that another team had not yet delivered. This became a dependency that was blocking progress.
+
+💬 Original Chinese
+
+还需要一个新的 System API 接口。
+
+🇺🇸 Natural English
+
+We still need a new System API endpoint.
+
+💬 Original Chinese
+
+等他们提供好了，我这个接口才能测。
+
+🇺🇸 Natural English
+
+I won't be able to test my API until they provide that endpoint.
+
+Alternative Expressions
+I'm blocked until that API is available.
+This depends on another team's API.
+Testing is currently blocked by this dependency.
+⭐ Extremely Useful Meeting Expressions
+
+I'm blocked until this is ready.
+
+This is a dependency for my task.
+
+We're waiting on another team.
+
+Testing can't start until this API is available.
+
+Topic 6. Deadline Conflict & Reprioritization
+📌 Meeting Background
+
+A task needed to be completed before the 19th, but the engineer already had another deadline around the 18th. The team therefore decided to pause the Search Volume refactoring work and prioritize the more urgent task.
+
+💬 Original Chinese
+
+这个是 19 号之前要做完的，所以最好这周把它开发完。
+
+🇺🇸 Natural English
+
+This needs to be completed before the 19th, so ideally we should finish development this week.
+
+Alternative Expressions
+The deadline is the 19th.
+We need to get this done before the 19th.
+Ideally, development should be completed this week.
+💬 Original Chinese
+
+那就跟那个时间有点冲突了。
+
+🇺🇸 Natural English
+
+That creates a bit of a scheduling conflict.
+
+Alternative Expressions
+The timelines overlap.
+There's a conflict between the two deadlines.
+These two tasks are competing for the same time.
+💬 Original Chinese
+
+Search Volume 先暂停一下，先做这个，这个更紧急一点。
+
+🇺🇸 Natural English
+
+Let's pause the Search Volume refactoring for now and prioritize this task since it's more urgent.
+
+Alternative Expressions
+Put the Search Volume work on hold.
+Let's reprioritize this.
+This takes priority over the Search Volume refactor.
+Let's focus on the more urgent task first.
+🧠 Vocabulary
+Word / Phrase	中文	Example
+deadline	截止日期	The deadline is the 19th.
+scheduling conflict	时间冲突	We have a scheduling conflict.
+reprioritize	重新调整优先级	We need to reprioritize the work.
+put on hold	暂停	Put this task on hold.
+urgent	紧急的	This is more urgent.
+take priority	优先	This task takes priority.
+Topic 7. Testing Priority & Release Dependency
+📌 Meeting Background
+
+The team discussed the testing order for Skill and Change Log work. Because Super Agent was scheduled for release on the 19th, Skill testing was considered more urgent. The team explored whether some page-related work could be deferred in order to save time.
+
+💬 Original Chinese
+
+我觉得 Skill 应该是优先的。
+
+🇺🇸 Natural English
+
+I think Skill testing should be the priority.
+
+Alternative Expressions
+We should prioritize the Skill work.
+The Skill work should come first.
+Skill testing is more time-sensitive.
+💬 Original Chinese
+
+如果页面不开，是不是可以节省一些时间？
+
+🇺🇸 Natural English
+
+Could we save some time by postponing the UI work?
+
+Alternative Expressions
+Can we defer the UI work for now?
+Do we really need the UI to be ready for this release?
+Can we reduce the scope to save time?
+💬 Original Chinese
+
+只要这个数据在就 OK 了。
+
+🇺🇸 Natural English
+
+As long as the data is available, that should be enough for now.
+
+Alternative Expressions
+The data is the critical part.
+The UI can come later.
+As long as the underlying data is there, we're fine.
+Topic 8. Hotfix
+📌 Meeting Background
+
+A change related to the API and LKS had already been completed and synchronized with QA. The team decided to release it as a hotfix.
+
+💬 Original Chinese
+
+我们整个 Hotfix 给发掉吗？
+
+🇺🇸 Natural English
+
+Should we release this as a hotfix?
+
+💬 Original Chinese
+
+Hotfix 掉吧。
+
+🇺🇸 Natural English
+
+Let's ship it as a hotfix.
+
+Alternative Expressions
+Let's push a hotfix.
+Let's patch this immediately.
+We can hotfix this directly.
+📖 Grammar & Expression Notes
+1. “上线”
+
+不同语境用不同词。
+
+如果是部署：
+
+deploy to production
+
+如果强调发布：
+
+release
+
+如果比较口语：
+
+push it to production
+
+2. “提测”
+
+不要直译：
+
+❌ submit test
+
+更自然：
+
+hand it over to QA
+
+move it into testing
+
+submit it for QA
+
+3. “先暂停一下”
+
+非常常见：
+
+put it on hold
+
+或者：
+
+pause it for now
+
+4. “更紧急”
+
+more urgent
+
+更像项目管理：
+
+higher priority
+
+例如：
+
+This is a higher-priority task.
+
+5. “被依赖卡住”
+
+非常值得背：
+
+I'm blocked by this dependency.
+
+We're waiting on another team.
+
+Testing is blocked until the API is ready.
+
+6. “这周不一定要发”
+
+This doesn't have to go out this week.
+
+这里 go out 在工作语境里可以表示发布、上线。
+
+⭐ Shadowing Practice
+
+This feature has already been tested, so we can deploy it to production today.
+
+There are no functional changes.
+
+The refactor is code-complete.
+
+I still need to identify all the call sites.
+
+Once that's done, we can hand it over to QA.
+
+Does this have to be released this week?
+
+We can finish testing this week and release it next week.
+
+Once the API is stable, we'll migrate to it.
+
+Testing is blocked by an external dependency.
+
+Let's put this task on hold for now.
+
+This is more urgent, so it should take priority.
+
+Could we defer the UI work to save some time?
+
+Let's ship this as a hotfix.
+
+📚 Today's Vocabulary
+deploy — 部署
+production — 生产环境
+code-complete — 代码开发完成
+call site — 调用位置
+regression testing — 回归测试
+batch API — 批量接口
+network overhead — 网络开销
+dependency — 依赖项
+blocker — 阻塞项
+reprioritize — 重新调整优先级
+put on hold — 暂停
+defer — 延后
+hotfix — 紧急修复
+⭐ 今天最值得背的 8 句
+
+This is ready for production.
+
+The refactor is code-complete.
+
+Once that's done, we can hand it over to QA.
+
+I'm blocked until that API is available.
+
+Let's put this task on hold for now.
+
+This task takes priority.
+
+Could we defer the UI work to save some time?
+
+Let's ship it as a hotfix.
