@@ -1172,3 +1172,665 @@ There's a mismatch between the validation rules.
 We need Product to clarify the expected behavior.
 
 I don't think pagination is necessary at this scale.
+
+# Engineering Meeting English Notebook
+
+## Meeting #3 – Skill Review, Release Risk, Sprint Planning & Cross-team Follow-up
+
+这场会议很适合学习几类高频工程英语：**Skill 安全评审、是否阻塞上线、测试排期、Release 风险、跨团队跟进、Backlog 调整**。另外你主持会议时也用了很多可以直接固化成英文模板的表达。
+
+---
+
+# Topic 1. Starting the Meeting
+
+## 📌 Meeting Background
+
+The meeting began after confirming that enough people had joined. Some PID details were still being adjusted, and a few development items were already waiting for testing. 
+
+## 💬 Original Chinese
+
+> 那我们现在开始吧。
+
+## 🇺🇸 Natural English
+
+> Alright, let's get started.
+
+### Alternative Expressions
+
+* Let's go ahead and start.
+* Looks like we're ready, so let's get started.
+* Alright, let's kick things off.
+
+### ⭐ 推荐
+
+> **Alright, let's get started.**
+
+---
+
+# Topic 2. Waiting for Testing
+
+## 💬 Original Chinese
+
+> 我这边开发差不多了，准备 Push 上去测试，但是现在大家都在测，我得等一下。
+
+## 🇺🇸 Natural English
+
+> Development is almost done on my side. I'm ready to push the changes for testing, but QA is tied up right now, so I'll need to wait a bit. 
+
+### Alternative Expressions
+
+* The implementation is nearly complete and ready for testing.
+* I'm just waiting for QA availability.
+* It's ready to be tested once QA has some bandwidth.
+
+### ⭐ Useful Phrase
+
+**QA is tied up right now.**
+
+= QA 目前比较忙 / 被其他任务占着。
+
+---
+
+# Topic 3. No Immediate Risk
+
+## 💬 Original Chinese
+
+> 分页还在开发中，目前没有风险。
+
+## 🇺🇸 Natural English
+
+> Pagination is still under development, but there are no immediate risks at the moment. 
+
+### Alternative Expressions
+
+* Development is still in progress, but everything is on track.
+* I don't see any delivery risk at this point.
+* There are no blockers right now.
+
+### ⭐ 高频
+
+> **Everything is on track.**
+
+> **I don't see any immediate risk.**
+
+---
+
+# Topic 4. Skill Security Review
+
+## 📌 Meeting Background
+
+The Skill was still under discussion. The main concern was whether it exposed core backend logic or proprietary implementation details that competitors could use to imitate Listing Builder behavior. 
+
+## 💬 Original Chinese
+
+> 他们还在看，我们的 Skill 有没有什么缺失，是不是 OK。
+
+## 🇺🇸 Natural English
+
+> They're still reviewing whether anything is missing from the Skill and whether it's ready as-is.
+
+### Alternative Expressions
+
+* They're still evaluating the completeness of the Skill.
+* The Skill is still under review.
+* They haven't signed off on it yet.
+
+---
+
+## 💬 Original Chinese
+
+> 我们的 Skill 有没有暴露最核心的一些东西？
+
+## 🇺🇸 Natural English
+
+> Does the Skill expose any of our core implementation details?
+
+### Alternative Expressions
+
+* Are we exposing any proprietary logic?
+* Does this reveal any sensitive backend logic?
+* Are we leaking internal implementation details?
+
+### 🧠 Vocabulary
+
+| Phrase                | 中文   |
+| --------------------- | ---- |
+| proprietary logic     | 专有逻辑 |
+| implementation detail | 实现细节 |
+| sensitive logic       | 敏感逻辑 |
+| expose                | 暴露   |
+| leak                  | 泄漏   |
+| core logic            | 核心逻辑 |
+
+---
+
+# Topic 5. Competitor Risk
+
+## 💬 Original Chinese
+
+> 我们担心竞争对手会不会模拟我们的 Listing Builder。
+
+## 🇺🇸 Natural English
+
+> We're concerned that competitors may be able to replicate how our Listing Builder works. 
+
+### Alternative Expressions
+
+* We're concerned about competitors reverse-engineering the workflow.
+* We don't want to expose enough information for competitors to reproduce the behavior.
+* We need to protect our core business logic.
+
+### ⭐ 技术商务都很常见
+
+**reverse-engineer**
+
+= 逆向推导 / 根据行为或信息还原实现逻辑。
+
+---
+
+# Topic 6. Ask AI to Review for Sensitive Logic
+
+## 💬 Original Chinese
+
+> 能不能写一个 Prompt，让 AI Review 一下，看里面有没有包含 Listing Builder 核心的后端逻辑？
+
+## 🇺🇸 Natural English
+
+> Could you write a prompt and have the AI review the Skill for any sensitive or proprietary backend logic? 
+
+### Alternative Expressions
+
+* Ask the AI to flag anything that might expose internal logic.
+* We should review the Skill for sensitive implementation details.
+* Let's check whether any proprietary logic is unintentionally exposed.
+
+### ⭐ Useful Phrase
+
+> **flag anything that might expose internal logic**
+
+这里 **flag** = 标记出有风险的内容。
+
+---
+
+# Topic 7. Safer Skill Design
+
+## 💬 Original Chinese
+
+> 以后写 Skill 的话，只给 AI 接口的 Request Input，再给它一些指令，如果是 Workflow 就告诉它第一步、第二步、第三步，这样会更安全一点。
+
+## 🇺🇸 Natural English
+
+> Going forward, it may be safer to provide the AI only with the API request inputs and the necessary workflow instructions, rather than exposing implementation details. 
+
+### Alternative Expressions
+
+* We should expose only what the AI actually needs.
+* Keep the implementation details encapsulated.
+* Provide the interface, not the internal logic.
+
+### ⭐⭐⭐ 很值得背
+
+> **Expose the interface, not the implementation.**
+
+这是非常经典的工程设计表达。
+
+---
+
+# Topic 8. Encapsulating Core Logic
+
+## 💬 Original Chinese
+
+> 核心计算逻辑看能不能封装在 MCP 里面。
+
+## 🇺🇸 Natural English
+
+> We should see if we can encapsulate the core logic inside the MCP layer. 
+
+### Alternative Expressions
+
+* Keep the core logic behind the MCP boundary.
+* Hide the implementation details behind the API.
+* Encapsulate the business logic on the backend.
+
+### 🧠 Vocabulary
+
+**encapsulate** = 封装
+
+**hide behind the API** = 把内部实现隐藏在 API 后面
+
+---
+
+# Topic 9. Monitoring Can Be Paused
+
+## 💬 Original Chinese
+
+> 昨天没有发现需要关注的异常，所以巡检做到今天先暂停，后面有需要再重新开始。
+
+## 🇺🇸 Natural English
+
+> We didn't find any issues that require attention yesterday, so we'll pause the monitoring after today and resume it if needed. 
+
+### Alternative Expressions
+
+* We can pause the monitoring for now.
+* We'll resume monitoring if any new issues come up.
+* There haven't been any notable issues recently.
+
+### ⭐ 高频
+
+> **We can pause this for now and resume if needed.**
+
+---
+
+# Topic 10. Possible Root Cause Found
+
+## 📌 Meeting Background
+
+The team noticed that report volume had declined over the previous three weeks. Another team later found that one machine had gone down during an upgrade and had only recently recovered, which might explain the drop. 
+
+## 💬 Original Chinese
+
+> 可能跟之前报告数量下降有关。
+
+## 🇺🇸 Natural English
+
+> This may be related to the drop in report volume we saw earlier.
+
+### Alternative Expressions
+
+* This could explain the decline we observed.
+* There may be a correlation between the two.
+* This is likely related to the issue we saw before.
+
+---
+
+## 💬 Original Chinese
+
+> 我觉得大概率就是这个原因。
+
+## 🇺🇸 Natural English
+
+> I think this is most likely the root cause.
+
+### Alternative Expressions
+
+* This is probably the underlying cause.
+* This seems to be the most likely explanation.
+* There's a good chance this is what caused it.
+
+---
+
+# Topic 11. Gradual Production Rollout
+
+## 💬 Original Chinese
+
+> 上周开了 1% 的真实流量，这两天观察下来接口都正常。
+
+## 🇺🇸 Natural English
+
+> We enabled 1% of real production traffic last week, and the APIs have been stable so far. 
+
+### Alternative Expressions
+
+* We rolled it out to 1% of production traffic.
+* So far, everything looks stable.
+* We haven't seen any issues with the live traffic yet.
+
+### ⭐ 高频
+
+> **So far, everything looks stable.**
+
+---
+
+# Topic 12. Release Together Because of Shared Branch
+
+## 💬 Original Chinese
+
+> 分页都在一个分支上，所以只能一起发，不能一个一个发。
+
+## 🇺🇸 Natural English
+
+> All the pagination changes are on the same branch, so they have to be released together. We can't deploy them individually. 
+
+### Alternative Expressions
+
+* These changes are bundled into the same branch.
+* We'll need to ship them as a single release.
+* They can't be released independently.
+
+### 🧠 Vocabulary
+
+**bundled together** = 捆绑在一起
+
+**independently** = 独立地
+
+---
+
+# Topic 13. QA Capacity Is Full
+
+## 📌 Meeting Background
+
+A Notification task was not planned for testing in the current sprint because QA capacity was already full. Development could continue, but testing and release would likely need to move to the next sprint. 
+
+## 💬 Original Chinese
+
+> 这个 Sprint 没排测试，因为测试这边排不下了。
+
+## 🇺🇸 Natural English
+
+> This isn't scheduled for testing in the current sprint because QA doesn't have enough capacity.
+
+### Alternative Expressions
+
+* QA is fully booked this sprint.
+* There isn't enough QA capacity this sprint.
+* Testing will have to move to the next sprint.
+
+### ⭐ 非常实用
+
+> **QA is fully booked this sprint.**
+
+---
+
+# Topic 14. Will We Make the Release Date?
+
+## 💬 Original Chinese
+
+> 我们能赶得上 9 月 8 号 Release 吗？
+
+## 🇺🇸 Natural English
+
+> Are we still on track for the September 8th release? 
+
+### Alternative Expressions
+
+* Can we still make the September 8th release?
+* Do we think we'll hit the September 8th release date?
+* Is September 8th still realistic?
+
+### ⭐⭐⭐
+
+> **Can we still make the release?**
+
+> **Is the release date still realistic?**
+
+---
+
+## 💬 Original Chinese
+
+> 估计赶不上。
+
+## 🇺🇸 Natural English
+
+> We probably won't make it.
+
+更正式：
+
+> We likely won't be able to meet that release date.
+
+---
+
+# Topic 15. Keep Started Work in the Current Sprint
+
+## 💬 Original Chinese
+
+> 只要这个 Sprint 已经开始开发了，我们就先放在当前 Sprint，最后一天没 Done 再移到下一个迭代。
+
+## 🇺🇸 Natural English
+
+> If development has already started in this sprint, we'll keep the item here for now. If it's still not done by the end of the sprint, we'll carry it over to the next one. 
+
+### Alternative Expressions
+
+* Don't move it yet if work has already started.
+* We'll reassess it at the end of the sprint.
+* If it's unfinished, we'll carry it over.
+
+---
+
+# Topic 16. Backlog Refinement
+
+## 💬 Original Chinese
+
+> 下周一就是 Backlog Refinement，需要提前准备下个 Sprint 要做的东西。
+
+## 🇺🇸 Natural English
+
+> We have backlog refinement next Monday, so we need to prepare the candidate items for the next sprint in advance. 
+
+### Alternative Expressions
+
+* We need to have the next sprint candidates ready.
+* Let's prepare the backlog items before refinement.
+* We should identify potential work for the next sprint.
+
+### 🧠 Vocabulary
+
+**candidate item** = 候选任务
+
+**backlog refinement** = Backlog 梳理 / 细化会议
+
+---
+
+# Topic 17. Release Risk Due to Limited Testing Time
+
+## 💬 Original Chinese
+
+> 9 月 8 号发布有一定风险，因为下周五才提测，大概只有一天测试时间。
+
+## 🇺🇸 Natural English
+
+> The September 8th release is at risk because the handoff to QA is scheduled for next Friday, which leaves us with only about one day for testing. 
+
+### Alternative Expressions
+
+* The release timeline is pretty tight.
+* We have very little testing buffer.
+* There's not much room for delays.
+* The schedule carries some delivery risk.
+
+### ⭐ 高级但常用
+
+**testing buffer**
+
+= 测试预留时间。
+
+---
+
+# Topic 18. Decide the Risk Earlier
+
+## 💬 Original Chinese
+
+> 最好提前确定下来，然后我可以跟他们讲。
+
+## 🇺🇸 Natural English
+
+> It would be better to confirm this as early as possible so we can communicate the risk to the relevant teams. 
+
+### Alternative Expressions
+
+* Let's make the call early.
+* We should flag the risk as soon as possible.
+* The earlier we know, the sooner we can communicate it.
+
+### ⭐ 推荐
+
+> **Let's flag the risk early.**
+
+---
+
+# Topic 19. Investigating a Serious Impact
+
+## 💬 Original Chinese
+
+> 这个单子目前可能有一个比较严重的影响，我会后和你一起看一下，我整理了一个文档。
+
+## 🇺🇸 Natural English
+
+> This ticket may have a fairly significant impact. Let's go through it together after the meeting; I've put together a document with the details. 
+
+### Alternative Expressions
+
+* This may have a significant impact.
+* There may be a high-impact issue here.
+* Let's review the details offline after the meeting.
+
+### ⭐ 高频
+
+> **Let's go through it offline after the meeting.**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “等测试”
+
+不要说：
+
+❌ wait test
+
+推荐：
+
+> **waiting for QA**
+
+> **pending testing**
+
+> **ready for testing**
+
+---
+
+### 2. “没有风险”
+
+> **There are no immediate risks.**
+
+> **Everything is on track.**
+
+---
+
+### 3. “核心逻辑泄露”
+
+> **expose proprietary logic**
+
+> **leak internal implementation details**
+
+---
+
+### 4. “只给必要信息”
+
+> **Expose only what is necessary.**
+
+> **Provide the interface, not the implementation.**
+
+---
+
+### 5. “大概率是这个原因”
+
+> **This is most likely the root cause.**
+
+> **This seems to be the most likely explanation.**
+
+---
+
+### 6. “测试排不下”
+
+非常自然：
+
+> **QA doesn't have enough capacity.**
+
+> **QA is fully booked.**
+
+---
+
+### 7. “赶不赶得上上线”
+
+> **Can we still make the release?**
+
+> **Are we still on track for the release?**
+
+---
+
+### 8. “风险提前说”
+
+> **Flag the risk early.**
+
+> **Raise the risk as soon as possible.**
+
+---
+
+# ⭐ Shadowing Practice
+
+> **Development is almost done and ready for testing.**
+
+> **I'm just waiting for QA availability.**
+
+> **Everything is on track so far.**
+
+> **The Skill is still under review.**
+
+> **Are we exposing any proprietary logic?**
+
+> **Let's ask the AI to flag anything that might expose internal implementation details.**
+
+> **Expose the interface, not the implementation.**
+
+> **We should encapsulate the core logic on the backend.**
+
+> **This is most likely the root cause.**
+
+> **So far, everything looks stable.**
+
+> **These changes have to be released together.**
+
+> **QA is fully booked this sprint.**
+
+> **Are we still on track for the September 8th release?**
+
+> **We have very little testing buffer.**
+
+> **Let's flag the risk early.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                | 中文     |
+| ------------------------- | ------ |
+| **tied up**               | 忙于其他事情 |
+| **under review**          | 审核中    |
+| **proprietary**           | 专有的    |
+| **implementation detail** | 实现细节   |
+| **reverse-engineer**      | 逆向推导   |
+| **flag**                  | 标记风险   |
+| **encapsulate**           | 封装     |
+| **resume monitoring**     | 恢复巡检   |
+| **root cause**            | 根因     |
+| **production traffic**    | 生产真实流量 |
+| **bundled together**      | 捆绑在一起  |
+| **fully booked**          | 排满了    |
+| **make the release**      | 赶上发布   |
+| **candidate item**        | 候选任务   |
+| **testing buffer**        | 测试缓冲时间 |
+| **flag the risk**         | 提前暴露风险 |
+| **significant impact**    | 较大影响   |
+
+## ⭐ 今天最值得背的 10 句
+
+> **I'm just waiting for QA availability.**
+
+> **Everything is on track so far.**
+
+> **Are we exposing any proprietary logic?**
+
+> **Expose the interface, not the implementation.**
+
+> **Let's encapsulate the core logic on the backend.**
+
+> **This is most likely the root cause.**
+
+> **QA is fully booked this sprint.**
+
+> **Are we still on track for the release?**
+
+> **We have very little testing buffer.**
+
+> **Let's flag the risk early.**
