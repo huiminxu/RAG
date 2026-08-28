@@ -1834,3 +1834,778 @@ A Notification task was not planned for testing in the current sprint because QA
 > **We have very little testing buffer.**
 
 > **Let's flag the risk early.**
+
+
+
+## Meeting #4 – Notification Architecture, Testing Capacity, AI Workflow & MCP Review
+
+这场会议很适合学习几类高频工程英语：**进度同步、催回复、Scope 确认、跨 PHP/Java 改造、QA 容量不足、AI 问题重试策略、需求文档 Review、Hotfix 决策**。
+
+---
+
+# Topic 1. Sharing Progress & Updating the PID
+
+## 📌 Meeting Background
+
+The meeting started with a progress update. The PID had been reviewed and updated, and the development work was around 50% complete. The plan for the day was to review the PID again for possible improvements and sync with QA on test cases. 
+
+## 💬 Original Chinese
+
+> 昨天做了一个 PID 的评审，然后把 PID 更新了一下，代码进展到 50% 左右。
+
+## 🇺🇸 Natural English
+
+> I reviewed and updated the PID yesterday, and development is now about 50% complete.
+
+### Alternative Expressions
+
+* Development is roughly halfway done.
+* I'm about 50% through the implementation.
+* The implementation is currently around 50% complete.
+
+### ⭐ 推荐
+
+> **Development is roughly halfway done.**
+
+---
+
+## 💬 Original Chinese
+
+> 今天还要再看一下 PID 有没有什么优化的地方。
+
+## 🇺🇸 Natural English
+
+> Today, I'll take another pass at the PID and see if there's anything we can improve.
+
+### ⭐ Useful Phrase
+
+**take another pass at something**
+
+= 再过一遍 / 再检查优化一轮。
+
+---
+
+# Topic 2. Following Up When Someone Hasn't Responded
+
+## 💬 Original Chinese
+
+> 如果今天没有答复的话，我今天会再催一下。
+
+## 🇺🇸 Natural English
+
+> If I don't hear back today, I'll follow up with them again. 
+
+### Alternative Expressions
+
+* I'll follow up again if there's still no response.
+* I'll check in with them again today.
+* I'll give them another nudge if needed.
+
+### ⭐ 最值得背
+
+> **If I don't hear back today, I'll follow up again.**
+
+---
+
+# Topic 3. Finalizing the Scope
+
+## 📌 Meeting Background
+
+The team confirmed the scope of the notification work. Two notification types were selected, allowing implementation to continue. 
+
+## 💬 Original Chinese
+
+> Notification 的 Scope 已经确定下来了，我们的 Scope 是两个。
+
+## 🇺🇸 Natural English
+
+> We've finalized the scope for the notification work. We're moving forward with two notification types.
+
+### Alternative Expressions
+
+* The scope has now been confirmed.
+* We've narrowed the scope down to two items.
+* These are the two items we're moving forward with.
+
+### 🧠 Vocabulary
+
+**narrow down the scope** = 缩小 / 明确范围
+
+**finalize the scope** = 最终确定范围
+
+---
+
+# Topic 4. Delayed & Daily Notifications
+
+## 📌 Meeting Background
+
+The notification flow was more complicated than a simple immediate notification. Some events needed to be stored first and later grouped into delayed or daily notifications. The flow involved scheduled jobs, event storage, message queues, and consumer services. 
+
+## 💬 Original Chinese
+
+> 事件来了以后不是马上发送，而是先写到表里，然后定时任务再汇总。
+
+## 🇺🇸 Natural English
+
+> Instead of sending the notification immediately, we first persist the event and then use a scheduled job to aggregate and process it later.
+
+### Alternative Expressions
+
+* The event is stored first and processed asynchronously.
+* We batch the events before sending the notification.
+* A scheduled job handles the aggregation.
+
+### 🧠 Vocabulary
+
+| Phrase                 | 中文    |
+| ---------------------- | ----- |
+| persist the event      | 持久化事件 |
+| scheduled job          | 定时任务  |
+| aggregate events       | 汇总事件  |
+| process asynchronously | 异步处理  |
+| message queue          | 消息队列  |
+| consumer service       | 消费服务  |
+
+---
+
+## 💬 Original Chinese
+
+> Immediate 的通知可以直接发，但是 Delayed 和 Daily 需要另外的定时任务处理。
+
+## 🇺🇸 Natural English
+
+> Immediate notifications can be sent directly, while delayed and daily notifications require additional scheduled processing.
+
+### ⭐ 推荐
+
+> **This flow requires additional scheduled processing.**
+
+---
+
+# Topic 5. PHP and Java Both Need Changes
+
+## 📌 Meeting Background
+
+The notification implementation had to work across both PHP and Java. Because the logic was split across both sides, the team concluded that both implementations had to be tested rather than validating only one side. 
+
+## 💬 Original Chinese
+
+> PHP 跟 Java 都要改的话，这个 Sprint 能做完吗？
+
+## 🇺🇸 Natural English
+
+> If we need changes on both the PHP and Java sides, can we still finish this within the current sprint?
+
+### Alternative Expressions
+
+* Can we still fit this into the current sprint?
+* Is this still achievable within this sprint?
+* Does this put the sprint timeline at risk?
+
+---
+
+## 💬 Original Chinese
+
+> 开发应该可以做完，但是测试要覆盖的东西会多一点。
+
+## 🇺🇸 Natural English
+
+> Development should be doable within the sprint, but we'll need broader test coverage because both sides are changing.
+
+### ⭐ Useful
+
+**broader test coverage**
+
+= 更广的测试覆盖范围。
+
+---
+
+## 💬 Original Chinese
+
+> 所以两边都要测。
+
+## 🇺🇸 Natural English
+
+> So we need to test both sides.
+
+更专业：
+
+> **Both implementations need to be covered by QA.**
+
+---
+
+# Topic 6. Testing May Spill Into the Next Sprint
+
+## 💬 Original Chinese
+
+> 如果测不完的话，我们再安排到下一个 Sprint。
+
+## 🇺🇸 Natural English
+
+> If we can't finish testing in this sprint, we'll carry the remaining work over to the next sprint. 
+
+### Alternative Expressions
+
+* Testing may spill over into the next sprint.
+* We'll move the remaining QA work to the next sprint.
+* Development can finish now, but QA may continue next sprint.
+
+### ⭐ 区别
+
+**carry over** = 中性地顺延
+
+**spill over** = 原计划范围之外延续了一点
+
+---
+
+# Topic 7. Prioritizing Testing
+
+## 💬 Original Chinese
+
+> 这个 Sprint 肯定测试不完，我会优先测这两个模块。
+
+## 🇺🇸 Natural English
+
+> We definitely won't have enough time to finish all the testing this sprint, so I'll prioritize these two modules first. 
+
+### Alternative Expressions
+
+* These two modules will take priority.
+* I'll focus QA on these two items first.
+* Given the limited testing capacity, these two come first.
+
+### ⭐ 高频
+
+> **Given the limited testing capacity...**
+
+= 考虑到测试资源有限……
+
+---
+
+# Topic 8. Splitting the Release
+
+## 💬 Original Chinese
+
+> 能不能拆开，先把这两个发掉，Alerts 放到下个 Sprint？
+
+## 🇺🇸 Natural English
+
+> Can we split the release and ship these two first, while moving Alerts to the next sprint? 
+
+### Alternative Expressions
+
+* Can we decouple these items for release?
+* Can these two be released independently?
+* Could we ship these first and defer Alerts?
+
+### 🧠 Vocabulary
+
+**decouple** = 解耦
+
+**defer** = 延后
+
+---
+
+# Topic 9. Report Data Changes Within an Hour
+
+## 📌 Meeting Background
+
+The team investigated report data freshness and found that some metrics could change within an hour. Based on that observation, a cache duration of roughly two to four hours was suggested. 
+
+## 💬 Original Chinese
+
+> 一个小时内，报告数据是有变化的。
+
+## 🇺🇸 Natural English
+
+> The report data can change within the span of an hour.
+
+### Alternative Expressions
+
+* Some metrics change within an hour.
+* The report data is not completely stable within a one-hour window.
+* We're seeing data updates within the hour.
+
+---
+
+## 💬 Original Chinese
+
+> 如果做缓存的话，缓存时间考虑两到四小时。
+
+## 🇺🇸 Natural English
+
+> If we introduce caching, we're considering a cache duration of around two to four hours.
+
+### ⭐ Useful
+
+**cache duration**
+
+= 缓存时长
+
+**TTL (time to live)** 也常用：
+
+> We could set the cache TTL to two to four hours.
+
+---
+
+# Topic 10. Setting a Safe Parameter Limit
+
+## 💬 Original Chinese
+
+> 数据库里最多一个 Seller 对应 13 个 Marketplace，所以建议参数最多放到 15 个。
+
+## 🇺🇸 Natural English
+
+> Based on the existing data, a seller is associated with at most 13 marketplaces, so I'd suggest setting the parameter limit to 15. 
+
+### Alternative Expressions
+
+* Fifteen gives us a little headroom.
+* We can set the upper limit to 15.
+* The current maximum is 13, so 15 should be a safe limit.
+
+### ⭐ 很实用
+
+**give us some headroom**
+
+= 留一点余量。
+
+---
+
+# Topic 11. Release Date Is Still Unchanged
+
+## 💬 Original Chinese
+
+> 上线时间没有变，还是 9 月 8 号。
+
+## 🇺🇸 Natural English
+
+> The release date hasn't changed. We're still targeting September 8th. 
+
+### Alternative Expressions
+
+* September 8th is still the target date.
+* The release remains scheduled for September 8th.
+* We're still on track for the September 8th release.
+
+---
+
+# Topic 12. Choosing a Storage Solution
+
+## 📌 Meeting Background
+
+The team discussed where to store notification-related data. After considering an application-level database, they leaned toward reusing Doris because the RTA layer already had access to it. 
+
+## 💬 Original Chinese
+
+> 如果可以的话，我们最好用 Doris 来存。
+
+## 🇺🇸 Natural English
+
+> Ideally, we'd reuse Doris for storage.
+
+### Alternative Expressions
+
+* Doris would be the preferred option.
+* We should reuse the existing Doris setup.
+* Reusing Doris would keep things simpler.
+
+---
+
+## 💬 Original Chinese
+
+> 因为可以复用。
+
+## 🇺🇸 Natural English
+
+> Because we can reuse the existing infrastructure.
+
+### ⭐ 高频工程表达
+
+> **Let's reuse the existing infrastructure.**
+
+---
+
+# Topic 13. Is This MCP-specific or Does Web Have the Same Issue?
+
+## 💬 Original Chinese
+
+> 这个只有 MCP 会出现吗？还是网页端也会出现？
+
+## 🇺🇸 Natural English
+
+> Is this issue specific to MCP, or can it also happen on the web side? 
+
+### Alternative Expressions
+
+* Is this MCP-specific?
+* Does the web flow have the same issue?
+* Is this shared across both clients?
+
+### ⭐ Pattern
+
+**X-specific**
+
+* MCP-specific
+* browser-specific
+* environment-specific
+* user-specific
+
+---
+
+# Topic 14. Wait Until the Fix Is Released Before Replying to the User
+
+## 💬 Original Chinese
+
+> 是不是等 Release 完了以后再跟用户讲，会好一点？
+
+## 🇺🇸 Natural English
+
+> Would it be better to wait until the fix is released before getting back to the user? 
+
+### Alternative Expressions
+
+* Let's confirm the fix first before responding to the user.
+* We should probably wait until the release is complete.
+* Let's validate the fix before closing the loop with the user.
+
+### ⭐ Useful Phrase
+
+**close the loop with the user**
+
+= 给用户最终反馈，把事情闭环。
+
+---
+
+# Topic 15. AI Issue Is Hard to Reproduce
+
+## 📌 Meeting Background
+
+An AI workflow problem was difficult to test because it could not be reproduced consistently. The team had adjusted the structured output to better match the expected data shape, but several rounds of testing did not guarantee the issue had disappeared completely. 
+
+## 💬 Original Chinese
+
+> 测了十几次，没有发现异常，但是也不能保证以后一定不会出现。
+
+## 🇺🇸 Natural English
+
+> I tested it more than ten times without seeing the issue, but we still can't guarantee that it won't happen again.
+
+### Alternative Expressions
+
+* We haven't seen it again so far.
+* The issue hasn't reproduced in our latest tests.
+* It's intermittent, so it's hard to rule it out completely.
+
+---
+
+## 💬 Original Chinese
+
+> 这个 Ticket 怎么测？我感觉很难测。
+
+## 🇺🇸 Natural English
+
+> How are we supposed to validate this ticket? It seems difficult to test reliably.
+
+### ⭐ Useful
+
+**test reliably**
+
+= 稳定、可靠地验证。
+
+---
+
+# Topic 16. Retry as a Resilience Strategy
+
+## 📌 Meeting Background
+
+The team discussed adding retry logic when the AI returned unexpected data. If failures were rare, retrying several times could dramatically reduce the probability of a user-facing failure. 
+
+## 💬 Original Chinese
+
+> 如果数据有异常，那就再 Call 一次。
+
+## 🇺🇸 Natural English
+
+> If the response looks invalid, we can retry the request.
+
+### Alternative Expressions
+
+* Add retry logic for invalid responses.
+* Retry when validation fails.
+* We can retry transient failures automatically.
+
+---
+
+## 💬 Original Chinese
+
+> 你不能相信它总是给你一个完美的答复。
+
+## 🇺🇸 Natural English
+
+> We shouldn't assume the AI will always return a perfect response.
+
+### Alternative Expressions
+
+* AI output shouldn't be treated as inherently reliable.
+* We need defensive validation around AI output.
+* We should expect occasional malformed or incorrect responses.
+
+### ⭐ 非常值得背
+
+> **We need defensive validation around AI output.**
+
+---
+
+# Topic 17. Define What “Done” Means
+
+## 📌 Meeting Background
+
+The team discussed having TPM/GTM review not only the title and description, but also the scenarios used to define whether an MCP tool should be considered complete—such as which user prompts should trigger the tool. 
+
+## 💬 Original Chinese
+
+> 我怎么定义这个 Tool 是完成了？
+
+## 🇺🇸 Natural English
+
+> How do we define what "done" means for this tool?
+
+### Alternative Expressions
+
+* What are the completion criteria?
+* What does success look like for this tool?
+* What are the acceptance criteria?
+
+### ⭐⭐⭐ 核心词
+
+**acceptance criteria**
+
+= 验收标准
+
+---
+
+## 💬 Original Chinese
+
+> 用户说 A 的时候调用这个 Tool，说 B 的时候调用这个 Tool。
+
+## 🇺🇸 Natural English
+
+> We should define representative scenarios for when the tool is expected to be invoked.
+
+### Alternative Expressions
+
+* Define the trigger scenarios.
+* Specify when the agent should use the tool.
+* Document the expected invocation cases.
+
+---
+
+# Topic 18. Highlight Items That Need Review
+
+## 💬 Original Chinese
+
+> 这几项最好高亮出来，他们拿去给 GTM 确认。
+
+## 🇺🇸 Natural English
+
+> It would be helpful to highlight these sections so they can easily review them with GTM. 
+
+### Alternative Expressions
+
+* Please call out the sections that need GTM review.
+* Highlight the items that require confirmation.
+* Make the review items easy to identify.
+
+### ⭐ Useful
+
+**call out**
+
+= 特别指出、强调。
+
+---
+
+# Topic 19. Simple Enough for a Hotfix
+
+## 💬 Original Chinese
+
+> 如果简单的话，我们就来一个 Hotfix。
+
+## 🇺🇸 Natural English
+
+> If the change is straightforward enough, let's handle it as a hotfix. 
+
+### Alternative Expressions
+
+* If it's a small change, we can hotfix it.
+* If the impact is limited, let's ship a hotfix.
+* We don't need to wait for the next full release if it's low risk.
+
+---
+
+## 💬 Original Chinese
+
+> 你先完成当前 Sprint 里的，如果还有时间，我再加进来；不行就下个 Sprint。
+
+## 🇺🇸 Natural English
+
+> Finish your current sprint work first. If you still have capacity, we'll bring this in; otherwise, we'll move it to the next sprint.
+
+### ⭐ 高频
+
+> **If you still have capacity, we can pull this into the sprint.**
+
+**pull into the sprint**
+
+= 把一个新任务加入当前 Sprint。
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “再过一遍”
+
+> **take another pass at it**
+
+> **go through it again**
+
+---
+
+### 2. “催回复”
+
+> **follow up with them**
+
+> **check in with them**
+
+> **give them a nudge**
+
+---
+
+### 3. “开发做得完，测试做不完”
+
+> **Development should fit within the sprint, but testing may spill over.**
+
+---
+
+### 4. “测试资源不够”
+
+> **QA has limited capacity.**
+
+> **QA is fully booked.**
+
+---
+
+### 5. “留一点余量”
+
+> **give us some headroom**
+
+---
+
+### 6. “问题只发生在某端”
+
+> **Is this MCP-specific?**
+
+---
+
+### 7. “闭环用户”
+
+> **close the loop with the user**
+
+---
+
+### 8. “重试机制”
+
+> **retry logic**
+
+> **automatic retry**
+
+> **retry on validation failure**
+
+---
+
+### 9. “验收标准”
+
+> **acceptance criteria**
+
+> **completion criteria**
+
+---
+
+# ⭐ Shadowing Practice
+
+> **I'll take another pass at the PID today.**
+
+> **If I don't hear back, I'll follow up again.**
+
+> **We've finalized the scope.**
+
+> **Development should fit within the sprint, but testing may spill over.**
+
+> **Given the limited testing capacity, these two modules should take priority.**
+
+> **Can we split the release and ship these two first?**
+
+> **We're considering a cache duration of two to four hours.**
+
+> **Fifteen should give us enough headroom.**
+
+> **Is this issue MCP-specific?**
+
+> **Let's validate the fix before we get back to the user.**
+
+> **We shouldn't assume the AI will always return a perfect response.**
+
+> **We need defensive validation around AI output.**
+
+> **What are the acceptance criteria for this tool?**
+
+> **Please call out the sections that need GTM review.**
+
+> **If you still have capacity, we can pull this into the sprint.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                | 中文          |
+| ------------------------- | ----------- |
+| **take another pass**     | 再检查/再过一遍    |
+| **narrow down the scope** | 缩小范围        |
+| **persist**               | 持久化         |
+| **aggregate**             | 汇总          |
+| **scheduled job**         | 定时任务        |
+| **test coverage**         | 测试覆盖        |
+| **spill over**            | 顺延          |
+| **decouple**              | 解耦          |
+| **cache duration / TTL**  | 缓存时长        |
+| **headroom**              | 余量          |
+| **MCP-specific**          | MCP 特有的     |
+| **close the loop**        | 闭环          |
+| **retry logic**           | 重试逻辑        |
+| **defensive validation**  | 防御性校验       |
+| **acceptance criteria**   | 验收标准        |
+| **call out**              | 强调、特别指出     |
+| **pull into the sprint**  | 拉入当前 Sprint |
+
+## ⭐ 今天最值得背的 10 句
+
+> **If I don't hear back today, I'll follow up again.**
+
+> **We've finalized the scope.**
+
+> **Development should fit within the sprint, but testing may spill over.**
+
+> **Given the limited testing capacity, these two should take priority.**
+
+> **Can we split the release?**
+
+> **Fifteen should give us enough headroom.**
+
+> **Is this issue MCP-specific?**
+
+> **Let's validate the fix before we get back to the user.**
+
+> **We need defensive validation around AI output.**
+
+> **What are the acceptance criteria for this tool?**
+
