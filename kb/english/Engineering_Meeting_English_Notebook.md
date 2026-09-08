@@ -2324,3 +2324,705 @@ This isn't a release blocker.
 We can address it after the release.
 
 Let's make sure both environments are in sync.
+
+继续按你前面确定的 **Engineering Meeting English Notebook** 风格整理这份 `sprint.txt`。这次会议本质上是一次 **Sprint Planning**，重点集中在：**需求是否进入当前 Sprint、依赖项、Story Point、测试时间、Release Risk、Backlog 调整、跨团队沟通**。
+
+# Engineering Meeting English Notebook
+
+## Meeting #10 – Sprint Planning, Story Points, Dependencies & Release Risk
+
+---
+
+# Topic 1. Starting the Sprint Planning Meeting
+
+## 📌 Meeting Background
+
+The meeting started by reviewing what could realistically be completed in the sprint and revisiting open questions left over from the previous backlog refinement meeting. 
+
+## 💬 Original Chinese
+
+> 我们主要看一下这个 Sprint 能够完成哪些需求，以及上一次 Backlog Refinement 遗留的一些要确认的内容。
+
+## 🇺🇸 Natural English
+
+> Today, we'll mainly review what we can realistically complete in this sprint and go over the open items left from the last backlog refinement session.
+
+### Alternative Expressions
+
+* Let's review what we can commit to for this sprint.
+* We also need to revisit a few open items from backlog refinement.
+* Let's confirm the scope for this sprint.
+
+### ⭐ 推荐
+
+> **Let's review what we can realistically commit to for this sprint.**
+
+---
+
+# Topic 2. Assigning Work to the Right Team
+
+## 📌 Meeting Background
+
+One requirement did not belong to the current Scrum team and instead needed to be handled by another team. The discussion focused on where the story should be created and who should own it. 
+
+## 💬 Original Chinese
+
+> 其实不是我们这个 Scrum Team 的，是另外一个 Scrum Team。
+
+## 🇺🇸 Natural English
+
+> This actually belongs to another Scrum team rather than ours.
+
+### Alternative Expressions
+
+* This falls under another team's ownership.
+* This isn't owned by our team.
+* We should route this to the appropriate team.
+
+### 🧠 Vocabulary
+
+| Phrase      | 中文        |
+| ----------- | --------- |
+| ownership   | 归属 / 负责范围 |
+| owning team | 负责团队      |
+| fall under  | 归属于       |
+| route to    | 转交给       |
+| assign to   | 分配给       |
+
+---
+
+## 💬 Original Chinese
+
+> 你可以建一个 Story 放到他们 Sprint 里面。
+
+## 🇺🇸 Natural English
+
+> You can create a story and add it to their sprint.
+
+---
+
+# Topic 3. Creating a User Story
+
+## 💬 Original Chinese
+
+> 这个需求还没有建 User Story。
+
+## 🇺🇸 Natural English
+
+> We haven't created a user story for this requirement yet. 
+
+### Alternative Expressions
+
+* This requirement hasn't been turned into a story yet.
+* We still need to create a story for this.
+* This is currently only tracked as a Jira item.
+
+### ⭐ Useful Phrase
+
+> **We still need to turn this into a user story.**
+
+---
+
+# Topic 4. Clarifying Requirement Scope
+
+## 📌 Meeting Background
+
+A substantial part of the meeting focused on the Title Density requirement. The core question was whether `item highlight` should be included in the Title Density calculation during Amazon's transition period. The team clarified that the current requested behavior was to calculate Title Density based only on `item name`, while a separate Highlight Density metric might be considered later. 
+
+## 💬 Original Chinese
+
+> 需求明确要的是把 Name 和 Highlight 分开，Title Density 只算 Item Name。
+
+## 🇺🇸 Natural English
+
+> The requirement is to separate `item name` from `item highlight` and calculate Title Density based on `item name` only.
+
+### Alternative Expressions
+
+* Title Density should only take `item name` into account.
+* `Item highlight` should be excluded from the Title Density calculation.
+* We need to separate the two fields in the calculation logic.
+
+### ⭐ 技术会议高频
+
+> **take something into account**
+
+= 把某个因素算进去。
+
+> We should not take `item highlight` into account here.
+
+---
+
+# Topic 5. Two Different Cases
+
+## 💬 Original Chinese
+
+> 这里有两个 Case，一个是旧 Listing 没有拆分，一个是已经拆成 Item Name 和 Item Highlight。
+
+## 🇺🇸 Natural English
+
+> There are two cases we need to handle: legacy listings where the fields haven't been split yet, and newer listings where `item name` and `item highlight` are already separated. 
+
+### Alternative Expressions
+
+* We need to support both legacy and new data formats.
+* There are two different data shapes we need to account for.
+* We need backward compatibility for legacy listings.
+
+### 🧠 Vocabulary
+
+**legacy** = 旧版的 / 历史遗留的
+
+**backward compatibility** = 向后兼容
+
+---
+
+# Topic 6. Requirement Review Should Not Go Too Deep
+
+## 📌 Meeting Background
+
+The group discussed meeting efficiency. The idea was that backlog refinement should focus on whether a requirement should enter the sprint, key dependencies, and major risks. Deep solution design should move to a smaller follow-up meeting instead of consuming the whole planning session. 
+
+## 💬 Original Chinese
+
+> 如果要讲得比较深，可以私下再拉一个会议。
+
+## 🇺🇸 Natural English
+
+> If we need to go deeper into the implementation details, we can schedule a separate follow-up meeting.
+
+### Alternative Expressions
+
+* Let's take the detailed discussion offline.
+* We can set up a smaller session for the technical details.
+* Let's keep this meeting focused on scope and dependencies.
+
+### ⭐⭐⭐ 推荐
+
+> **Let's keep this meeting focused on scope, dependencies, and risks.**
+
+---
+
+## 💬 Original Chinese
+
+> 具体方案细节，我们后面再约会。
+
+## 🇺🇸 Natural English
+
+> We can discuss the detailed solution in a separate follow-up session. 
+
+---
+
+# Topic 7. Summarizing the Decision
+
+## 💬 Original Chinese
+
+> 我们总结一下这个 Ticket。
+
+## 🇺🇸 Natural English
+
+> Let's summarize the decision on this ticket. 
+
+### Alternative Expressions
+
+* Let's make sure we're aligned on the final decision.
+* Let me summarize what we've agreed on.
+* Just to recap...
+
+### ⭐ 高频
+
+> **Just to recap...**
+
+非常适合会议里把复杂讨论拉回来。
+
+---
+
+# Topic 8. This Is Mostly Coordination Work
+
+## 💬 Original Chinese
+
+> 这个其实更多是沟通的工作。
+
+## 🇺🇸 Natural English
+
+> This is mostly coordination work rather than implementation work. 
+
+### Alternative Expressions
+
+* The main effort here is cross-team coordination.
+* There's not much coding involved.
+* Most of the work is around follow-up and coordination.
+
+### 🧠 Vocabulary
+
+**cross-team coordination** = 跨团队协调
+
+**follow-up work** = 后续跟进工作
+
+---
+
+# Topic 9. Story Point Estimation
+
+## 📌 Meeting Background
+
+The team repeatedly estimated story points for items based on implementation effort, QA effort, operational work, and cross-team coordination. The purpose was to understand how much work the team could realistically take on in a sprint. 
+
+## 💬 Original Chinese
+
+> Story Point 的意义是为了知道团队能承载多少需求量。
+
+## 🇺🇸 Natural English
+
+> Story points help us understand how much work the team can realistically take on in a sprint.
+
+### Alternative Expressions
+
+* Story points give us a sense of team capacity.
+* We use story points to estimate sprint capacity.
+* They help us avoid overcommitting.
+
+### ⭐ 必背
+
+> **We don't want to overcommit the team.**
+
+**overcommit** = 承诺超过团队实际承载能力。
+
+---
+
+## 💬 Original Chinese
+
+> 如果估了 50 个点太多，就需要重新排优先级，或者挪掉一部分需求。
+
+## 🇺🇸 Natural English
+
+> If the sprint is over capacity, we'll need to reprioritize or move some items out.
+
+### Alternative Expressions
+
+* We may need to reduce the sprint scope.
+* Some items may need to be pushed back to the backlog.
+* We should rebalance the workload.
+
+---
+
+# Topic 10. Dependencies Can Block a Sprint
+
+## 📌 Meeting Background
+
+One TikTok-related requirement depended on an OpenID migration and upstream data readiness. Although the actual code change was small, the dependency meant the item probably could not be completed in the current sprint, so it was moved to the backlog. 
+
+## 💬 Original Chinese
+
+> 这个单子本身很好改，但是要看 OpenID 切换的进度。
+
+## 🇺🇸 Natural English
+
+> The change itself is fairly small, but it depends on the OpenID migration timeline.
+
+### Alternative Expressions
+
+* The implementation is simple, but we're blocked by a dependency.
+* The real risk is the upstream dependency.
+* We can't start this until the migration is complete.
+
+---
+
+## 💬 Original Chinese
+
+> 先放到 Backlog 吧，我觉得这个 Sprint 应该做不完。
+
+## 🇺🇸 Natural English
+
+> Let's keep it in the backlog for now. I don't think we'll be able to finish it in this sprint. 
+
+### ⭐ 高频
+
+> **Let's keep it in the backlog for now.**
+
+---
+
+# Topic 11. Release Target & Sprint Commitment
+
+## 💬 Original Chinese
+
+> 这个 Sprint 是 9 月 7 号到 9 月 18 号。
+
+## 🇺🇸 Natural English
+
+> This sprint runs from September 7th through September 18th. 
+
+---
+
+## 💬 Original Chinese
+
+> 我们要确保 9 月 22 号能够 Release。
+
+## 🇺🇸 Natural English
+
+> We need to make sure this is ready for the September 22nd release. 
+
+### Alternative Expressions
+
+* We need to hit the September 22nd release.
+* This has to be release-ready by September 22nd.
+* We need development and testing completed within this sprint.
+
+### ⭐ 推荐
+
+> **We need this to be release-ready by September 22nd.**
+
+---
+
+# Topic 12. Development Done, Testing Still Uncertain
+
+## 💬 Original Chinese
+
+> 开发应该可以，但测试不一定，因为需要跑很多数据。
+
+## 🇺🇸 Natural English
+
+> Development should be fine, but testing is less certain because we need to process a large amount of data. 
+
+### Alternative Expressions
+
+* Development is manageable, but QA may take longer.
+* The testing timeline is the bigger risk.
+* Testing depends on having enough data available.
+
+---
+
+# Topic 13. Testing Effort Should Count Toward Story Points
+
+## 💬 Original Chinese
+
+> Story Point 是包含 QA 的。
+
+## 🇺🇸 Natural English
+
+> Story points should account for QA effort as well. 
+
+### Alternative Expressions
+
+* QA effort should be included in the estimate.
+* Story points should reflect the full end-to-end effort.
+* Don't estimate development effort in isolation.
+
+### ⭐ 很重要
+
+> **Story points should reflect the full end-to-end effort.**
+
+---
+
+# Topic 14. Identifying Affected Areas for Regression Testing
+
+## 💬 Original Chinese
+
+> 你改的时候，把涉及到的工具和页面列一下。
+
+## 🇺🇸 Natural English
+
+> When you make the change, please list all the affected tools and pages so QA knows what needs regression testing. 
+
+### Alternative Expressions
+
+* Please document the impacted areas.
+* Call out all affected modules.
+* Let's define the regression scope clearly.
+
+### 🧠 Vocabulary
+
+**impacted area** = 受影响范围
+
+**regression scope** = 回归测试范围
+
+---
+
+# Topic 15. Phased Rollout / Whitelist First
+
+## 💬 Original Chinese
+
+> 我们可以先开白名单，也不影响线上用户。
+
+## 🇺🇸 Natural English
+
+> We can start with a whitelist rollout so it doesn't affect general production users. 
+
+### Alternative Expressions
+
+* Let's start with a limited rollout.
+* We can validate it with whitelisted users first.
+* This reduces the risk to production users.
+
+---
+
+# Topic 16. Read-only Features Can Be Released Directly
+
+## 💬 Original Chinese
+
+> 只读的我们就直接发，测完没问题后再 Release。
+
+## 🇺🇸 Natural English
+
+> For read-only functionality, we can release it directly once testing passes. 
+
+### Alternative Expressions
+
+* Read-only changes are lower risk.
+* Once QA signs off, we can release it.
+* No additional rollout restriction is needed for read-only functionality.
+
+---
+
+# Topic 17. Should This Be One Tool or Two?
+
+## 💬 Original Chinese
+
+> 一个是 Sales History，一个是 GMV History，关注点不一样，要分成两个。
+
+## 🇺🇸 Natural English
+
+> Sales History and GMV History should be separate because they serve different use cases. 
+
+### Alternative Expressions
+
+* They represent different user intents.
+* They should be exposed as separate tools.
+* Even if they share the same underlying API, the use cases are different.
+
+### ⭐ 高价值表达
+
+> **They share the same underlying API, but they serve different use cases.**
+
+---
+
+# Topic 18. Take Detailed Discussion Offline
+
+## 💬 Original Chinese
+
+> 我们线下再 Check 吧，这样方便一点。
+
+## 🇺🇸 Natural English
+
+> Let's take this offline and check the details separately. 
+
+### ⭐ 必背
+
+> **Let's take this offline.**
+
+---
+
+# Topic 19. Sprint Risk Review
+
+## 📌 Meeting Background
+
+At the end of planning, the team explicitly reviewed whether QA considered the sprint risky, how many tickets were planned, and whether any development items would be submitted too late for adequate testing. 
+
+## 💬 Original Chinese
+
+> 测试这边觉得这个 Sprint 风险高吗？
+
+## 🇺🇸 Natural English
+
+> From a QA perspective, do you see this sprint as high risk?
+
+### Alternative Expressions
+
+* Are there any major testing risks this sprint?
+* Does QA see any delivery risk?
+* Are we comfortable with the current sprint scope?
+
+---
+
+# Topic 20. Leave Enough Time for QA
+
+## 💬 Original Chinese
+
+> 测试这边至少要留四到五天的时间。
+
+## 🇺🇸 Natural English
+
+> We should leave at least four to five days for QA. 
+
+### Alternative Expressions
+
+* QA needs at least four to five days of testing time.
+* We need enough testing buffer.
+* Late handoffs will put the release at risk.
+
+### ⭐ 高频
+
+> **We need enough testing buffer.**
+
+---
+
+# Topic 21. Submit Testable Parts Early
+
+## 💬 Original Chinese
+
+> 如果开发完了一部分，能够测的就先提交到测试环境。
+
+## 🇺🇸 Natural English
+
+> If part of the work is already testable, let's deploy it to the test environment early rather than waiting for everything to be finished. 
+
+### Alternative Expressions
+
+* Hand off testable pieces as early as possible.
+* Don't wait for the entire feature if parts can already be tested.
+* Early QA handoff will reduce schedule risk.
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “这个 Sprint 能不能做完？”
+
+> **Can we realistically finish this within the sprint?**
+
+比：
+
+> Can we finish it?
+
+更适合 Planning。
+
+---
+
+### 2. “这个不属于我们 Team”
+
+> **This isn't owned by our team.**
+
+> **This falls under another team's ownership.**
+
+---
+
+### 3. “有依赖”
+
+> **This has a dependency on X.**
+
+> **We're blocked by X.**
+
+---
+
+### 4. “承载能力”
+
+团队工作量：
+
+> **team capacity**
+
+例如：
+
+> We're already close to full capacity.
+
+---
+
+### 5. “不要承诺太多”
+
+> **We don't want to overcommit.**
+
+---
+
+### 6. “这个 Sprint 放不下”
+
+> **We don't have room for this in the current sprint.**
+
+> **Let's keep it in the backlog for now.**
+
+---
+
+### 7. “测试时间太赶”
+
+> **The QA timeline is tight.**
+
+> **We don't have enough testing buffer.**
+
+---
+
+### 8. “提前提测”
+
+> **hand off to QA early**
+
+> **deploy testable pieces early**
+
+---
+
+# ⭐ Shadowing Practice
+
+> **Let's review what we can realistically commit to for this sprint.**
+
+> **This falls under another team's ownership.**
+
+> **We still need to turn this into a user story.**
+
+> **There are two cases we need to handle.**
+
+> **Let's keep this meeting focused on scope, dependencies, and risks.**
+
+> **Let's take the detailed discussion offline.**
+
+> **Just to recap, this is the final decision.**
+
+> **This is mostly cross-team coordination work.**
+
+> **Story points help us understand team capacity.**
+
+> **We don't want to overcommit the team.**
+
+> **The implementation is small, but there's an upstream dependency.**
+
+> **Let's keep it in the backlog for now.**
+
+> **We need this to be release-ready by September 22nd.**
+
+> **Story points should reflect the full end-to-end effort.**
+
+> **Please document all impacted areas for regression testing.**
+
+> **We need enough testing buffer.**
+
+> **Let's hand off testable pieces to QA as early as possible.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                  | 中文        |
+| --------------------------- | --------- |
+| **commit to**               | 承诺完成      |
+| **ownership**               | 归属 / 负责范围 |
+| **owning team**             | 负责团队      |
+| **legacy**                  | 历史遗留 / 旧版 |
+| **backward compatibility**  | 向后兼容      |
+| **take offline**            | 会后单独讨论    |
+| **recap**                   | 总结回顾      |
+| **cross-team coordination** | 跨团队协调     |
+| **team capacity**           | 团队承载能力    |
+| **overcommit**              | 过度承诺      |
+| **upstream dependency**     | 上游依赖      |
+| **release-ready**           | 已具备发布条件   |
+| **end-to-end effort**       | 完整端到端工作量  |
+| **impacted area**           | 受影响范围     |
+| **regression scope**        | 回归范围      |
+| **testing buffer**          | 测试缓冲时间    |
+| **early QA handoff**        | 提前交给 QA   |
+
+## ⭐ 今天最值得背的 10 句
+
+> **Let's review what we can realistically commit to for this sprint.**
+
+> **This falls under another team's ownership.**
+
+> **Let's keep this meeting focused on scope, dependencies, and risks.**
+
+> **Just to recap, here's what we've agreed on.**
+
+> **We don't want to overcommit the team.**
+
+> **The implementation is small, but there's an upstream dependency.**
+
+> **Let's keep it in the backlog for now.**
+
+> **We need this to be release-ready by September 22nd.**
+
+> **We need enough testing buffer.**
+
+> **Let's hand off testable pieces to QA as early as possible.**
