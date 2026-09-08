@@ -4376,3 +4376,624 @@ This isn't a release blocker.
 Let's treat these as follow-up items.
 
 Let's keep both environments in sync.
+Meeting #13 – QA Status, Release Coordination, Blockers & Backlog Prioritization
+
+这场会议非常适合练 Daily Standup。尤其值得学的是：测试进度、验收发现问题、等待 QA、分阶段上线、澄清技术逻辑、判断优先级、把深入讨论移到会后、从 Backlog 接任务。会议一开始就是典型的逐人过进度和测试状态。
+
+Topic 1. Testing Status & Priorities
+📌 Meeting Background
+
+Several items were already in testing. The team decided to prioritize bugs found during testing before starting new development work. Monitoring over the previous four days had not revealed any significant issues.
+
+💬 Original Chinese
+
+有两个测试中的需求。
+
+🇺🇸 Natural English
+
+We currently have two items in testing.
+
+Alternative Expressions
+We have two items currently with QA.
+Two items are in the testing phase.
+We're currently testing two features.
+💬 Original Chinese
+
+过去四天没有发现任何需要关注的异常。
+
+🇺🇸 Natural English
+
+We haven't seen any issues that require attention over the past four days.
+
+Alternative Expressions
+Everything has been stable over the past four days.
+Nothing concerning has come up.
+We haven't identified any significant anomalies.
+💬 Original Chinese
+
+优先解决测试中的 Bug，如果没有什么 Bug，再开始这两个任务。
+
+🇺🇸 Natural English
+
+We'll prioritize the bugs found during testing. If there are no major issues, we'll move on to these two tasks.
+
+⭐ Useful Expressions
+prioritize bug fixes
+address the testing issues first
+move on to the next task
+pick up new work
+Topic 2. Pending Review
+💬 Original Chinese
+
+永毅已经做完了，需要我 Review。
+
+🇺🇸 Natural English
+
+Yongyi has finished the implementation. It's pending my review.
+
+Alternative Expressions
+The implementation is complete and ready for review.
+Development is done; the only remaining step is my review.
+It's currently waiting on my review.
+💬 Original Chinese
+
+我会 Follow Up 这个 Review。
+
+🇺🇸 Natural English
+
+I'll follow up on the review.
+
+⭐ 注意
+
+follow up on + 事情
+
+I'll follow up on the review.
+
+follow up with + 人
+
+I'll follow up with Yongyi.
+
+这个区别非常值得记。
+
+Topic 3. Duplicate / Overlapping Tickets
+💬 Original Chinese
+
+这两个跟我创建的下个 Sprint 要做的 Story 有重复。
+
+🇺🇸 Natural English
+
+These two tasks overlap with the stories I created for the next sprint.
+
+Alternative Expressions
+These tasks overlap with the new stories.
+These are essentially duplicates.
+They cover the same scope.
+💬 Original Chinese
+
+如果那个 Story 开始了，我们就把这个关闭掉。
+
+🇺🇸 Natural English
+
+Once work starts on the new story, we can close this ticket as a duplicate.
+
+🧠 Vocabulary
+overlap — 重叠
+duplicate — 重复项
+same scope — 相同范围
+Topic 4. Picking Higher-priority Work
+💬 Original Chinese
+
+那两个 Task 优先级比较低。
+
+🇺🇸 Natural English
+
+Those two tasks are relatively low priority.
+
+💬 Original Chinese
+
+大家如果忙完手头上的工作，把优先级更高的先做起来。
+
+🇺🇸 Natural English
+
+Once everyone finishes their current work, let's pick up the higher-priority items first.
+
+Alternative Expressions
+Let's focus on the higher-priority work first.
+Higher-priority items should come first.
+Once you have some bandwidth, pick up a higher-priority item.
+⭐ 高频
+
+Once you have some bandwidth, pick this up.
+
+这里的 bandwidth = 工作上的时间 / 精力 / 容量。
+
+Topic 5. Validation Is Still in Progress
+
+这部分就是你在会议里的表达。
+
+💬 Original Chinese
+
+目前还没有全部修完，我还在验收之中。
+
+🇺🇸 Natural English
+
+Not all of the issues have been fixed yet. I'm still validating the changes.
+
+Alternative Expressions
+Validation is still in progress.
+There are still a few outstanding issues.
+I'm still going through the fixes.
+💬 Original Chinese
+
+验收的时候还是发现有点问题，所以还在跟他们对接。
+
+🇺🇸 Natural English
+
+I found a few more issues during validation, so I'm still working with the team to get them resolved.
+
+Alternative Expressions
+A few more issues came up during validation.
+I'm still coordinating with the team on the remaining issues.
+We're still working through a few outstanding issues.
+⭐ 推荐你直接背
+
+I found a few more issues during validation, so I'm still working with the team to get them resolved.
+
+这句话以后你晨会可以直接用。
+
+Topic 6. Waiting for QA Availability
+📌 Meeting Background
+
+The frontend and backend work for one requirement had already been completed, but QA would not have capacity until after Wednesday. The item was therefore temporarily waiting for testing.
+
+💬 Original Chinese
+
+前后端都开发完了，现在等待测试。
+
+🇺🇸 Natural English
+
+Both the frontend and backend work are complete. We're just waiting for QA now.
+
+Alternative Expressions
+Development is complete on both sides.
+It's ready for QA.
+The only remaining step is testing.
+💬 Original Chinese
+
+现在是一个挂起的状态。
+
+🇺🇸 Natural English
+
+It's currently on hold pending QA availability.
+
+⭐ pending 非常值得学
+pending review → 等待 Review
+pending testing → 等待测试
+pending approval → 等待批准
+pending confirmation → 等待确认
+pending QA availability → 等 QA 有空
+Topic 7. Phased Production Rollout
+📌 Meeting Background
+
+The Main App refactor was planned as a staged production rollout: deploy the backend first, configure whitelist and routing rules in production, validate everything, and then deploy the frontend one or two days later.
+
+💬 Original Chinese
+
+计划明天把后端发到生产上面去。
+
+🇺🇸 Natural English
+
+We're planning to deploy the backend to production tomorrow.
+
+💬 Original Chinese
+
+然后在生产上面配白名单、配路由规则。
+
+🇺🇸 Natural English
+
+Then we'll configure the whitelist and routing rules in production.
+
+💬 Original Chinese
+
+验证没问题的话，后天或者大后天前端再发上去。
+
+🇺🇸 Natural English
+
+If everything looks good after validation, we'll deploy the frontend a day or two later.
+
+Alternative Expressions
+We'll roll out the frontend once the backend is validated.
+Assuming validation passes, the frontend will follow.
+We're doing a phased rollout.
+⭐ 必背
+
+Assuming everything looks good, we'll roll out the frontend next.
+
+Topic 8. Reporting Testing Percentage
+💬 Original Chinese
+
+我测了 60%。
+
+🇺🇸 Natural English
+
+I'm about 60% through testing.
+
+Alternative Expressions
+Testing is about 60% complete.
+I've completed around 60% of the test cases.
+I'm roughly 60% through the test cycle.
+❌ 不推荐
+
+I tested 60%.
+
+✅ 推荐
+
+I'm about 60% through testing.
+
+Topic 9. Bug Regression
+💬 Original Chinese
+
+现在处于 Bug 回归阶段。
+
+🇺🇸 Natural English
+
+We're currently retesting the bug fixes.
+
+或者：
+
+It's currently in regression testing.
+
+Useful Expressions
+retest the fix — 重新测试修复
+verify the fix — 验证修复
+regression testing — 回归测试
+pending verification — 等待验证
+Topic 10. Clarifying a Confusing Technical Discussion
+
+这段特别值得你学，因为英文会议里没听懂 / 逻辑绕晕了以后怎么确认理解非常重要。团队当时就是重新梳理 Listing Builder 的次数扣减逻辑。
+
+💬 Original Chinese
+
+等一下，我有点晕了。
+
+普通英语
+
+Hold on, I'm a little confused.
+
+⭐ 更推荐的会议表达
+
+Let me make sure I understand this correctly.
+
+或者：
+
+Just to make sure we're on the same page...
+
+这两个比直接说 I'm confused 更专业。
+
+💬 Original Chinese
+
+简单来说，Listing Builder 现在跟其他 MCP 是一样的，对吧？
+
+🇺🇸 Natural English
+
+So, to put it simply, Listing Builder now behaves the same way as the other MCP tools, right?
+
+Alternative Expressions
+
+So, if I understand correctly...
+
+In other words...
+
+Just to summarize...
+
+⭐ 会议确认理解四件套
+
+Let me make sure I understand this correctly.
+
+So, if I understand correctly...
+
+In other words...
+
+Is that correct?
+
+Topic 11. Identifying the Root Cause
+💬 Original Chinese
+
+应该就是因为没有注册到新的代码里面。
+
+🇺🇸 Natural English
+
+It looks like the issue is that Listing Builder hasn't been registered in the new code path yet.
+
+Alternative Expressions
+That seems to be the root cause.
+It hasn't been wired into the new logic yet.
+The issue appears to be in the new code path.
+🧠 Vocabulary
+
+root cause = 根因
+
+code path = 代码执行路径
+
+wire into = 接入某套逻辑
+
+We haven't wired this into the new flow yet.
+
+Topic 12. Asking for Priority Order
+💬 Original Chinese
+
+这几个测试中的有没有优先级？你身上任务好像比较多。
+
+🇺🇸 Natural English
+
+It looks like you have quite a few items in testing. What's the priority order?
+
+Alternative Expressions
+Which one should take priority?
+How are you prioritizing these?
+Which one is the highest-priority item?
+⭐ 晨会主持很好用
+
+What's the priority order for these items?
+
+Topic 13. Two Features Need to Ship Together
+💬 Original Chinese
+
+如果周三要一起上的话，这两个会一起上；如果不上，这两个应该都不上。
+
+🇺🇸 Natural English
+
+If we're releasing on Wednesday, these two should go out together. Otherwise, we should hold both of them back.
+
+Alternative Expressions
+These two need to ship together.
+They shouldn't be released independently.
+The two releases are coupled.
+🧠 Vocabulary
+
+coupled = 相互绑定 / 耦合
+
+Topic 14. Test Environment Only
+💬 Original Chinese
+
+这个只影响测试环境，不影响生产。
+
+🇺🇸 Natural English
+
+This only affects the test environment. Production isn't impacted.
+
+💬 Original Chinese
+
+会不会你碰到的问题，其他人也会再次碰到？
+
+🇺🇸 Natural English
+
+Is there a chance other people could run into the same issue?
+
+⭐ 高频
+
+run into an issue
+
+= 遇到问题。
+
+例如：
+
+I ran into an issue during testing.
+
+不要说：
+
+❌ I met a problem.
+
+Topic 15. Take the Discussion Offline
+💬 Original Chinese
+
+这个问题我们线下再讨论一下。
+
+🇺🇸 Natural English
+
+Let's take this offline and discuss it separately.
+
+⭐⭐⭐ 必背
+
+Let's take this offline.
+
+不是“下线”。
+
+意思是：
+
+这个问题先不占用当前会议时间，我们会后单独讨论。
+
+Topic 16. Picking Up Backlog Tasks
+📌 Meeting Background
+
+At the end of the standup, the team reviewed backlog items by priority. Engineers who had finished their current development work could pick up higher-priority items, preferably ones related to their own modules.
+
+💬 Original Chinese
+
+如果这个 Sprint 已经没有开发任务了，可以从这里面挑。
+
+🇺🇸 Natural English
+
+If you've finished your development work for this sprint, feel free to pick up something from the backlog.
+
+Alternative Expressions
+Pick up the next highest-priority item.
+Take on another backlog item if you have capacity.
+Grab something from the backlog.
+💬 Original Chinese
+
+先挑跟自己模块最相关的。
+
+🇺🇸 Natural English
+
+Start with the items that are most relevant to your own module.
+
+💬 Original Chinese
+
+你挑好了告诉我，我 Assign 给你。
+
+🇺🇸 Natural English
+
+Once you've picked one, let me know and I'll assign it to you.
+
+📖 Grammar & Expression Notes
+1. “我还在验收”
+
+不要：
+
+❌ I'm still accepting it.
+
+推荐：
+
+I'm still validating the changes.
+
+或者：
+
+Validation is still in progress.
+
+2. “还有几个问题没解决”
+
+There are still a few outstanding issues.
+
+outstanding 在这里不是“优秀”。
+
+而是：
+
+尚未解决的 / 尚未完成的
+
+3. “我在跟他们对接”
+
+不要总说：
+
+I'm communicating with them.
+
+更自然：
+
+I'm working with the team on this.
+
+I'm coordinating with them.
+
+4. “等 QA 有空”
+
+We're waiting for QA availability.
+
+或者：
+
+It's pending QA availability.
+
+5. “我测到 60%”
+
+I'm about 60% through testing.
+
+这个结构可以无限复用：
+
+I'm halfway through the implementation.
+
+I'm about 80% through the migration.
+
+I'm almost through the review.
+
+6. “我有点没听懂”
+
+推荐不要一上来：
+
+I'm confused.
+
+而是：
+
+Let me make sure I understand this correctly.
+
+7. “简单来说”
+
+To put it simply...
+
+In short...
+
+So, basically...
+
+8. “线下再聊”
+
+Let's take this offline.
+
+⭐ Shadowing Practice
+
+这场会议最适合你练这一组：
+
+We currently have two items in testing.
+
+We'll prioritize the bugs found during testing.
+
+It's pending my review.
+
+I'll follow up on the review.
+
+Once I have some bandwidth, I'll pick up the next task.
+
+I'm still validating the changes.
+
+I found a few more issues during validation.
+
+I'm still working with the team to get them resolved.
+
+We're just waiting for QA now.
+
+It's currently pending QA availability.
+
+Assuming everything looks good, we'll deploy the frontend next.
+
+I'm about 60% through testing.
+
+Let me make sure I understand this correctly.
+
+That seems to be the root cause.
+
+What's the priority order for these items?
+
+Is there a chance other people could run into the same issue?
+
+Let's take this offline.
+
+Feel free to pick up something from the backlog.
+
+📚 Today's Vocabulary
+Expression	中文
+pending review	等待 Review
+follow up on	跟进某件事
+follow up with	跟进某个人
+overlap	重叠
+bandwidth	工作时间 / 精力
+validation	验证 / 验收
+outstanding issue	尚未解决的问题
+QA availability	QA 可用时间
+phased rollout	分阶段上线
+regression testing	回归测试
+retest	重新测试
+root cause	根因
+code path	代码路径
+wire into	接入某套逻辑
+priority order	优先级顺序
+coupled	相互绑定的
+run into	遇到
+take offline	会后单独讨论
+pick up	接手任务
+⭐ 今天最值得你背的 10 句
+
+I'm still validating the changes.
+
+There are still a few outstanding issues.
+
+I'm still working with the team to get them resolved.
+
+We're just waiting for QA now.
+
+It's currently pending QA availability.
+
+I'm about 60% through testing.
+
+Let me make sure I understand this correctly.
+
+That seems to be the root cause.
+
+What's the priority order for these items?
+
+Let's take this offline.
