@@ -3871,3 +3871,508 @@ The team discussed how development tended to dominate the first week while QA pr
 
 > **We shouldn't plan the team at 100% capacity.**
 
+
+Meeting #12 – Release Planning, MCP Rollout & Production Readiness
+
+这份会议特别适合学习 Daily Standup + Release Meeting 英语：今天发什么、是否 Ready、等待确认、测试环境 vs Production、白名单灰度、Bug 是否阻塞上线、上线后的 Follow-up。会议开头也涉及你正在确认 Xray 不同市场配置升级的问题。
+
+Topic 1. Reviewing Today’s Release Scope
+📌 Meeting Background
+
+The team started by reviewing all items scheduled for release that day, including MCP-related changes, Listing Builder description updates, Listing Analyzer, and the first batch of Main App refactoring APIs.
+
+💬 Original Chinese
+
+开始之前，先说一下今天预计要上线发布的内容。
+
+🇺🇸 Natural English
+
+Before we get started, let's quickly go over what's scheduled for release today.
+
+Alternative Expressions
+Let's review today's release scope first.
+Let's go over what we're planning to ship today.
+Let's confirm what's going out today.
+⭐ 推荐直接背
+
+Let's quickly go over what's scheduled for release today.
+
+💬 Original Chinese
+
+大家看看今天上线的内容还有要补充的吗？
+
+🇺🇸 Natural English
+
+Is there anything else we need to include in today's release?
+
+Alternative Expressions
+Are we missing anything from today's release?
+Does anyone have anything else going out today?
+Anything else we need to add to the release scope?
+Topic 2. Waiting for Confirmation
+📌 Meeting Background
+
+The Change Log had already passed testing, but the team was still waiting for confirmation on whether it should actually be released.
+
+💬 Original Chinese
+
+Change Log 已经测试完成了，但是具体要不要发布，还要再确认一下。
+
+🇺🇸 Natural English
+
+The Change Log has passed testing, but we still need confirmation on whether to release it.
+
+Alternative Expressions
+Testing is complete, but the release decision is still pending.
+It's ready from a testing perspective, but we're still waiting for approval.
+We haven't gotten the go-ahead to release it yet.
+⭐ 高频
+
+We're still waiting for the go-ahead.
+
+go-ahead = 正式允许继续做某件事。
+
+💬 Original Chinese
+
+昨天给他的留言都没回。
+
+🇺🇸 Natural English
+
+I haven't heard back from him since I messaged him yesterday.
+
+Alternative Expressions
+He hasn't responded yet.
+I'm still waiting to hear back from him.
+I'll follow up with him again today.
+⭐ 组合起来非常实用
+
+I haven't heard back from him yet. I'll follow up again today.
+
+Topic 3. Test Environment vs. Production
+💬 Original Chinese
+
+这些都是在测试环境，对吧？
+
+🇺🇸 Natural English
+
+These changes are only in the test environment right now, correct?
+
+Alternative Expressions
+These haven't gone to production yet, right?
+These changes are still only in testing, correct?
+This hasn't been rolled out to production yet, right?
+💬 Original Chinese
+
+生产环境都还没动，还是原来的。
+
+🇺🇸 Natural English
+
+We haven't changed anything in production yet. It's still running the existing version.
+
+Alternative Expressions
+Production is still on the old version.
+Nothing has changed in production yet.
+The production configuration remains unchanged.
+Topic 4. Should We Keep or Remove This Tool?
+📌 Meeting Background
+
+The team discussed whether the Show Listing Builder Workflow tool was still needed. Its future depended on whether the Skill would be released together with the MCP.
+
+💬 Original Chinese
+
+这个 Tool 我们要移除吗？还是依然要保留？
+
+🇺🇸 Natural English
+
+Should we remove this tool, or do we still need to keep it?
+
+Alternative Expressions
+Do we still need this tool?
+Should this tool remain available?
+Can we deprecate this tool?
+🧠 Vocabulary
+
+deprecate a feature
+
+= 功能还可能存在，但已经不建议继续使用，并计划逐步淘汰。
+
+Topic 5. Monitoring an Intermittent Issue
+💬 Original Chinese
+
+还有一个偶发性的超时，数量很少，可以再继续观察一下。
+
+🇺🇸 Natural English
+
+We're seeing a small number of intermittent timeouts, but they're rare enough that we can continue monitoring for now.
+
+Alternative Expressions
+We've seen a few sporadic timeouts.
+The issue appears to be intermittent.
+Let's keep an eye on it for now.
+I don't think this requires immediate action.
+⭐ 必背
+
+Let's keep an eye on it for now.
+
+= 目前先继续观察。
+
+Topic 6. Putting Tasks on Hold
+💬 Original Chinese
+
+另外两个先挂起，后面有时间再做。
+
+🇺🇸 Natural English
+
+Let's put the other two tasks on hold for now and come back to them when we have more capacity.
+
+Alternative Expressions
+Let's defer these two for now.
+We can revisit them later.
+We'll pick them up when we have more bandwidth.
+⭐ 三个程度很接近的表达
+put on hold → 暂停
+defer → 延后
+revisit → 以后重新讨论/处理
+Topic 7. Read-only vs. Write Operations
+📌 Meeting Background
+
+The team clarified the rollout policy for MCPs: read-only functionality could be released more broadly, while MCPs involving write operations should first be released to whitelisted users.
+
+💬 Original Chinese
+
+只要不涉及写功能，就可以直接 Release。
+
+🇺🇸 Natural English
+
+As long as the MCP is read-only, we can release it directly.
+
+Alternative Expressions
+Read-only functionality can go straight to release.
+We don't need a limited rollout for read-only operations.
+Read-only MCPs can be released directly.
+💬 Original Chinese
+
+如果有写功能，先 Release 给 Whitelist。
+
+🇺🇸 Natural English
+
+If it includes write operations, we should release it to whitelisted users first.
+
+Alternative Expressions
+Let's start with a limited rollout for write operations.
+Write functionality should be whitelist-only initially.
+We should roll it out gradually because it can modify data.
+🧠 Vocabulary
+Expression	中文
+read-only	只读
+write operation	写操作
+whitelist	白名单
+limited rollout	小范围上线
+phased rollout	分阶段上线
+modify data	修改数据
+Topic 8. Reporting Testing Progress
+💬 Original Chinese
+
+TikTok 还在测试中，现在整体测试进度 15%。
+
+🇺🇸 Natural English
+
+TikTok is still in testing. We're about 15% through the testing so far.
+
+Alternative Expressions
+Testing is roughly 15% complete.
+We've completed about 15% of the test cases.
+We're still early in the testing phase.
+⭐ 不建议
+
+My testing progress is 15%.
+
+✅ 更自然
+
+I'm about 15% through testing.
+
+Topic 9. Ready for Production
+💬 Original Chinese
+
+这个已经测完了，今天会发到线上。
+
+🇺🇸 Natural English
+
+Testing is complete, and we're releasing it to production today.
+
+Alternative Expressions
+This is ready for production.
+This is going live today.
+QA is complete, so we can ship it today.
+⭐ 三种“上线”
+
+deploy to production
+强调部署动作。
+
+release
+强调版本/功能发布。
+
+go live
+强调正式对用户可用。
+
+Topic 10. Closing a Ticket After Release
+💬 Original Chinese
+
+到时候维护一下状态，直接把它关掉就好了。
+
+🇺🇸 Natural English
+
+Once it's released, update the status and close the ticket.
+
+Alternative Expressions
+We can close this out once it's live.
+Mark it as done after the release.
+Once it's in production, we can close the ticket.
+⭐ 高频
+
+We can close this out once it's live.
+
+close out = 正式把某件工作收尾。
+
+Topic 11. Does This Bug Block the Release?
+📌 Meeting Background
+
+Several Listing Builder issues were still open, but the initial release would only go to a limited group of internal whitelisted users. The team therefore confirmed that those bugs did not block that day's release.
+
+💬 Original Chinese
+
+这几个 Bug 不影响今天上线，是吧？
+
+🇺🇸 Natural English
+
+These bugs aren't blocking today's release, right?
+
+Alternative Expressions
+Are any of these release blockers?
+Can we still release with these issues open?
+Are we comfortable shipping with these known issues?
+⭐⭐⭐ 强烈建议背
+
+This isn't a release blocker.
+
+= 这个问题不至于阻塞上线。
+
+Topic 12. Limited Rollout
+💬 Original Chinese
+
+今天只会先开放给一部分白名单用户。
+
+🇺🇸 Natural English
+
+Today's release will only be available to a limited group of whitelisted users.
+
+Alternative Expressions
+We're starting with a limited rollout.
+We're only rolling this out internally for now.
+It won't be generally available yet.
+We'll start small and expand gradually.
+🧠 Vocabulary
+
+generally available / GA
+
+= 面向所有目标用户正式开放。
+
+Topic 13. Follow Up on Known Issues
+💬 Original Chinese
+
+后续你再跟进一下这几个问题，看看能不能解决一下。
+
+🇺🇸 Natural English
+
+Please follow up on these issues after the release and see if we can get them resolved.
+
+Alternative Expressions
+Let's track these separately as follow-up items.
+We can address these after the release.
+Please continue investigating these issues.
+⭐ 高频
+
+Let's treat these as follow-up items.
+
+Topic 14. Re-registering Existing MCPs
+💬 Original Chinese
+
+线上原来的 MCP 是不是也都要重新注册？
+
+🇺🇸 Natural English
+
+Do we also need to re-register the existing MCPs in production?
+
+💬 Original Chinese
+
+对，重新注册，我们保持一致。
+
+🇺🇸 Natural English
+
+Yes. We need to re-register them so that everything stays consistent.
+
+Alternative Expressions
+Let's keep both environments in sync.
+Production should match the whitelist environment.
+We need to make sure the configurations are aligned.
+⭐ 必背
+
+Let's keep both environments in sync.
+
+Topic 15. Closing the Meeting
+💬 Original Chinese
+
+没有其他问题的话，那我们今天就到这里吧，谢谢大家。
+
+🇺🇸 Natural English
+
+If there are no other questions, let's wrap up here. Thanks, everyone.
+
+Alternative Expressions
+Anything else before we wrap up?
+If there's nothing else, I think we're good for today.
+Alright, that's all for today. Thanks, everyone.
+⭐ 主持会议直接背
+
+Anything else before we wrap up?
+
+Alright, let's wrap up here. Thanks, everyone.
+
+📖 Grammar & Expression Notes
+1. “今天上线什么？”
+
+What's scheduled for release today?
+
+口语：
+
+What's going out today?
+
+2. “还没回复我”
+
+I haven't heard back from him yet.
+
+不要：
+
+❌ He hasn't replied me.
+
+reply 要说：
+
+He hasn't replied to me.
+
+3. “还要确认”
+
+We still need confirmation.
+
+The decision is still pending.
+
+4. “测试环境”
+
+test environment
+
+staging environment
+
+注意两者不一定完全相同，具体看公司的环境定义。
+
+5. “偶发”
+
+intermittent
+
+sporadic
+
+例如：
+
+We're seeing intermittent timeouts.
+
+6. “不影响上线”
+
+It doesn't block the release.
+
+更工程化：
+
+It's not a release blocker.
+
+7. “小范围上线”
+
+limited rollout
+
+phased rollout
+
+8. “保持环境一致”
+
+keep the environments in sync
+
+keep the configurations aligned
+
+⭐ Shadowing Practice
+
+Before we get started, let's go over what's scheduled for release today.
+
+Are we missing anything from today's release?
+
+Testing is complete, but we're still waiting for the go-ahead.
+
+I haven't heard back from him yet.
+
+These changes haven't gone to production yet.
+
+Let's keep an eye on it for now.
+
+We'll put these tasks on hold until we have more capacity.
+
+As long as it's read-only, we can release it directly.
+
+For write operations, we'll start with a limited rollout.
+
+I'm about 15% through testing.
+
+This is ready for production.
+
+These bugs aren't blocking today's release.
+
+Let's treat these as follow-up items.
+
+Let's keep both environments in sync.
+
+Anything else before we wrap up?
+
+📚 Today's Vocabulary
+Expression	中文
+release scope	发布范围
+go-ahead	批准 / 放行
+hear back	收到回复
+pending	待确认 / 待处理
+deprecate	逐步弃用
+intermittent	间歇性的
+keep an eye on	持续关注
+put on hold	暂停
+read-only	只读
+write operation	写操作
+limited rollout	小范围上线
+phased rollout	分阶段上线
+go live	正式上线
+close out	收尾
+release blocker	上线阻塞项
+follow-up item	后续跟进项
+re-register	重新注册
+in sync	保持同步
+⭐ 今天最值得背的 10 句
+
+Let's quickly go over what's scheduled for release today.
+
+Are we missing anything from today's release?
+
+We're still waiting for the go-ahead.
+
+I haven't heard back from him yet.
+
+Let's keep an eye on it for now.
+
+We'll put this on hold for now.
+
+We're about 15% through testing.
+
+This isn't a release blocker.
+
+Let's treat these as follow-up items.
+
+Let's keep both environments in sync.
