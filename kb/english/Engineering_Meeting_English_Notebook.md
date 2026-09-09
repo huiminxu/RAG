@@ -4997,3 +4997,757 @@ That seems to be the root cause.
 What's the priority order for these items?
 
 Let's take this offline.
+
+
+
+# Engineering Meeting English Notebook
+
+## Meeting #14 – Testing Readiness, Production Validation, Root Cause Analysis & AI Code Review
+
+这场会议很适合积累 **Daily Standup + Engineering Troubleshooting** 英语。核心场景包括：**准备提测、安排 Review、线上验收、跨团队依赖、根因分析、数据差异风险、联调，以及 AI Code Review 流程**。会议开头就是典型的“已经开测 / 明天提测 / Bug 已同步”的进度更新。
+
+---
+
+# Topic 1. Ready for Testing / 提测
+
+## 📌 Meeting Background
+
+Several tasks had completed their initial review and were either ready for testing or expected to be handed over to QA soon.
+
+## 💬 Original Chinese
+
+> 这个也可以开始开发了，预计明天下班前提测。
+
+## 🇺🇸 Natural English
+
+> This is ready for development, and we're planning to hand it over to QA by the end of tomorrow.
+
+### Alternative Expressions
+
+* We're targeting a QA handoff by EOD tomorrow.
+* It should be ready for testing by tomorrow afternoon.
+* We're aiming to get this into QA by the end of tomorrow.
+
+### ⭐ 强烈推荐
+
+> **We're targeting a QA handoff by EOD tomorrow.**
+
+**EOD = end of day**
+
+---
+
+## 💬 Original Chinese
+
+> 这个已经可以测了，今天应该就可以测。
+
+## 🇺🇸 Natural English
+
+> This is ready for testing, so QA should be able to start today.
+
+### Alternative Expressions
+
+* This is testable now.
+* It's ready for QA.
+* QA can pick this up today.
+
+---
+
+# Topic 2. Validating Collected Data
+
+## 💬 Original Chinese
+
+> 昨天已经把几个主要仓库汇总了一下，今天主要去校验这些汇总的地址是不是有效的。
+
+## 🇺🇸 Natural English
+
+> I consolidated the data from the main repositories yesterday. Today, I'll mainly validate whether the collected endpoints are actually valid. 
+
+### Alternative Expressions
+
+* I'll verify the collected endpoints today.
+* I need to validate the results before we use them.
+* Some page URLs may have been incorrectly identified as API endpoints.
+
+### 🧠 Vocabulary
+
+| Expression      | 中文        |
+| --------------- | --------- |
+| consolidate     | 汇总、整合     |
+| validate        | 校验        |
+| endpoint        | 接口端点      |
+| identify A as B | 把 A 识别成 B |
+| false match     | 错误匹配      |
+
+---
+
+# Topic 3. Scheduling a Review
+
+## 💬 Original Chinese
+
+> 东明你有空帮忙 Review 一下，如果没什么问题就可以开始开发。
+
+## 🇺🇸 Natural English
+
+> Dongming, when you have some time, could you review this? If everything looks good, we can move forward with development. 
+
+### Alternative Expressions
+
+* Once the review is complete, we can start development.
+* If there are no concerns, we can move forward.
+* We just need your sign-off before development starts.
+
+### ⭐ 高频
+
+> **If everything looks good, we can move forward.**
+
+---
+
+## 💬 Original Chinese
+
+> 约个会议是吗？QA 也一起吗？还是我们两个过一下就行？
+
+## 🇺🇸 Natural English
+
+> Should we set up a meeting for this? Do we need QA to join, or can the two of us just go through it together?
+
+### Useful Expressions
+
+* **set up a meeting** — 约会议
+* **have QA join** — 让 QA 参加
+* **go through it together** — 一起过一下
+
+---
+
+# Topic 4. Production Regression & Validation
+
+## 💬 Original Chinese
+
+> Main App 重构 C1 已经发了，现在 CE 在回归生产接口，有问题的话我们会跟着修复。
+
+## 🇺🇸 Natural English
+
+> C1 of the Main App refactor has already been released. CE is now running regression tests against the production APIs, and we'll address any issues that come up. 
+
+### Alternative Expressions
+
+* We're validating the production APIs after the release.
+* Production regression is currently in progress.
+* We'll fix any issues we uncover during regression testing.
+
+### ⭐ 高频
+
+> **We'll address any issues that come up.**
+
+这里的 **come up** = 出现。
+
+---
+
+# Topic 5. Deleted User Still Receiving Notifications
+
+## 📌 Meeting Background
+
+The team discussed an issue where a user account had already been deleted, but the old notification subscription remained active. The upstream service was still returning the deleted user as subscribed. 
+
+## 💬 Original Chinese
+
+> 用户账号已经删掉了，但他还能收到我们的通知邮件。
+
+## 🇺🇸 Natural English
+
+> The user's account has already been deleted, but they're still receiving notification emails.
+
+---
+
+## 💬 Original Chinese
+
+> 删除的用户应该就不返回订阅了，但他们现在还是返回给我。
+
+## 🇺🇸 Natural English
+
+> Deleted users shouldn't be returned as active subscribers, but the upstream service is still returning them.
+
+### Alternative Expressions
+
+* The subscription should be invalidated when the account is deleted.
+* Deleted accounts shouldn't remain subscribed.
+* The upstream service needs to filter out deleted users.
+
+### 🧠 Vocabulary
+
+**invalidate** = 使失效
+
+**filter out** = 过滤掉
+
+**active subscriber** = 有效订阅用户
+
+---
+
+# Topic 6. Reporting Testing Progress
+
+## 💬 Original Chinese
+
+> Notification MCP 整体测试进度 70%。
+
+## 🇺🇸 Natural English
+
+> We're about 70% through testing for the Notification MCP. 
+
+### Alternative Expressions
+
+* Testing is roughly 70% complete.
+* We've completed around 70% of the test cases.
+* We're well over halfway through testing.
+
+### ⭐ 固定句型
+
+> **We're about X% through testing.**
+
+例如：
+
+> We're about 30% through testing.
+
+> We're about 80% through the migration.
+
+> I'm about halfway through the review.
+
+---
+
+# Topic 7. Production Validation Found API Errors
+
+## 💬 Original Chinese
+
+> 昨天前端在本地接线上接口的时候，发现几个接口报错了。
+
+## 🇺🇸 Natural English
+
+> Yesterday, while the frontend was testing against the production APIs locally, we ran into errors on several endpoints. 
+
+### Alternative Expressions
+
+* Several production endpoints returned errors.
+* We ran into a few API issues during integration testing.
+* A few endpoints failed during validation.
+
+### ⭐ 必背
+
+> **We ran into a few issues during integration testing.**
+
+---
+
+# Topic 8. May Not Have Enough Time Today
+
+## 💬 Original Chinese
+
+> 今天不一定来得及。
+
+## 🇺🇸 Natural English
+
+> I'm not sure we'll have enough time to get this done today. 
+
+### Alternative Expressions
+
+* We may not get to this today.
+* This might slip to tomorrow.
+* I'm not sure we can finish this by EOD.
+
+### ⭐ 很自然
+
+> **We may not get to this today.**
+
+这里 **get to something** = 有时间处理某事。
+
+---
+
+# Topic 9. Root Cause Has Been Identified
+
+## 📌 Meeting Background
+
+The team investigated a production issue and traced it to an account with more than 40,000 records in the Australian market. Repeated calls created pressure on the service, particularly when machine capacity was temporarily reduced. 
+
+## 💬 Original Chinese
+
+> 原因定位到了。
+
+## 🇺🇸 Natural English
+
+> We've identified the root cause.
+
+### Alternative Expressions
+
+* We've narrowed down the root cause.
+* We figured out what was causing the issue.
+* We've traced the issue back to a specific case.
+
+### ⭐ 三个层级
+
+**investigate the issue**
+↓ 正在排查
+
+**narrow down the root cause**
+↓ 范围缩小了
+
+**identify the root cause**
+↓ 已经找到根因
+
+---
+
+## 💬 Original Chinese
+
+> 根本原因是有一个用户的 My List 在澳大利亚市场有 4 万多条记录。
+
+## 🇺🇸 Natural English
+
+> The root cause was a user with more than 40,000 My List records in the Australian marketplace.
+
+---
+
+## 💬 Original Chinese
+
+> 如果触发次数多了，对我们这边就会有影响。
+
+## 🇺🇸 Natural English
+
+> If this gets triggered repeatedly, it can put significant load on our service.
+
+### Alternative Expressions
+
+* Repeated requests can put pressure on the service.
+* This becomes an issue under heavy usage.
+* Frequent calls can increase the load significantly.
+
+---
+
+# Topic 10. The Issue Only Surfaced Under Pressure
+
+## 💬 Original Chinese
+
+> 当时机器数比较少，后续压力比较大，所以这个问题才暴露出来。
+
+## 🇺🇸 Natural English
+
+> The issue only surfaced because we had fewer machines available at the time and the service was under heavier load. 
+
+### Alternative Expressions
+
+* The issue only became visible under load.
+* Reduced capacity exposed the problem.
+* The issue surfaced under higher traffic.
+
+### ⭐ 很值得学
+
+> **The issue only surfaced under load.**
+
+**surface** 作动词 = 暴露出来 / 浮现。
+
+---
+
+# Topic 11. Continue Monitoring After the Fix
+
+## 💬 Original Chinese
+
+> 应该结束了，但是也可以再观察一下。
+
+## 🇺🇸 Natural English
+
+> The issue should be resolved now, but we can continue monitoring it for a while.
+
+### Alternative Expressions
+
+* The fix is in place, but let's keep an eye on it.
+* We should monitor it for a little longer.
+* Let's make sure the issue doesn't recur.
+
+### 🧠 Vocabulary
+
+**recur** = 再次发生
+
+> We haven't seen the issue recur since the fix.
+
+---
+
+# Topic 12. Integration Testing / 联调
+
+## 💬 Original Chinese
+
+> 待会跟 Ivan 联调一下，然后就转测了。
+
+## 🇺🇸 Natural English
+
+> I'll do an integration test with Ivan later, and then we'll hand it over to QA. 
+
+### Alternative Expressions
+
+* I'll sync with Ivan for integration testing first.
+* Once integration testing is done, it'll be ready for QA.
+* We'll validate the integration together before handing it off.
+
+### ⭐ “联调”怎么说
+
+最稳妥：
+
+> **integration testing**
+
+口语也可以：
+
+> **test the integration together**
+
+---
+
+# Topic 13. Data Gap as a Release Risk
+
+## 📌 Meeting Background
+
+The team found a roughly 400,000-record difference between the new and old tables. The gap was still changing and might remain into the following week, so it was identified as a potential risk. 
+
+## 💬 Original Chinese
+
+> 新表和老表之间相差 40 万左右。
+
+## 🇺🇸 Natural English
+
+> There's a gap of roughly 400,000 records between the new table and the old one.
+
+---
+
+## 💬 Original Chinese
+
+> 到下周可能还是会有缺口，可能是一个风险点。
+
+## 🇺🇸 Natural English
+
+> The gap may still be there next week, so this could be a potential risk.
+
+### Alternative Expressions
+
+* This is something we should flag as a risk.
+* The data discrepancy may persist into next week.
+* We should keep this on our radar.
+
+### ⭐ 高频
+
+> **We should flag this as a potential risk.**
+
+---
+
+# Topic 14. Valid Records Incorrectly Marked as Invalid
+
+## 💬 Original Chinese
+
+> 将近五千个 Creator 实际上是有效的，但是被标记成无效了。
+
+## 🇺🇸 Natural English
+
+> Nearly 5,000 creators are actually valid but have been incorrectly marked as invalid. 
+
+### Alternative Expressions
+
+* Around 5,000 valid records were misclassified as invalid.
+* We're seeing incorrect status classification.
+* These records were falsely marked as invalid.
+
+### 🧠 Vocabulary
+
+**misclassify** = 错误分类
+
+**incorrectly marked** = 被错误标记
+
+---
+
+# Topic 15. Clarifying What a Test Account Is For
+
+## 💬 Original Chinese
+
+> 这个 Creator 测试账号主要是用来测什么功能？
+
+## 🇺🇸 Natural English
+
+> What exactly is this creator test account used for? 
+
+### Alternative Expressions
+
+* What's the purpose of this test account?
+* Which scenario are we using this account to test?
+* What functionality does this account cover?
+
+---
+
+## 💬 Original Chinese
+
+> 就发送邀约。
+
+## 🇺🇸 Natural English
+
+> It's mainly used to test sending invitations.
+
+---
+
+# Topic 16. New AI Code Review Workflow
+
+## 📌 Meeting Background
+
+The team clarified the new code-review workflow. Developers should first run their changes through the AI review, inspect the findings themselves, fix genuine issues, and then ask for final approval. 
+
+## 💬 Original Chinese
+
+> 我们现在 Code Review 的流程是不是自己先用 AI 检查，然后你再 Approve？
+
+## 🇺🇸 Natural English
+
+> Is the new code review process that we run the changes through AI first, review the findings ourselves, and then ask you for final approval?
+
+### ⭐ 推荐流程表达
+
+> **Run it through AI review first.**
+
+> **Review the findings yourself.**
+
+> **Address the valid issues.**
+
+> **Then request final approval.**
+
+---
+
+# Topic 17. AI Review Has False Positives
+
+## 💬 Original Chinese
+
+> 里面可能有一半是误报，另外一半确实是问题。
+
+## 🇺🇸 Natural English
+
+> Some of the findings may be false positives, while others are genuine issues. 
+
+### Alternative Expressions
+
+* Not every finding is actionable.
+* We need to validate the AI findings manually.
+* Some findings are noise, while others are legitimate issues.
+
+### 🧠 Vocabulary
+
+**false positive** = 误报
+
+**genuine issue** = 真实问题
+
+**actionable** = 值得采取行动 / 可以处理的
+
+**noise** = 无效信息、噪音
+
+---
+
+# Topic 18. Retry on AI Failure
+
+## 💬 Original Chinese
+
+> 后面再优化一下，如果出现错误，可以再重试一下。
+
+## 🇺🇸 Natural English
+
+> I'll improve this later by adding retry logic when an error occurs. 
+
+### Alternative Expressions
+
+* We should add automatic retries for transient failures.
+* We can retry the request if the AI call fails.
+* Let's make the workflow more resilient by adding retry logic.
+
+### ⭐ 很好的工程表达
+
+> **Let's make the workflow more resilient.**
+
+**resilient** = 有韧性的 / 出现临时故障也能恢复。
+
+---
+
+# Topic 19. Service Running Locally
+
+## 💬 Original Chinese
+
+> 因为那个是跑在我本地的，所以电脑休眠以后可能就打不开了。
+
+## 🇺🇸 Natural English
+
+> It's running locally on my machine, so it may become unavailable when my computer goes to sleep. 
+
+### Alternative Expressions
+
+* The service is currently hosted on my local machine.
+* It's not always available because it's running locally.
+* We may need to move it to a shared environment later.
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “提测”
+
+不要：
+
+> ❌ submit to test
+
+推荐：
+
+> **hand it over to QA**
+
+> **get it into QA**
+
+> **make it ready for testing**
+
+---
+
+### 2. “今天来不及”
+
+> **We may not get to this today.**
+
+> **I'm not sure we can get this done by EOD.**
+
+---
+
+### 3. “原因定位到了”
+
+> **We've identified the root cause.**
+
+---
+
+### 4. “问题暴露出来”
+
+> **The issue surfaced under load.**
+
+---
+
+### 5. “继续观察”
+
+> **Let's keep an eye on it.**
+
+> **Let's continue monitoring it.**
+
+---
+
+### 6. “联调”
+
+> **integration testing**
+
+> **test the integration together**
+
+---
+
+### 7. “有数据缺口”
+
+> **There's a gap in the data.**
+
+更强调不一致：
+
+> **There's a data discrepancy.**
+
+---
+
+### 8. “风险点”
+
+不要总说：
+
+> risk point
+
+更自然：
+
+> **potential risk**
+
+> **something we should flag**
+
+---
+
+### 9. “误报”
+
+> **false positive**
+
+例如：
+
+> This looks like a false positive.
+
+---
+
+# ⭐ Shadowing Practice
+
+> **We're targeting a QA handoff by EOD tomorrow.**
+
+> **This is ready for testing.**
+
+> **If everything looks good, we can move forward with development.**
+
+> **We'll address any issues that come up.**
+
+> **We're about 70% through testing.**
+
+> **We ran into a few issues during integration testing.**
+
+> **We may not get to this today.**
+
+> **We've identified the root cause.**
+
+> **Repeated requests can put significant load on the service.**
+
+> **The issue only surfaced under load.**
+
+> **The fix is in place, but let's keep an eye on it.**
+
+> **Once integration testing is done, we'll hand it over to QA.**
+
+> **We should flag this as a potential risk.**
+
+> **These records were incorrectly marked as invalid.**
+
+> **Run it through AI review first.**
+
+> **Some of the findings may be false positives.**
+
+> **Let's make the workflow more resilient by adding retry logic.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                | 中文         |
+| ------------------------- | ---------- |
+| **QA handoff**            | 提测 / 交给 QA |
+| **EOD**                   | 当天下班前      |
+| **consolidate**           | 汇总、整合      |
+| **validate**              | 校验         |
+| **sign-off**              | 确认 / 批准    |
+| **production regression** | 生产环境回归     |
+| **invalidate**            | 使失效        |
+| **filter out**            | 过滤         |
+| **run into**              | 遇到         |
+| **root cause**            | 根因         |
+| **put load on**           | 给系统增加负载    |
+| **surface**               | 暴露 / 浮现    |
+| **recur**                 | 再次发生       |
+| **integration testing**   | 联调         |
+| **data discrepancy**      | 数据差异       |
+| **flag a risk**           | 标记风险       |
+| **misclassify**           | 错误分类       |
+| **false positive**        | 误报         |
+| **actionable**            | 值得处理的      |
+| **retry logic**           | 重试逻辑       |
+| **resilient**             | 有容错/恢复能力的  |
+
+## ⭐ 今天最值得背的 10 句
+
+> **We're targeting a QA handoff by EOD tomorrow.**
+
+> **If everything looks good, we can move forward.**
+
+> **We'll address any issues that come up.**
+
+> **We're about 70% through testing.**
+
+> **We may not get to this today.**
+
+> **We've identified the root cause.**
+
+> **The issue only surfaced under load.**
+
+> **Once integration testing is done, we'll hand it over to QA.**
+
+> **We should flag this as a potential risk.**
+
+> **Some of the findings may be false positives.**
+
