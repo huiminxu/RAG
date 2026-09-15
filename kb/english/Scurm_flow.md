@@ -2641,3 +2641,841 @@ At the end of planning, the team explicitly checked for delivery risks and delay
 > **We shouldn't commit to this until the design is clearer.**
 
 > **Please flag any delivery risks early.**
+>
+# Engineering Meeting English Notebook
+
+## Meeting #19 – Backlog Refinement, Technical Stories, API Migration & Product Requirement Clarification
+
+这场会议属于比较典型的 **Backlog Refinement + Requirement Clarification**。和 Sprint Planning 不同，这次更关注：**下个 Sprint 可能做什么、需求是否足够清楚、技术故事怎么描述、依赖项是什么、哪些工作需要 UX、哪些需求只是先调研，以及新加入的产品需求怎么进入 Sprint 流程**。会议一开始就明确这是一次“需求澄清会”。
+
+---
+
+# Topic 1. Explaining the Backlog Refinement Process
+
+## 📌 Meeting Background
+
+Keisha was unfamiliar with the process, so the team explained how requirements move from the backlog into a sprint. A requirement can first stay in the backlog as a candidate item, and once the team decides to work on it, it can be moved into the upcoming sprint. 
+
+## 💬 Original Chinese
+
+> 当前不一定要做的需求可以先放到 Backlog，确定要做的话再放到下一个 Sprint。
+
+## 🇺🇸 Natural English
+
+> If a requirement isn't ready to be committed yet, we can keep it in the backlog and move it into the sprint once we're ready to work on it.
+
+### Alternative Expressions
+
+* Keep it in the backlog for now.
+* Move it into the sprint once the scope is clear.
+* Treat it as candidate work until we're ready to commit.
+
+### ⭐ 推荐
+
+> **We can keep it in the backlog until we're ready to commit to it.**
+
+---
+
+# Topic 2. Reviewing Work by Priority
+
+## 💬 Original Chinese
+
+> 我从高优先级到低优先级来讲。
+
+## 🇺🇸 Natural English
+
+> I'll go through the items from highest to lowest priority. 
+
+### Alternative Expressions
+
+* Let's review these in priority order.
+* We'll start with the highest-priority items.
+* I'll walk through the backlog from high to low priority.
+
+### ⭐ 高频
+
+> **Let's review these in priority order.**
+
+---
+
+# Topic 3. Migrating From Static Credentials to Role-based Access
+
+## 📌 Meeting Background
+
+One technical story involved changing how the system accesses S3 and SQS. The current implementation used credentials, while the target design was to switch to role-based access in the next sprint. 
+
+## 💬 Original Chinese
+
+> 现在调用 S3、SQS 都是用密码形式，下一 Sprint 要改成 Role 的方式。
+
+## 🇺🇸 Natural English
+
+> We're currently using static credentials to access S3 and SQS, and we want to migrate to role-based access in the next sprint.
+
+### Alternative Expressions
+
+* We want to move away from static credentials.
+* We should switch to role-based authentication.
+* This is mainly a security and maintainability improvement.
+
+### 🧠 Vocabulary
+
+| Expression          | 中文      |
+| ------------------- | ------- |
+| static credentials  | 静态凭据    |
+| role-based access   | 基于角色的访问 |
+| authentication      | 认证      |
+| credential rotation | 凭据轮换    |
+| maintainability     | 可维护性    |
+
+---
+
+# Topic 4. Listing Builder Skill Is Built but Not Released
+
+## 📌 Meeting Background
+
+The Listing Builder Skill had already been developed, but the team still did not know how or where it should be published. The remaining work was mostly coordination and release-process clarification rather than implementation. 
+
+## 💬 Original Chinese
+
+> Listing Builder Skill 已经做好了，但是一直不知道怎么 Release。
+
+## 🇺🇸 Natural English
+
+> The Listing Builder Skill is already built, but we still haven't finalized how it should be released.
+
+### Alternative Expressions
+
+* The implementation is done; the release path is still unclear.
+* We're blocked on the publishing process rather than development.
+* The remaining work is mostly coordination.
+
+### ⭐ 推荐
+
+> **The implementation is complete, but the release path is still unclear.**
+
+---
+
+# Topic 5. Replace Brand With Shop
+
+## 📌 Meeting Background
+
+In TikTok Product Finder, the existing Brand field had become unreliable because the source data could no longer be crawled consistently. Shop data was still available, so the team planned to replace Brand with Shop in both the web experience and MCP filtering. 
+
+## 💬 Original Chinese
+
+> Brand 现在拿不到了，但是 Shop 是可以的，所以我们准备把 Brand 替换成 Shop。
+
+## 🇺🇸 Natural English
+
+> Brand data is no longer reliably available, but Shop data is, so we're planning to replace Brand with Shop.
+
+### Alternative Expressions
+
+* The current Brand filter is no longer reliable.
+* Shop is a more stable data source.
+* We'll need to update both the web flow and the MCP filter.
+
+### ⭐ Useful
+
+> **The current data source is no longer reliable.**
+
+---
+
+# Topic 6. Assigning Work Based on Capacity
+
+## 💬 Original Chinese
+
+> 下个 Sprint 暂时没有计划的话，这个可以先给你。
+
+## 🇺🇸 Natural English
+
+> If you don't have anything else planned for the next sprint, I can assign this to you.
+
+### Alternative Expressions
+
+* Do you have capacity to take this on?
+* If you have bandwidth, I'll assign this to you.
+* You can pick this up if your current sprint work is wrapping up.
+
+### ⭐ 高频
+
+> **Do you have capacity to take this on?**
+
+---
+
+# Topic 7. Sales History & GMV History MCP
+
+## 📌 Meeting Background
+
+The team proposed building Sales History and GMV History MCP tools by following the pattern of an existing Search Volume History tool. Because the structure was already familiar, the work was considered relatively straightforward. 
+
+## 💬 Original Chinese
+
+> Sales 跟 GMV History 可以参照 Search Volume History 来做 MCP。
+
+## 🇺🇸 Natural English
+
+> We can model the Sales History and GMV History MCPs after the existing Search Volume History tool.
+
+### Alternative Expressions
+
+* We can reuse the same pattern.
+* The implementation should be fairly straightforward.
+* We already have a similar reference implementation.
+
+### 🧠 Vocabulary
+
+**reference implementation** = 参考实现
+
+---
+
+# Topic 8. API Deprecation Creates a Hard Deadline
+
+## 📌 Meeting Background
+
+A TikTok API was scheduled to be shut down in October, so the team needed to migrate to the new OpenID-based API before the end of September. 
+
+## 💬 Original Chinese
+
+> 现在的 API 10 月份就会下线，所以 9 月底之前必须替换完。
+
+## 🇺🇸 Natural English
+
+> The current API will be deprecated in October, so we need to complete the migration by the end of September.
+
+### Alternative Expressions
+
+* We have a hard migration deadline.
+* The legacy API is being sunset.
+* We need to complete the cutover before the old API is retired.
+
+### 🧠 Vocabulary
+
+**deprecate** = 弃用
+
+**sunset an API** = 正式停止一个 API
+
+**cutover** = 从旧系统切换到新系统
+
+### ⭐ 推荐
+
+> **We have a hard deadline because the legacy API is being sunset.**
+
+---
+
+# Topic 9. Dependency Between Product Work and API Migration
+
+## 💬 Original Chinese
+
+> 我要做的需求是以 OpenID 为前提，所以这个做完以后才能做我的需求。
+
+## 🇺🇸 Natural English
+
+> My requirement depends on the OpenID migration, so we can't start it until that work is complete.
+
+### Alternative Expressions
+
+* This is a prerequisite for my work.
+* My story is blocked by the OpenID migration.
+* We need the migration in place first.
+
+### ⭐ 高频
+
+> **This is a prerequisite for the next piece of work.**
+
+---
+
+# Topic 10. Why the API Is Changing
+
+## 📌 Meeting Background
+
+The team explained that TikTok was moving away from exposing internal user IDs and introducing OpenID instead, mainly for security reasons. The migration might also require compatibility handling for historical data. 
+
+## 💬 Original Chinese
+
+> 主要是为了安全，原来的 User ID 不能再用了，要切成 OpenID。
+
+## 🇺🇸 Natural English
+
+> The main reason is security. The old user ID can no longer be used, so we need to migrate to OpenID.
+
+### Alternative Expressions
+
+* This is primarily a security-driven migration.
+* The identifier model is changing.
+* We may also need backward compatibility for historical data.
+
+### 🧠 Vocabulary
+
+**backward compatibility** = 向后兼容
+
+---
+
+# Topic 11. Google Trends as a Research Task
+
+## 📌 Meeting Background
+
+The Google Keyword Trends item was lower priority and still somewhat exploratory. The team planned to investigate whether existing code could be reused and wrap the capability as an MCP rather than build an entirely new data flow. 
+
+## 💬 Original Chinese
+
+> 你先研究一下吧。
+
+## 🇺🇸 Natural English
+
+> Please investigate this first and see what we can reuse.
+
+### Alternative Expressions
+
+* Start with a technical spike.
+* Let's validate what already exists before building anything new.
+* This is exploratory for now.
+
+### ⭐ 高频
+
+> **Let's see what we can reuse before building anything new.**
+
+---
+
+# Topic 12. Reuse Existing Functionality
+
+## 💬 Original Chinese
+
+> Amazon 已经开发过了，所以对应功能照搬，Spec 保持一致就可以。
+
+## 🇺🇸 Natural English
+
+> We already have the Amazon version, so we can reuse the same behavior and keep the spec consistent. 
+
+### Alternative Expressions
+
+* We don't need to reinvent the behavior.
+* Let's keep the cross-platform behavior consistent.
+* We can mirror the existing Amazon implementation.
+
+### ⭐ 推荐
+
+> **Let's mirror the existing implementation and keep the spec consistent.**
+
+---
+
+# Topic 13. Centralizing AI API Keys
+
+## 📌 Meeting Background
+
+The team currently had separate LiteLLM keys across multiple features. The proposed improvement was to use a shared key and track AI usage by feature in the database or logs, making maintenance and cost visibility easier. 
+
+## 💬 Original Chinese
+
+> 每加一个功能都申请一个 Key，可维护性太差。
+
+## 🇺🇸 Natural English
+
+> Creating a separate key for every new feature isn't maintainable.
+
+### Alternative Expressions
+
+* The current key-management model doesn't scale well.
+* We should centralize key management.
+* We need better usage tracking by feature.
+
+---
+
+## 💬 Original Chinese
+
+> 最终希望统一一个 Key，然后按工具记录每天的 AI 使用量。
+
+## 🇺🇸 Natural English
+
+> Ideally, we'd use a shared key and track AI usage by feature or tool.
+
+### 🧠 Vocabulary
+
+* centralized key management
+* usage tracking
+* token consumption
+* feature-level metrics
+
+---
+
+# Topic 14. Legacy Navigation Still Exists
+
+## 📌 Meeting Background
+
+Some navigation flows still pointed users to legacy PHP pages after refactoring. The team wanted to audit cross-tool navigation and identify any paths that had not yet been migrated. 
+
+## 💬 Original Chinese
+
+> 有些页面跳转的时候还是会调到旧的 PHP 页面。
+
+## 🇺🇸 Natural English
+
+> Some navigation paths still point to the legacy PHP pages.
+
+### Alternative Expressions
+
+* We still have a few legacy navigation paths.
+* Some cross-tool links haven't been migrated.
+* We need to audit the remaining legacy routes.
+
+### 🧠 Vocabulary
+
+**audit** = 系统性检查
+
+**legacy route** = 遗留路由
+
+---
+
+# Topic 15. Standardizing Service Discovery
+
+## 💬 Original Chinese
+
+> 现在代码里有的用 Eureka，有的用 K8s Service，我们想统一掉。
+
+## 🇺🇸 Natural English
+
+> Some services still use Eureka while others use Kubernetes service discovery. We want to standardize on one approach. 
+
+### Alternative Expressions
+
+* We need to standardize service discovery.
+* The current setup is inconsistent.
+* Let's converge on a single approach.
+
+### ⭐ 工程高频
+
+> **We should standardize on one approach.**
+
+---
+
+# Topic 16. Don't Pull Everything Into One Sprint
+
+## 💬 Original Chinese
+
+> 这个不会完整放到下一个 Sprint，有空的话再拆新的 Technical Story。
+
+## 🇺🇸 Natural English
+
+> We won't pull the entire initiative into the next sprint. If we have capacity, we'll split off smaller technical stories.
+
+### Alternative Expressions
+
+* We'll tackle this incrementally.
+* We'll only pull in the parts we have capacity for.
+* Let's avoid overloading the sprint.
+
+### ⭐ 推荐
+
+> **We'll tackle this incrementally based on available capacity.**
+
+---
+
+# Topic 17. Confirming Whether UX Is Needed
+
+## 💬 Original Chinese
+
+> 这些需求需要 UX 参与吗？
+
+## 🇺🇸 Natural English
+
+> Do any of these items require UX involvement? 
+
+### Alternative Expressions
+
+* Do we need design support for any of these?
+* Is there any UX work involved?
+* Can engineering handle these without additional design?
+
+---
+
+# Topic 18. Refinement Doesn't Require Every Detail to Be Final
+
+## 📌 Meeting Background
+
+The team clarified that not every requirement needs a fully complete PRD during refinement. If some research is still needed, a user story can be created first, and the detailed requirement document can be attached later before Sprint Planning. 
+
+## 💬 Original Chinese
+
+> Backlog Refining 的时候不一定能确认所有细节。
+
+## 🇺🇸 Natural English
+
+> We don't need every detail finalized during backlog refinement.
+
+### Alternative Expressions
+
+* The story can still be exploratory at this stage.
+* We just need enough clarity to understand the intended work.
+* The detailed PRD can follow later.
+
+### ⭐ 推荐
+
+> **We just need enough clarity to understand the intended scope.**
+
+---
+
+# Topic 19. New Product Requirement – Two Commission Rates
+
+## 📌 Meeting Background
+
+A new TikTok Influencer Messenger requirement was introduced. Today the flow supports one commission rate, but the business now needs two: a standard commission rate and a Shop Ads commission rate, because orders generated through paid promotion may use a lower commission. 
+
+## 💬 Original Chinese
+
+> 现在实际上有两个佣金，一个是 Standard Commission Rate，一个是 Shop Ads Commission Rate。
+
+## 🇺🇸 Natural English
+
+> In practice, there are now two commission rates: the Standard Commission Rate and the Shop Ads Commission Rate.
+
+### Alternative Expressions
+
+* Organic and ad-driven orders may use different commission rates.
+* We need to support both rates in the same workflow.
+* The user should be able to configure both values during invitation setup.
+
+### ⭐ 推荐
+
+> **We need to support both commission rates in the same workflow.**
+
+---
+
+# Topic 20. Why the Second Commission Rate Is Needed
+
+## 💬 Original Chinese
+
+> 如果卖家额外花钱推广达人视频，就不会再按原来的 10% 给佣金。
+
+## 🇺🇸 Natural English
+
+> If the seller pays to promote the creator's video, they may use a lower commission rate for orders generated by that paid traffic.
+
+### Alternative Expressions
+
+* Paid traffic follows a different commission model.
+* The seller is already paying for the ad spend.
+* Ad-generated orders may have a separate commission rate.
+
+---
+
+# Topic 21. Don't Over-constrain the Relationship Between the Two Fields
+
+## 💬 Original Chinese
+
+> 理论上新比例应该更低，但不做强校验，只要在合法范围内就可以。
+
+## 🇺🇸 Natural English
+
+> In theory, the Shop Ads rate would usually be lower, but we don't want to enforce a strict relationship between the two values. As long as the input is valid, we should accept it. 
+
+### Alternative Expressions
+
+* We shouldn't hard-code a dependency between the two fields.
+* Keep validation limited to the allowed range.
+* Let the user decide the actual values.
+
+### ⭐ 高频
+
+> **We shouldn't enforce a strict relationship between the two fields.**
+
+---
+
+# Topic 22. Optional Field With Platform Default
+
+## 💬 Original Chinese
+
+> 新加的字段可以不填，TikTok 会有默认规则。
+
+## 🇺🇸 Natural English
+
+> The new field can remain optional, and TikTok will apply its own default behavior if it's not provided. 
+
+### Alternative Expressions
+
+* The field is optional.
+* We can rely on TikTok's fallback behavior.
+* We don't need to force a value in every case.
+
+### 🧠 Vocabulary
+
+**fallback behavior** = 兜底行为
+
+---
+
+# Topic 23. One Story vs. Multiple Stories
+
+## 💬 Original Chinese
+
+> 如果需求比较小，一个 Sprint 内能做完，就作为一个 Story；大的需求跨多个迭代才拆多个 Story。
+
+## 🇺🇸 Natural English
+
+> If the requirement is small enough to complete within one sprint, keep it as a single story. Only split it into multiple stories if it spans multiple iterations. 
+
+### ⭐ 推荐
+
+> **Keep it as one story if it can be delivered within a single sprint.**
+
+---
+
+# Topic 24. Avoid Process Overhead
+
+## 📌 Meeting Background
+
+Keisha questioned whether maintaining both idea-level tracking and internal Jira stories created unnecessary duplication. The response was that the detailed Jira board gives engineering and QA more granular visibility, but the team also agreed to keep the process lightweight where possible. 
+
+## 💬 Original Chinese
+
+> 我们不要用太多时间在这种 Paperwork 上。
+
+## 🇺🇸 Natural English
+
+> Let's make sure we don't spend too much time on process overhead.
+
+### Alternative Expressions
+
+* Let's keep the process lightweight.
+* We should minimize duplicate administrative work.
+* The tracking process shouldn't become a burden.
+
+### ⭐ 非常实用
+
+> **Let's keep the process lightweight.**
+
+---
+
+# Topic 25. Upstream API Changes Need Impact Analysis
+
+## 📌 Meeting Background
+
+Another team had changed several APIs and asked the Research team to re-integrate against the new versions. Before creating work, Dongming wanted to understand exactly what changed, which dependencies were affected, and what regression testing would be needed. 
+
+## 💬 Original Chinese
+
+> 首先我们得知道它改了哪些东西，我们的依赖是什么，我们要怎么改。
+
+## 🇺🇸 Natural English
+
+> First, we need to understand what changed, which dependencies are affected, and what changes we need to make on our side.
+
+### ⭐ 很标准
+
+> **We need to understand the impact before we commit to the work.**
+
+---
+
+# Topic 26. API Rename May Be Small, Regression Isn't
+
+## 💬 Original Chinese
+
+> 接口本身改动不大，但是我们这边改完以后还是要做回归。
+
+## 🇺🇸 Natural English
+
+> The API change itself may be small, but we'll still need regression testing after updating our integration.
+
+### Alternative Expressions
+
+* The implementation looks straightforward, but the regression scope is broader.
+* We still need to validate all affected consumers.
+* A small API change can still have a larger downstream impact.
+
+---
+
+# Topic 27. Main App Refactor – Production Rollout
+
+## 📌 Meeting Background
+
+The team reviewed the remaining Main App refactor rollout. CE regression was around 90% complete, and the next steps included releasing backend pieces to production, running production regression, and coordinating Audience validation. 
+
+## 💬 Original Chinese
+
+> 测试回归到 90% 了，这周先把后端发上去，然后再在线上回归一次。
+
+## 🇺🇸 Natural English
+
+> Regression is about 90% complete. The plan is to deploy the backend this week and then run another round of validation in production.
+
+### Alternative Expressions
+
+* We'll do a staged production rollout.
+* Backend goes first, followed by production regression.
+* We'll validate the production path before moving on.
+
+---
+
+# Topic 28. Long-running Scheduled-job Migration
+
+## 💬 Original Chinese
+
+> 定时任务比较复杂，测试要专门排时间，所以整个周期会比较长。
+
+## 🇺🇸 Natural English
+
+> The scheduled-job migration is more complex and requires dedicated QA time, so the overall timeline will be longer. 
+
+### Alternative Expressions
+
+* This needs dedicated regression coverage.
+* The testing effort is the main driver of the timeline.
+* This is not something we can rush.
+
+### ⭐ 高频
+
+> **The testing effort is the main driver of the timeline.**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “放进 Backlog”
+
+> **keep it in the backlog**
+
+---
+
+### 2. “从高优先级讲到低优先级”
+
+> **go through the items in priority order**
+
+---
+
+### 3. “旧 API 下线”
+
+> **the legacy API is being sunset**
+
+---
+
+### 4. “前置依赖”
+
+> **prerequisite**
+
+> This is a prerequisite for the next story.
+
+---
+
+### 5. “调研型任务”
+
+> **technical spike**
+
+> **exploratory task**
+
+---
+
+### 6. “尽量复用已有实现”
+
+> **reuse the existing implementation**
+
+> **mirror the existing behavior**
+
+---
+
+### 7. “流程不要太重”
+
+> **keep the process lightweight**
+
+---
+
+### 8. “影响分析”
+
+> **impact analysis**
+
+> We need an impact analysis before we proceed.
+
+---
+
+### 9. “默认兜底”
+
+> **fallback behavior**
+
+---
+
+### 10. “一个 Sprint 内做得完”
+
+> **deliverable within a single sprint**
+
+---
+
+# ⭐ Shadowing Practice
+
+这场建议重点练 **Refinement + Requirement Clarification**：
+
+> **We can keep it in the backlog until we're ready to commit to it.**
+
+> **Let's review these in priority order.**
+
+> **We want to migrate from static credentials to role-based access.**
+
+> **The implementation is complete, but the release path is still unclear.**
+
+> **The current data source is no longer reliable.**
+
+> **Do you have capacity to take this on?**
+
+> **We can reuse the existing implementation.**
+
+> **We have a hard deadline because the legacy API is being sunset.**
+
+> **This is a prerequisite for the next piece of work.**
+
+> **Let's see what we can reuse before building anything new.**
+
+> **We just need enough clarity to understand the intended scope.**
+
+> **We need to support both commission rates in the same workflow.**
+
+> **We shouldn't enforce a strict relationship between the two fields.**
+
+> **Let's keep the process lightweight.**
+
+> **We need to understand the impact before we commit to the work.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                     | 中文         |
+| ------------------------------ | ---------- |
+| **candidate work**             | 候选工作       |
+| **priority order**             | 优先级顺序      |
+| **static credentials**         | 静态凭据       |
+| **role-based access**          | 基于角色访问     |
+| **release path**               | 发布路径       |
+| **reference implementation**   | 参考实现       |
+| **sunset an API**              | 停止旧 API    |
+| **cutover**                    | 切换         |
+| **prerequisite**               | 前置依赖       |
+| **technical spike**            | 技术调研任务     |
+| **mirror the implementation**  | 复用/对齐已有实现  |
+| **centralized key management** | 集中式 Key 管理 |
+| **legacy route**               | 遗留路由       |
+| **standardize on**             | 统一采用       |
+| **fallback behavior**          | 默认兜底行为     |
+| **process overhead**           | 流程成本       |
+| **impact analysis**            | 影响分析       |
+| **regression scope**           | 回归范围       |
+| **staged rollout**             | 分阶段发布      |
+
+## ⭐ 今天最值得背的 10 句
+
+> **We can keep it in the backlog until we're ready to commit to it.**
+
+> **Let's review these in priority order.**
+
+> **The implementation is complete, but the release path is still unclear.**
+
+> **The current data source is no longer reliable.**
+
+> **We have a hard deadline because the legacy API is being sunset.**
+
+> **This is a prerequisite for the next piece of work.**
+
+> **We just need enough clarity to understand the intended scope.**
+
+> **We need to support both commission rates in the same workflow.**
+
+> **Let's keep the process lightweight.**
+
+> **We need to understand the impact before we commit to the work.**
+
