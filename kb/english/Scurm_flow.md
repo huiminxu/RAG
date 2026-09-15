@@ -823,3 +823,845 @@ Given the team's current workload and relatively low volume of product requireme
 > **We don't need to fill the entire timebox.**
 
 > **Let's tailor the process to the team's needs.**
+
+# Engineering Meeting English Notebook
+
+## Meeting #2 – Backlog Refinement, MCP Requirement Clarification & Sprint Preparation
+
+这场会议更偏 **Backlog Refinement + Requirement Clarification**。最值得学习的是：**介绍 Refinement 的目的、确认 Sprint 范围、研究型 Story、MCP Tool 边界、技术可行性、Owner 分配、分页设计，以及什么时候把讨论移到小范围会议里**。会议一开始也明确了，这次 Backlog Refinement 的目标，是把原来零散的小会集中起来，提前澄清下个 Sprint 要做的内容。
+
+---
+
+# Topic 1. Explaining the Purpose of Backlog Refinement
+
+## 📌 Meeting Background
+
+The team was just starting to adopt a more structured Scrum rhythm. Instead of having separate small meetings for every requirement, Backlog Refinement would be used to review upcoming work together, clarify open questions, identify dependencies, and prepare the team for Sprint Planning. 
+
+## 💬 Original Chinese
+
+> 我们希望通过这些会议，把以前很零散的东西集中在某一个会议里面解决。
+
+## 🇺🇸 Natural English
+
+> We want to use these meetings to consolidate the discussions that used to happen across many separate meetings.
+
+### Alternative Expressions
+
+* We want to centralize requirement discussions.
+* Instead of scheduling multiple ad hoc meetings, we'll review the upcoming work together.
+* The goal is to clarify requirements before the sprint starts.
+
+### ⭐ 推荐
+
+> **The goal is to clarify the upcoming work before the sprint starts.**
+
+---
+
+## 💬 Original Chinese
+
+> Backlog Refining 就是提前了解一下我们下个 Sprint 要做哪些。
+
+## 🇺🇸 Natural English
+
+> Backlog refinement gives us a chance to review and clarify the work we're considering for the next sprint.
+
+### ⭐ 注意
+
+Backlog Refinement 不等于：
+
+> decide everything for the sprint
+
+更准确的是：
+
+> **review and clarify candidate work**
+
+真正最终承诺范围通常是在 Sprint Planning。
+
+---
+
+# Topic 2. Product Requirements Are Not Ready Yet
+
+## 📌 Meeting Background
+
+The PM side did not have new requirements ready for the first sprint. Some product work was still under investigation, so the team planned to fill the upcoming sprint with MCP work, technical research, and engineering improvements. 
+
+## 💬 Original Chinese
+
+> 产品这边正在进行的需求都还在调研中。
+
+## 🇺🇸 Natural English
+
+> The product requirements are still in the research phase.
+
+### Alternative Expressions
+
+* The product work isn't ready for implementation yet.
+* Product is still validating the requirements.
+* Those requirements are still being explored.
+
+---
+
+## 💬 Original Chinese
+
+> MCP、技术调研、技术优化这些可以填满接下来 14 天要做的内容。
+
+## 🇺🇸 Natural English
+
+> We can fill the upcoming sprint with MCP work, technical research, and engineering improvements.
+
+### 🧠 Vocabulary
+
+* **technical research** — 技术调研
+* **engineering improvement** — 技术优化
+* **implementation-ready** — 已具备开发条件
+
+---
+
+# Topic 3. Prioritizing the High-priority Stories
+
+## 📌 Meeting Background
+
+There were around 20 stories and technical stories in the backlog. The plan was to focus on the high-priority items first in the next sprint. 
+
+## 💬 Original Chinese
+
+> 下一个 Sprint，我们先把高等级的安排起来。
+
+## 🇺🇸 Natural English
+
+> For the next sprint, let's start with the highest-priority items.
+
+### Alternative Expressions
+
+* Let's prioritize the high-priority stories first.
+* We'll work through the backlog based on priority.
+* The high-priority items should come first.
+
+### ⭐ 高频
+
+> **Let's prioritize the highest-impact items first.**
+
+如果强调“业务影响”，`highest-impact` 比单纯 `high-priority` 更自然。
+
+---
+
+# Topic 4. Engineers Can Pick Work Based on Expertise or Interest
+
+## 💬 Original Chinese
+
+> 大家可以选择自己领域比较熟悉的，或者比较感兴趣的。
+
+## 🇺🇸 Natural English
+
+> Feel free to pick up work that's either in your area of expertise or something you're interested in.
+
+### Alternative Expressions
+
+* Pick something that aligns with your experience.
+* Feel free to take ownership of something you're interested in.
+* You don't have to stay strictly within your usual role.
+
+### 🧠 Vocabulary
+
+**area of expertise** = 擅长领域
+
+**take ownership of** = 主动负责
+
+---
+
+# Topic 5. Research-heavy Story
+
+## 📌 Meeting Background
+
+The Amazon Seller Account Health MCP story was not a fully specified PM story. It had a stronger research component: the owner first needed to understand the Amazon report, validate whether the required data was available, and then define the MCP implementation. 
+
+## 💬 Original Chinese
+
+> 这个 Story 跟 PM 的 Story 不太一样，会有一点研究的特性。
+
+## 🇺🇸 Natural English
+
+> This story is a little different from a typical product story because it includes a significant research component.
+
+### Alternative Expressions
+
+* This is more exploratory than implementation-ready.
+* There's still some discovery work involved.
+* The owner needs to validate the feasibility first.
+
+### ⭐ 很值得背
+
+> **This is still somewhat exploratory.**
+
+---
+
+## 💬 Original Chinese
+
+> Owner 需要先研究一下这个 Report 是什么，再看我们能不能提供这样的数据能力。
+
+## 🇺🇸 Natural English
+
+> The owner first needs to understand the report and then validate whether we can expose the same data through our MCP.
+
+### ⭐ 高频
+
+> **validate whether we can support this use case**
+
+---
+
+# Topic 6. On-demand Data Fetching Instead of Pulling Everything Up Front
+
+## 💬 Original Chinese
+
+> 用户 Call 的时候，我们再拿这个 Report，然后拿到之后存下来。
+
+## 🇺🇸 Natural English
+
+> Instead of pulling all the reports up front, we can fetch the report on demand when the user calls the tool and persist the result afterward. 
+
+### Alternative Expressions
+
+* We can fetch the data lazily.
+* We don't need to pre-load everything.
+* Let's retrieve the report on demand.
+
+### 🧠 Vocabulary
+
+**on demand** — 按需
+
+**fetch lazily / lazy loading** — 延迟加载
+
+**persist the result** — 持久化结果
+
+---
+
+# Topic 7. Clarifying the Tool's User Value
+
+## 📌 Meeting Background
+
+The team questioned the exact user intent behind the Account Health MCP. The conclusion was that the tool would provide a broad account-health view rather than only checking whether an Amazon account had been suspended. 
+
+## 💬 Original Chinese
+
+> 用户为什么会调用这个 Tool？
+
+## 🇺🇸 Natural English
+
+> What's the user intent behind calling this tool?
+
+### Alternative Expressions
+
+* What problem is this tool solving for the user?
+* What's the primary use case?
+* What would trigger a user to use this tool?
+
+### ⭐⭐⭐ 产品/技术会议非常有用
+
+> **What's the primary user intent here?**
+
+---
+
+# Topic 8. Requirement Should Be Clear Before Moving On
+
+## 💬 Original Chinese
+
+> Backlog Refining 就是确保大家对这个需求没有疑问。
+
+## 🇺🇸 Natural English
+
+> The goal of backlog refinement is to make sure everyone has enough clarity on the requirement before we move forward. 
+
+### Alternative Expressions
+
+* We should resolve the major open questions before planning.
+* Everyone should understand the scope and dependencies.
+* The requirement should be clear enough to estimate.
+
+### ⭐ 推荐
+
+> **The requirement should be clear enough to estimate and implement.**
+
+---
+
+# Topic 9. Assigning an Owner
+
+## 💬 Original Chinese
+
+> 有对这个感兴趣的吗？我可以优先安排。
+
+## 🇺🇸 Natural English
+
+> Is anyone interested in taking ownership of this one?
+
+### Alternative Expressions
+
+* Does anyone want to pick this up?
+* Is anyone interested in owning this?
+* If no one volunteers, I'll assign an owner later.
+
+### ⭐ 高频
+
+> **Does anyone want to take ownership of this?**
+
+---
+
+# Topic 10. Real-time Notification MCP
+
+## 📌 Meeting Background
+
+The team discussed integrating additional Amazon notifications into the MCP and existing Alerts system. A key open question was when subscriptions should be created and whether all seller accounts should be subscribed by default. 
+
+## 💬 Original Chinese
+
+> 我们现在需要对这些 Notification 做 MCP 集成。
+
+## 🇺🇸 Natural English
+
+> We need to integrate these Amazon notifications into the MCP workflow.
+
+---
+
+## 💬 Original Chinese
+
+> 这些通知需要跟现在的 Alerts 去做集成。
+
+## 🇺🇸 Natural English
+
+> These notifications also need to integrate with our existing Alerts system.
+
+### 🧠 Vocabulary
+
+* **subscription** — 订阅
+* **notification flow** — 通知流程
+* **event-driven** — 事件驱动的
+* **integration point** — 集成点
+
+---
+
+# Topic 11. Surfacing an Important Design Question
+
+## 💬 Original Chinese
+
+> 什么时候触发这个 Notification？
+
+## 🇺🇸 Natural English
+
+> What should trigger the notification subscription?
+
+### Alternative Expressions
+
+* When should the subscription be created?
+* What's the trigger point?
+* Should we subscribe all eligible accounts by default?
+
+### ⭐ 技术设计常用
+
+> **What's the trigger point for this flow?**
+
+---
+
+# Topic 12. This Needs Research, but It's Not a Blocker
+
+## 💬 Original Chinese
+
+> 这个我可以去调研，我可以最终给出答案，这不是什么 Block 的问题。
+
+## 🇺🇸 Natural English
+
+> I can investigate this and come back with an answer. I don't see it as a blocker right now. 
+
+### Alternative Expressions
+
+* This is an open question, but not a blocker.
+* We can resolve this during implementation.
+* I don't think this should prevent us from moving forward.
+
+### ⭐ 很实用
+
+> **It's an open question, but not a blocker.**
+
+---
+
+# Topic 13. Split Research into a Separate AC
+
+## 💬 Original Chinese
+
+> 可以先分出来一个 AC，专门去研究。
+
+## 🇺🇸 Natural English
+
+> We can split out a separate acceptance criterion or task specifically for the research work. 
+
+### 更自然的工程表达
+
+> **Let's create a separate research task for this.**
+
+如果你们公司 AC 指具体子项，也可以说：
+
+> Let's create a separate AC for the research portion.
+
+---
+
+# Topic 14. Raise Risks Early
+
+## 💬 Original Chinese
+
+> Sprint 前半周如果觉得有风险，及时跟我讲。
+
+## 🇺🇸 Natural English
+
+> If you see any risk during the first half of the sprint, please raise it early.
+
+### Alternative Expressions
+
+* Flag any risks as early as possible.
+* Don't wait until the end of the sprint to raise concerns.
+* Let me know early if the timeline starts looking risky.
+
+### ⭐⭐⭐ 必背
+
+> **Please flag any risks early.**
+
+---
+
+# Topic 15. CPC History Needs Currency
+
+## 📌 Meeting Background
+
+The CPC History tool could follow an existing history-tool pattern, but the team identified one important addition: currency needed to be included because CPC values differ by marketplace. 
+
+## 💬 Original Chinese
+
+> 我觉得这里唯一需要加的是 Currency。
+
+## 🇺🇸 Natural English
+
+> The only additional field we really need here is currency.
+
+---
+
+## 💬 Original Chinese
+
+> 每个国家货币不一样，所以 CPC History 里面需要带 Currency。
+
+## 🇺🇸 Natural English
+
+> Since CPC values are marketplace-specific, the response should include the currency.
+
+### ⭐ 更自然
+
+> **The response should make the currency explicit.**
+
+---
+
+# Topic 16. Keep the First Version Small
+
+## 📌 Meeting Background
+
+For the "bought together" tool, the team considered multiple query directions but chose to keep the first version simple: input one ASIN and return the products that are frequently bought together with it. 
+
+## 💬 Original Chinese
+
+> 反过来的查询先不需要，我们先只做这一个。
+
+## 🇺🇸 Natural English
+
+> We don't need to support the reverse lookup in the first version. Let's keep the initial scope to one direction.
+
+### Alternative Expressions
+
+* Let's keep the first version simple.
+* We can defer the reverse lookup.
+* Let's avoid expanding the scope unnecessarily.
+
+### ⭐ 高频
+
+> **Let's keep the initial scope small.**
+
+---
+
+# Topic 17. Requirement Documentation Should Be Completed Before QA
+
+## 💬 Original Chinese
+
+> 如果不补充的话，以后发了什么，测试怎么验证，会不太清楚。
+
+## 🇺🇸 Natural English
+
+> If we don't document the details, it'll be difficult later to understand exactly what was shipped and how QA should validate it. 
+
+### Alternative Expressions
+
+* We need enough detail for QA to know what to test.
+* The implementation scope should be traceable.
+* We should document the expected behavior before testing starts.
+
+### ⭐ 推荐
+
+> **QA needs enough context to validate the expected behavior.**
+
+---
+
+# Topic 18. MCP Should Be Treated as an Independent Tool
+
+## 📌 Meeting Background
+
+A long discussion focused on whether an MCP tool should reproduce the full Listing Builder workflow. The key clarification was that an MCP tool should expose a capability with defined inputs and outputs; the AI agent decides how to combine that capability with other tools. 
+
+## 💬 Original Chinese
+
+> 你又陷入整个 Listing Builder 的场景里面了，你要从那里出来。
+
+## 🇺🇸 Natural English
+
+> You're thinking about this too much in terms of the full Listing Builder workflow. We should treat this as an independent capability.
+
+### ⭐ 更专业版本
+
+> **Let's decouple the tool from the end-to-end Listing Builder workflow.**
+
+---
+
+## 💬 Original Chinese
+
+> 它只是提供一个功能，具体 AI 怎么用你不要管。
+
+## 🇺🇸 Natural English
+
+> The MCP only needs to expose the capability. How the AI chooses to use it is a separate concern.
+
+### Alternative Expressions
+
+* Define the contract, not the orchestration.
+* The tool should focus on inputs and outputs.
+* The agent is responsible for orchestration.
+
+### ⭐⭐⭐ 这句非常值得你学
+
+> **The tool should focus on its contract; the agent handles the orchestration.**
+
+---
+
+# Topic 19. Input and Output Contract
+
+## 💬 Original Chinese
+
+> 你给我一堆 Keyword，我给你 Keyword Performance 就可以了。
+
+## 🇺🇸 Natural English
+
+> You give the tool a set of keywords, and it returns the corresponding keyword-performance data.
+
+### 🧠 Vocabulary
+
+**tool contract** — Tool 的输入输出约定
+
+**input schema** — 输入 Schema
+
+**output schema** — 输出 Schema
+
+**orchestration** — 多工具调用与流程编排
+
+---
+
+# Topic 20. Pagination to Reduce Response Size
+
+## 📌 Meeting Background
+
+Some MCP calls were taking a very long time because large responses were difficult for different agents to handle. One example took around 26 minutes. The proposed solution was to add pagination to high-volume tools. 
+
+## 💬 Original Chinese
+
+> 返回数据量的大小会影响 Agent。
+
+## 🇺🇸 Natural English
+
+> The response size can significantly affect how well the agent handles the tool call.
+
+### Alternative Expressions
+
+* Large payloads can slow the agent down.
+* Response size affects performance.
+* We should avoid returning unnecessarily large payloads.
+
+---
+
+## 💬 Original Chinese
+
+> 我们要给很多 Tool 加分页。
+
+## 🇺🇸 Natural English
+
+> We need to add pagination to a number of high-volume tools.
+
+### 🧠 Vocabulary
+
+**payload** = 请求/响应数据体
+
+**pagination** = 分页
+
+**high-volume tool** = 返回数据量大的工具
+
+---
+
+# Topic 21. Owners Should Review Their Own Tools
+
+## 💬 Original Chinese
+
+> 每个人 Review 一下自己做过的 Tool，看哪些需要加分页。
+
+## 🇺🇸 Natural English
+
+> Each owner should review the tools they've worked on and identify which ones need pagination. 
+
+### Alternative Expressions
+
+* Tool owners should assess pagination needs.
+* Please review your own tools for large response payloads.
+* Identify which tools would benefit from pagination.
+
+---
+
+# Topic 22. Use the UI Maximum as the Default Page Size
+
+## 💬 Original Chinese
+
+> 大家 Follow 页面的最大次数就可以了。
+
+## 🇺🇸 Natural English
+
+> We can use the UI's current maximum result count as the default page size. 
+
+### Alternative Expressions
+
+* Align the default page size with the existing UI limit.
+* Use the current product limit as the default.
+* Users can still request more or fewer results.
+
+---
+
+# Topic 23. Final Confirmation Before Sprint Planning
+
+## 📌 Meeting Background
+
+The team planned to complete missing requirement details, move the selected stories into the sprint, review story points and ACs in Sprint Planning, and then do a final confirmation of the sprint scope. 
+
+## 💬 Original Chinese
+
+> Planning 会议上，把今天剩下的疑问点和缺失的内容补齐。
+
+## 🇺🇸 Natural English
+
+> In sprint planning, we'll close the remaining gaps and confirm any open questions from today's discussion.
+
+### Alternative Expressions
+
+* We'll finalize the remaining details in planning.
+* Planning should give us a clear, executable sprint scope.
+* By the end of planning, everyone should understand the committed work.
+
+### ⭐⭐⭐ 推荐
+
+> **By the end of planning, we should have a clear and executable sprint scope.**
+
+---
+
+# Topic 24. Take Detailed Requirement Review to a Smaller Group
+
+## 💬 Original Chinese
+
+> Backlog Refining 不一定能全部确认，具体的事情可以私下约小范围会议。
+
+## 🇺🇸 Natural English
+
+> We don't need to resolve every implementation detail during backlog refinement. Detailed discussions can move to a smaller follow-up session. 
+
+### Alternative Expressions
+
+* Let's take the detailed discussion offline.
+* We can schedule a smaller follow-up with the relevant people.
+* Refinement should focus on major scope and open questions.
+
+### ⭐ 会议效率神句
+
+> **Let's take the detailed discussion into a smaller follow-up.**
+
+---
+
+# Topic 25. Don't Treat the Written Requirement as Perfect
+
+## 💬 Original Chinese
+
+> 不要拘泥于我写的需求，有可能是我考虑不周到。
+
+## 🇺🇸 Natural English
+
+> Don't treat the written requirement as fixed. If you notice missing cases or something that doesn't make sense, bring it up.
+
+### Alternative Expressions
+
+* The requirement isn't set in stone.
+* Please challenge the requirement if something looks wrong.
+* Feel free to propose changes as you learn more during implementation.
+
+### ⭐ 很地道
+
+> **The requirement isn't set in stone.**
+
+= 需求不是不可修改的。
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “研究型需求”
+
+> **exploratory story**
+
+> **research-heavy story**
+
+---
+
+### 2. “用户为什么会调用这个 Tool？”
+
+> **What's the user intent?**
+
+> **What's the primary use case?**
+
+---
+
+### 3. “不是 Blocker”
+
+> **It's an open question, but not a blocker.**
+
+---
+
+### 4. “先做第一版”
+
+> **keep the initial scope small**
+
+> **defer the rest**
+
+---
+
+### 5. “输入输出”
+
+> **input/output contract**
+
+> **tool contract**
+
+---
+
+### 6. “不要管 AI 怎么编排”
+
+> **The agent handles the orchestration.**
+
+---
+
+### 7. “响应数据太大”
+
+> **The payload is too large.**
+
+> **The response size is too large.**
+
+---
+
+### 8. “完善需求”
+
+> **flesh out the requirement**
+
+例如：
+
+> We still need to flesh out the requirement.
+
+---
+
+### 9. “需求不是写死的”
+
+> **It's not set in stone.**
+
+---
+
+# ⭐ Shadowing Practice
+
+这场建议重点练 **Refinement + MCP Design**：
+
+> **The goal is to clarify the upcoming work before the sprint starts.**
+
+> **This story is still somewhat exploratory.**
+
+> **Let's validate whether we can support this use case.**
+
+> **What's the primary user intent here?**
+
+> **The requirement should be clear enough to estimate and implement.**
+
+> **Does anyone want to take ownership of this?**
+
+> **It's an open question, but not a blocker.**
+
+> **Please flag any risks early.**
+
+> **Let's keep the initial scope small.**
+
+> **QA needs enough context to validate the expected behavior.**
+
+> **Let's decouple the tool from the end-to-end workflow.**
+
+> **The tool should focus on its contract; the agent handles the orchestration.**
+
+> **Large payloads can slow the agent down.**
+
+> **Each owner should review their tools for pagination needs.**
+
+> **The requirement isn't set in stone.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression               | 中文          |
+| ------------------------ | ----------- |
+| **backlog refinement**   | Backlog 梳理  |
+| **candidate work**       | 候选需求        |
+| **implementation-ready** | 已具备开发条件     |
+| **area of expertise**    | 专长领域        |
+| **exploratory story**    | 探索型需求       |
+| **on demand**            | 按需          |
+| **user intent**          | 用户意图        |
+| **take ownership**       | 主动负责        |
+| **trigger point**        | 触发点         |
+| **open question**        | 待确认问题       |
+| **flag a risk**          | 提前暴露风险      |
+| **initial scope**        | 初始范围        |
+| **tool contract**        | Tool 输入输出约定 |
+| **orchestration**        | 编排          |
+| **payload**              | 返回/请求数据体    |
+| **pagination**           | 分页          |
+| **page size**            | 每页数据量       |
+| **flesh out**            | 补充完善        |
+| **set in stone**         | 已固定、不可更改    |
+
+## ⭐ 今天最值得背的 10 句
+
+> **The goal is to clarify the upcoming work before the sprint starts.**
+
+> **This story is still somewhat exploratory.**
+
+> **What's the primary user intent here?**
+
+> **The requirement should be clear enough to estimate and implement.**
+
+> **Does anyone want to take ownership of this?**
+
+> **It's an open question, but not a blocker.**
+
+> **Please flag any risks early.**
+
+> **Let's keep the initial scope small.**
+
+> **The tool should focus on its contract; the agent handles the orchestration.**
+
+> **The requirement isn't set in stone.**
+
