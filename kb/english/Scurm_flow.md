@@ -4264,3 +4264,952 @@ Some generated prompts mixed concepts such as keyword sales, search volume, ASIN
 > **We should test realistic user phrasing, not just raw parameters.**
 
 > **We shouldn't infer daily values from weekly data.**
+
+# Engineering Meeting English Notebook
+
+## Meeting #21 – Sprint Retrospective, Standup Efficiency, PR Review & Team Growth
+
+这场会议是一次完整的 **Sprint Retrospective**。最值得学习的部分包括：**What went well / What could be improved、PR Review 流程优化、AI Review 的误报、站会时间控制、上下游依赖、Backlog Refinement vs Sprint Planning、提前提测、Capacity Buffer，以及个人成长与跨前后端能力**。会议开头就明确了，这次 Retro 不是绩效评价，而是为了帮助团队持续改进。
+
+---
+
+# Topic 1. What Went Well & What Could Be Improved
+
+## 📌 Meeting Background
+
+The team was encouraged to talk about what went well, what others did well, and what could be improved in the sprint. The purpose was continuous improvement rather than performance evaluation. 
+
+## 💬 Original Chinese
+
+> 大家可以说自己做得比较好的地方，也可以说别人做得比较好的地方，以及对这个 Sprint 有什么建议。
+
+## 🇺🇸 Natural English
+
+> Everyone can share what went well, what others did well, and what we could improve in the next sprint.
+
+### Alternative Expressions
+
+* What went well this sprint?
+* What could we improve next sprint?
+* Is there anything we should continue doing?
+* What should we try differently next time?
+
+### ⭐ Retro 必背
+
+> **What went well?**
+
+> **What could we improve?**
+
+> **What should we try differently next sprint?**
+
+---
+
+# Topic 2. This Is Not a Performance Review
+
+## 💬 Original Chinese
+
+> 这个不会跟绩效有关系，主要是为了让 Team 越来越好。
+
+## 🇺🇸 Natural English
+
+> This isn't a performance review. The goal is to help the team improve over time.
+
+### Alternative Expressions
+
+* This is about continuous improvement, not evaluation.
+* We want people to feel comfortable surfacing problems.
+* The goal is to learn from the sprint.
+
+### 🧠 Vocabulary
+
+**continuous improvement** = 持续改进
+
+**surface a problem** = 把问题暴露出来
+
+---
+
+# Topic 3. PR Review Became a Bottleneck
+
+## 📌 Meeting Background
+
+PR reviews were often delayed because too much review responsibility was concentrated on one person. AI review was already being used, but human judgment was still required. 
+
+## 💬 Original Chinese
+
+> 大家给我 PR，但是我不能及时 Review。
+
+## 🇺🇸 Natural English
+
+> PR reviews are sometimes delayed because I can't always get to them quickly enough.
+
+### Alternative Expressions
+
+* PR review has become a bottleneck.
+* My review turnaround time needs to improve.
+* Too many reviews are waiting on me.
+
+### ⭐ 高频
+
+> **PR review has become a bottleneck.**
+
+---
+
+## 💬 Original Chinese
+
+> 我得提高 Review 的效率。
+
+## 🇺🇸 Natural English
+
+> I need to improve my review turnaround time.
+
+### 🧠 Vocabulary
+
+**turnaround time** = 从提交到完成所需时间
+
+---
+
+# Topic 4. AI Review Helps, but It Has False Positives
+
+## 💬 Original Chinese
+
+> AI Review 会有一些误报，但有时候它提的问题确实是问题。
+
+## 🇺🇸 Natural English
+
+> AI review does produce some false positives, but it also catches real issues. 
+
+### Alternative Expressions
+
+* Some findings are noise, but others are legitimate.
+* The signal-to-noise ratio isn't perfect.
+* Human validation is still necessary.
+
+### 🧠 Vocabulary
+
+**false positive** = 误报
+
+**legitimate issue** = 真实问题
+
+**noise** = 无效信息
+
+---
+
+# Topic 5. Self-review Before Final Approval
+
+## 💬 Original Chinese
+
+> 如果 AI Review 完的问题你都 Check 过了，我就可以直接 Approve。
+
+## 🇺🇸 Natural English
+
+> If you've already reviewed the AI findings yourself, I can approve the PR much faster. 
+
+### Alternative Expressions
+
+* Please do a self-review first.
+* Validate the AI findings before asking for approval.
+* Clear the valid findings before handing it over.
+
+### ⭐ 推荐
+
+> **Please review the AI findings yourself before requesting final approval.**
+
+---
+
+# Topic 6. Improve the PR Review Workflow
+
+## 💬 Original Chinese
+
+> PR Review 的流程要改一下，不然一直卡在我这里。
+
+## 🇺🇸 Natural English
+
+> We need to improve the PR review workflow; otherwise, everything keeps getting stuck with me.
+
+### Alternative Expressions
+
+* We need to remove the review bottleneck.
+* Review responsibility should be distributed better.
+* The current workflow doesn't scale well.
+
+---
+
+# Topic 7. Configuration Work Is Creating Friction
+
+## 📌 Meeting Background
+
+The team discussed environment/configuration changes. Too many configuration updates required one person to make them manually, which was slowing everyone down. 
+
+## 💬 Original Chinese
+
+> 现在大家改配置都要来找我，这会影响工作效率。
+
+## 🇺🇸 Natural English
+
+> Right now, everyone has to come to me for configuration changes, and that's affecting team efficiency.
+
+### Alternative Expressions
+
+* This creates a single point of dependency.
+* The current setup adds unnecessary friction.
+* We need a more self-service approach.
+
+### 🧠 Vocabulary
+
+**friction** = 流程阻力
+
+**single point of dependency** = 单点依赖
+
+---
+
+# Topic 8. Standups Are Taking Too Long
+
+## 📌 Meeting Background
+
+One of the biggest team-level improvement areas was standup duration. The team felt the meetings were often too long without providing much additional alignment. 
+
+## 💬 Original Chinese
+
+> 我们现在早会时间很长，但是信息对齐上没有明显提升。
+
+## 🇺🇸 Natural English
+
+> Our standups are taking too long, but the extra time isn't giving us much better alignment.
+
+### Alternative Expressions
+
+* We're spending too much time without getting much extra value.
+* The standup is getting too detailed.
+* We need to make the meeting more focused.
+
+---
+
+# Topic 9. Avoid Deep Dives During Standup
+
+## 💬 Original Chinese
+
+> 不能对任何一个问题发散，一个点讨论五六分钟，整个会议就会很长。
+
+## 🇺🇸 Natural English
+
+> We shouldn't deep-dive into individual issues during standup. A five-minute discussion on one topic can easily derail the whole meeting.
+
+### Alternative Expressions
+
+* Let's avoid deep dives during standup.
+* Detailed discussions should happen offline.
+* Let's park the topic and follow up afterward.
+
+### ⭐⭐⭐ 非常值得你背
+
+> **Let's avoid deep dives during standup.**
+
+> **Let's take this offline and follow up after the meeting.**
+
+---
+
+# Topic 10. The Host Should Keep the Meeting on Track
+
+## 💬 Original Chinese
+
+> Host 要 Hold 住全场，如果讨论太深就及时掐下来。
+
+## 🇺🇸 Natural English
+
+> The host needs to keep the meeting on track and step in when the discussion goes too deep. 
+
+### Alternative Expressions
+
+* The facilitator needs to manage the time actively.
+* The host should redirect overly detailed discussions.
+* The host should step in when the conversation starts drifting.
+
+### ⭐ 主持会议直接用
+
+> **Let's keep this focused.**
+
+> **We're going a little too deep into this.**
+
+> **Let's park this and follow up afterward.**
+
+---
+
+# Topic 11. Keep Standup Around 15 Minutes
+
+## 💬 Original Chinese
+
+> 尽量控制在 15 分钟以内。
+
+## 🇺🇸 Natural English
+
+> Let's try to keep the standup within 15 minutes.
+
+### Alternative Expressions
+
+* Let's aim for a 15-minute standup.
+* We should timebox the meeting to 15 minutes.
+* Let's keep the updates concise.
+
+### 🧠 Vocabulary
+
+**timebox** = 给一项活动设置明确的时间上限
+
+---
+
+# Topic 12. Focus on Dependencies and Handoffs
+
+## 💬 Original Chinese
+
+> 站会最重要的是同步上下游，你有什么事情需要别人帮你做。
+
+## 🇺🇸 Natural English
+
+> The most important part of standup is surfacing dependencies and handoffs—especially anything you need from other people or teams. 
+
+### Alternative Expressions
+
+* Focus on blockers, dependencies, and handoffs.
+* Highlight anything that requires action from another team.
+* Call out what you're waiting on.
+
+### ⭐ 必背
+
+> **Focus on blockers, dependencies, and handoffs.**
+
+---
+
+# Topic 13. Don't Over-explain Your Own Work
+
+## 💬 Original Chinese
+
+> 自己正在做什么可以略带一下，不需要说得那么细。
+
+## 🇺🇸 Natural English
+
+> You can briefly mention your own progress, but there's no need to go into too much detail.
+
+### Alternative Expressions
+
+* Keep individual updates concise.
+* Focus on what's relevant to the team.
+* Don't spend too much time on details that don't affect others.
+
+---
+
+# Topic 14. Experiment With Different Standup Formats
+
+## 📌 Meeting Background
+
+The team discussed whether standup should be organized by person or by story. They agreed to experiment with a story-based approach and evaluate whether it worked better. 
+
+## 💬 Original Chinese
+
+> 下次可以试一下按 Story 来过，看怎么样。
+
+## 🇺🇸 Natural English
+
+> Next time, we can try running the standup by story and see how it works.
+
+### Alternative Expressions
+
+* Let's experiment with a story-based format.
+* We can try it and see whether it improves visibility.
+* Let's iterate on the format.
+
+### ⭐ 推荐
+
+> **Let's try it and see how it works.**
+
+---
+
+# Topic 15. Hosting Is Not Just Going Through the Motions
+
+## 💬 Original Chinese
+
+> Host 不是只走流程，要真正了解每个 Task。
+
+## 🇺🇸 Natural English
+
+> The host shouldn't just go through the motions. They need to understand the tasks well enough to identify risks and dependencies. 
+
+### Alternative Expressions
+
+* Hosting isn't just procedural.
+* The host needs enough context to spot risks.
+* You should understand the work, not just read the board.
+
+### 🧠 Vocabulary
+
+**go through the motions** = 机械地走流程
+
+**spot a risk** = 识别风险
+
+---
+
+# Topic 16. Follow Up After Standup
+
+## 💬 Original Chinese
+
+> 如果站会上觉得有问题，可以先过，会后再 Check，但是一定要 Follow Up。
+
+## 🇺🇸 Natural English
+
+> If something needs deeper discussion, move on during standup and follow up after the meeting. 
+
+### Alternative Expressions
+
+* Let's circle back after standup.
+* I'll follow up with you separately.
+* Let's take the detailed discussion offline.
+
+### ⭐ 高频
+
+> **I'll circle back with you after standup.**
+
+---
+
+# Topic 17. Backlog Refinement vs. Sprint Planning
+
+## 📌 Meeting Background
+
+The team discussed whether these meetings overlapped too much. The distinction was clarified: Backlog Refinement is mainly about requirement clarification, while Sprint Planning is where the final sprint scope is confirmed and the team becomes ready to execute. 
+
+## 💬 Original Chinese
+
+> Backlog Refinement 是需求澄清，Planning 是最终的需求规划和确认。
+
+## 🇺🇸 Natural English
+
+> Backlog refinement is mainly for clarifying requirements, while sprint planning is where we finalize the scope and commitment.
+
+### Alternative Expressions
+
+* Refinement prepares the work.
+* Planning finalizes the commitment.
+* By the end of planning, the team should be ready to execute.
+
+### ⭐ 推荐
+
+> **Refinement prepares the work; planning finalizes the commitment.**
+
+---
+
+# Topic 18. Remove Unnecessary Meetings
+
+## 💬 Original Chinese
+
+> 尽量缩短时间，并且取消不必要的会议。
+
+## 🇺🇸 Natural English
+
+> We should keep meetings as lightweight as possible and remove the ones that don't add enough value. 
+
+### Alternative Expressions
+
+* Let's eliminate low-value meetings.
+* We should reduce meeting overhead.
+* We don't need ceremony for its own sake.
+
+### 🧠 Vocabulary
+
+**meeting overhead** = 会议带来的额外时间成本
+
+---
+
+# Topic 19. Prepare Next Sprint Work Earlier
+
+## 📌 Meeting Background
+
+The team suggested that requirement discovery and PID preparation for the next sprint should begin during the current sprint. This would reduce pressure at planning time. 
+
+## 💬 Original Chinese
+
+> 下一个 Sprint 要做的需求，可以提前一个 Sprint 收集和准备。
+
+## 🇺🇸 Natural English
+
+> We should start preparing next sprint's requirements during the current sprint.
+
+### Alternative Expressions
+
+* Let's shift requirement discovery one sprint earlier.
+* We should front-load requirement clarification.
+* Upcoming work should be prepared ahead of time.
+
+### 🧠 Vocabulary
+
+**front-load** = 把工作前置
+
+---
+
+# Topic 20. Huimin – What Went Well
+
+## 📌 Meeting Background
+
+Huimin shared that hosting the standup gave her a stronger sense of the team's business context and project rhythm. She also summarized each meeting and used those notes the next day to follow up on blockers. 
+
+## 💬 Original Chinese
+
+> 主持晨会让我对团队业务和项目节奏有了更真实的体感。
+
+## 🇺🇸 Natural English
+
+> Hosting the daily standup gave me a much better sense of the team's business context and overall project rhythm.
+
+### Alternative Expressions
+
+* It gave me better visibility into the team's work.
+* I gained a clearer understanding of how the team operates.
+* It helped me understand the overall delivery flow.
+
+---
+
+## 💬 Original Chinese
+
+> 每次会后我都会整理会议纪要，第二天再跟进有没有 Blocker。
+
+## 🇺🇸 Natural English
+
+> After each standup, I summarize the meeting notes and use them the next day to follow up on blockers and open issues.
+
+### ⭐ 非常适合你
+
+> **I use the meeting notes to follow up on blockers and open issues the next day.**
+
+---
+
+# Topic 21. Huimin – Improving Facilitation Skills
+
+## 💬 Original Chinese
+
+> 我觉得晨会主持的把控能力还需要再熟练。
+
+## 🇺🇸 Natural English
+
+> I still need to improve my facilitation skills, especially when it comes to keeping the meeting focused and on time. 
+
+### Alternative Expressions
+
+* I want to get better at meeting facilitation.
+* I need to improve my time management as a host.
+* I want to get more comfortable redirecting discussions.
+
+### ⭐ 你直接背
+
+> **I want to get better at keeping the meeting focused and on time.**
+
+---
+
+# Topic 22. How to Interrupt Politely
+
+## 💬 Original Chinese
+
+> 我不知道什么时候应该打断别人，怎么样合适地切断讨论。
+
+## 🇺🇸 Natural English
+
+> I'm still learning when and how to step in and redirect a discussion without making it feel abrupt.
+
+### Useful Host Sentences
+
+> **Sorry to jump in, but I want to keep us on time.**
+
+> **Let's pause this thread and follow up afterward.**
+
+> **I think we have enough context for now. Let's move on.**
+
+> **We can take the details offline.**
+
+---
+
+# Topic 23. Learn More MCP Business Context
+
+## 💬 Original Chinese
+
+> 我希望能够承担更多 MCP，也要更加熟悉其他相关业务。
+
+## 🇺🇸 Natural English
+
+> I'd like to take on more MCP work and build a broader understanding of the related business domains. 
+
+### Alternative Expressions
+
+* I want to deepen my MCP domain knowledge.
+* I'd like more exposure to other MCP areas.
+* I want to broaden my understanding beyond the pieces I've already worked on.
+
+### 🧠 Vocabulary
+
+**domain knowledge** = 业务领域知识
+
+**exposure** = 接触面、相关经验
+
+---
+
+# Topic 24. Frontend and Backend Both Work for Me
+
+## 📌 Meeting Background
+
+Huimin also mentioned that she was open to working on both frontend and backend tasks. The team responded positively and connected this to the company's focus on MCP and AI agents. 
+
+## 💬 Original Chinese
+
+> 我觉得前后端都可以做，我也想多尝试一下。
+
+## 🇺🇸 Natural English
+
+> I'd like to explore both frontend and backend work and broaden my technical scope.
+
+### Alternative Expressions
+
+* I'm open to working across the stack.
+* I'd like to become more full-stack over time.
+* I'm interested in expanding beyond frontend.
+
+### ⭐ 推荐
+
+> **I'm open to working across the stack.**
+
+---
+
+# Topic 25. You Don't Need to Master Neural-network Internals
+
+## 💬 Original Chinese
+
+> 神经网络的原理不一定要全懂，重要的是知道 Agent 能做什么，我们怎么利用它。
+
+## 🇺🇸 Natural English
+
+> You don't necessarily need to understand all the internals of neural networks. What's more important is knowing what agents can do and how we can use them effectively. 
+
+### ⭐ 非常好的学习思路
+
+> **Focus on what the technology enables and how to apply it effectively.**
+
+---
+
+# Topic 26. AI Testing Still Needs Human Review
+
+## 📌 Meeting Background
+
+The QA discussion highlighted that AI can speed up testing, but it may generate invalid or confusing bugs because it lacks full business context. Human review remains necessary. 
+
+## 💬 Original Chinese
+
+> AI 有时候会误报 Bug，也不理解真实业务场景。
+
+## 🇺🇸 Natural English
+
+> AI sometimes reports false positives because it doesn't fully understand the real business context.
+
+---
+
+## 💬 Original Chinese
+
+> 最终还是需要人来把关。
+
+## 🇺🇸 Natural English
+
+> Human review is still needed as the final quality gate.
+
+### 🧠 Vocabulary
+
+**quality gate** = 最后的质量把关
+
+---
+
+# Topic 27. Use Invalid Bugs to Improve AI Testing
+
+## 💬 Original Chinese
+
+> 可以把已经 Close 的无效 Bug 拉出来，做成 Skill，避免以后重复误报。
+
+## 🇺🇸 Natural English
+
+> We could use previously closed invalid bugs to create better guidance for the agent and reduce repeated false positives. 
+
+### Alternative Expressions
+
+* Use historical false positives as examples.
+* Turn invalid bugs into guardrails.
+* Feed validated examples back into the AI testing workflow.
+
+---
+
+# Topic 28. QA Pressure Is Too High in Week Two
+
+## 📌 Meeting Background
+
+The team noticed that most development happened in the first week, which compressed QA into the second week and created unnecessary pressure. 
+
+## 💬 Original Chinese
+
+> 第一周都在开发，第二周测试压力会很大。
+
+## 🇺🇸 Natural English
+
+> If most development happens in the first week, QA ends up under a lot of pressure in the second week.
+
+### Alternative Expressions
+
+* Testing gets compressed toward the end of the sprint.
+* QA becomes the bottleneck in week two.
+* We need to shift testing earlier.
+
+---
+
+# Topic 29. Hand Off Testable Parts Earlier
+
+## 💬 Original Chinese
+
+> 不要等整个需求开发完再提测，可以逐步提测。
+
+## 🇺🇸 Natural English
+
+> We shouldn't wait for the entire feature to be complete before handing it over to QA. We should test incrementally.
+
+### Alternative Expressions
+
+* Hand off testable pieces as early as possible.
+* Shift testing left.
+* Let QA start with the parts that are already ready.
+
+### ⭐⭐⭐ 必背
+
+> **We should shift testing left.**
+
+---
+
+# Topic 30. Sprint Planning Should Leave Buffer
+
+## 📌 Meeting Background
+
+The team discussed not planning at 100% capacity. Around 20% should remain available for customer tickets, unplanned work, leave, and other interruptions. 
+
+## 💬 Original Chinese
+
+> Planning 不能把团队 100% 的 Capacity 排满，至少要留 20%。
+
+## 🇺🇸 Natural English
+
+> We shouldn't plan the team at 100% capacity. We should leave at least 20% buffer for unplanned work.
+
+### Alternative Expressions
+
+* Leave some capacity for unexpected work.
+* Don't fully load the sprint.
+* We need contingency capacity.
+
+### 🧠 Vocabulary
+
+**contingency capacity** = 为临时情况预留的容量
+
+---
+
+# Topic 31. Planned Leave Should Be Considered During Planning
+
+## 💬 Original Chinese
+
+> Planning 的时候要统计大家的休假。
+
+## 🇺🇸 Natural English
+
+> Planned leave should be factored into sprint capacity during planning. 
+
+### Alternative Expressions
+
+* We need to account for planned time off.
+* Capacity should reflect everyone's availability.
+* Let the team know about planned leave early.
+
+### ⭐ 高频
+
+> **We need to account for planned time off when planning capacity.**
+
+---
+
+# Topic 32. Don't Overcommit the Sprint
+
+## 💬 Original Chinese
+
+> 如果最后大家都在加班，那其实说明 Planning 不合理。
+
+## 🇺🇸 Natural English
+
+> If everyone ends up working overtime at the end of the sprint, that's usually a sign that the sprint was overcommitted.
+
+### Alternative Expressions
+
+* The sprint scope was too aggressive.
+* We planned beyond our actual capacity.
+* We need more realistic commitments.
+
+### ⭐ 推荐
+
+> **We don't want to overcommit the team.**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “复盘”
+
+> **retrospective**
+
+> **reflect on the sprint**
+
+---
+
+### 2. “做得好的地方”
+
+> **what went well**
+
+---
+
+### 3. “需要改进”
+
+> **what could be improved**
+
+> **areas for improvement**
+
+---
+
+### 4. “卡在我这里”
+
+> **get stuck with me**
+
+> **become a bottleneck**
+
+---
+
+### 5. “控制会议节奏”
+
+> **keep the meeting on track**
+
+> **manage the meeting pace**
+
+---
+
+### 6. “打断深入讨论”
+
+> **step in**
+
+> **redirect the discussion**
+
+> **take it offline**
+
+---
+
+### 7. “测试左移”
+
+> **shift testing left**
+
+---
+
+### 8. “预留容量”
+
+> **leave some buffer**
+
+> **reserve capacity**
+
+---
+
+### 9. “不要排满”
+
+> **Don't plan at 100% capacity.**
+
+---
+
+### 10. “更熟悉业务”
+
+> **deepen my domain knowledge**
+
+---
+
+# ⭐ Shadowing Practice
+
+这场特别建议你练 **Retro + Standup Host + Career Growth**：
+
+> **What went well this sprint?**
+
+> **What could we improve next sprint?**
+
+> **This isn't a performance review; it's about continuous improvement.**
+
+> **PR review has become a bottleneck.**
+
+> **Please review the AI findings yourself before requesting final approval.**
+
+> **Let's keep the standup within 15 minutes.**
+
+> **Let's avoid deep dives during standup.**
+
+> **Focus on blockers, dependencies, and handoffs.**
+
+> **The host needs to keep the meeting on track.**
+
+> **Let's take this offline and follow up afterward.**
+
+> **Refinement prepares the work; planning finalizes the commitment.**
+
+> **I want to get better at keeping the meeting focused and on time.**
+
+> **I'd like to deepen my domain knowledge.**
+
+> **I'm open to working across the stack.**
+
+> **Human review is still needed as the final quality gate.**
+
+> **We should shift testing left.**
+
+> **We shouldn't plan the team at 100% capacity.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                 | 中文        |
+| -------------------------- | --------- |
+| **retrospective**          | Sprint 复盘 |
+| **continuous improvement** | 持续改进      |
+| **bottleneck**             | 瓶颈        |
+| **turnaround time**        | 周转时间      |
+| **false positive**         | 误报        |
+| **self-review**            | 自查        |
+| **friction**               | 流程阻力      |
+| **timebox**                | 设置时间上限    |
+| **handoff**                | 交接        |
+| **deep dive**              | 深入讨论      |
+| **go through the motions** | 机械走流程     |
+| **circle back**            | 稍后再跟进     |
+| **front-load**             | 前置工作      |
+| **domain knowledge**       | 业务知识      |
+| **quality gate**           | 质量把关      |
+| **shift testing left**     | 测试左移      |
+| **buffer**                 | 缓冲空间      |
+| **contingency capacity**   | 预留容量      |
+| **planned time off**       | 计划休假      |
+| **overcommit**             | 过度承诺      |
+
+## ⭐ 今天最值得你背的 10 句
+
+> **PR review has become a bottleneck.**
+
+> **Let's keep the standup within 15 minutes.**
+
+> **Let's avoid deep dives during standup.**
+
+> **Focus on blockers, dependencies, and handoffs.**
+
+> **The host needs to keep the meeting on track.**
+
+> **Let's take this offline and follow up afterward.**
+
+> **I want to get better at keeping the meeting focused and on time.**
+
+> **I'm open to working across the stack.**
+
+> **We should shift testing left.**
+
+> **We shouldn't plan the team at 100% capacity.**
+
