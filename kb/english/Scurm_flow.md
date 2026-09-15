@@ -3479,3 +3479,788 @@ The team reviewed the remaining Main App refactor rollout. CE regression was aro
 
 > **We need to understand the impact before we commit to the work.**
 
+# Engineering Meeting English Notebook
+
+## Meeting #20 – Test Case Review, History Tools, Parameter Validation & Agent Behavior
+
+这场会议和前面的 Planning / Refinement 不太一样，更偏 **QA Test Case Review + MCP Tool Validation**。核心内容包括：**工具注册验证、Tool Routing、参数校验、日期边界、Reporting Range、次数扣减、数据正确性、自然语言问题集，以及如何验证 Agent 不要错误理解“单日数据”**。会议一开始就明确，这次主要 Review 两个 History Tool 的测试用例。
+
+---
+
+# Topic 1. Reviewing Test Cases
+
+## 📌 Meeting Background
+
+The meeting focused on reviewing test cases for two history tools that had been discussed the previous day.
+
+## 💬 Original Chinese
+
+> 今天评审一下我们昨天过的两个 History 工具的测试用例。
+
+## 🇺🇸 Natural English
+
+> Today, we're going to review the test cases for the two history tools we discussed yesterday.
+
+### Alternative Expressions
+
+* Let's go through the test cases for the two history tools.
+* Today we'll review the QA coverage for these two tools.
+* Let's validate whether the current test cases cover the expected behavior.
+
+### ⭐ 推荐
+
+> **Let's go through the test cases and make sure we have enough coverage.**
+
+---
+
+# Topic 2. Tool Registration Validation
+
+## 💬 Original Chinese
+
+> 工具列表需要包含这次新的 Frequency Rank History 工具。
+
+## 🇺🇸 Natural English
+
+> The tool list should include the new Frequency Rank History tool.
+
+### Alternative Expressions
+
+* We need to verify that the tool is registered correctly.
+* The new tool should appear in the MCP tool list.
+* Let's confirm the registration metadata is correct.
+
+---
+
+## 💬 Original Chinese
+
+> Name、Title 和 Description 要和 PRD 保持一致。
+
+## 🇺🇸 Natural English
+
+> The name, title, and description should match the PRD.
+
+### Alternative Expressions
+
+* The tool metadata should be consistent with the PRD.
+* We should validate the registered metadata against the latest spec.
+* The description should reflect the latest requirement.
+
+### 🧠 Vocabulary
+
+**tool metadata** = Tool 的元信息
+**registration information** = 注册信息
+**match the spec** = 与规范保持一致
+
+---
+
+# Topic 3. Tool Routing / Tool Selection
+
+## 📌 Meeting Background
+
+The team wanted to make sure the agent could correctly choose among multiple existing history tools based on the user's intent. For example, ABA Search Frequency Rank History should trigger one tool, while Search Volume History, BSR History, Price History, and Rating History should trigger their own tools. 
+
+## 💬 Original Chinese
+
+> 看一下能不能调到对应的 History 工具。
+
+## 🇺🇸 Natural English
+
+> We need to verify that the agent routes each query to the correct history tool.
+
+### Alternative Expressions
+
+* Make sure the right tool is selected for each user intent.
+* Validate tool routing across the different history metrics.
+* We should confirm that each query triggers the expected tool.
+
+### ⭐ MCP 高频
+
+> **We need to verify the tool-routing behavior.**
+
+---
+
+# Topic 4. Required vs. Optional Parameters
+
+## 💬 Original Chinese
+
+> Marketplace、Keyword 和 Reporting Range 是必填，Start Date 和 End Date 是非必填。
+
+## 🇺🇸 Natural English
+
+> Marketplace, keyword, and reporting range are required, while start date and end date are optional. 
+
+### Alternative Expressions
+
+* These three fields are mandatory.
+* The date range is optional.
+* There is no default value for reporting range.
+
+### 🧠 Vocabulary
+
+**required field** = 必填字段
+**optional field** = 非必填字段
+**mandatory** = 强制要求的
+**default value** = 默认值
+
+---
+
+# Topic 5. Marketplace Validation
+
+## 💬 Original Chinese
+
+> Marketplace 要使用两位大写国家缩写。
+
+## 🇺🇸 Natural English
+
+> Marketplace should use a two-letter uppercase country code.
+
+### Example
+
+> `US` is valid, while `USA` should be rejected.
+
+---
+
+## 💬 Original Chinese
+
+> 不传 Marketplace，或者传不支持的站点，要调用失败，不扣减次数，并返回正确错误码。
+
+## 🇺🇸 Natural English
+
+> If marketplace is missing or unsupported, the tool call should fail without consuming usage quota and should return the correct error code. 
+
+### ⭐ 高频
+
+> **The request should fail without consuming quota.**
+
+---
+
+# Topic 6. Keyword Validation
+
+## 💬 Original Chinese
+
+> Keyword 支持词组文本，也支持纯数字的 Phrase ID。
+
+## 🇺🇸 Natural English
+
+> The keyword parameter should support both text phrases and numeric phrase IDs.
+
+---
+
+## 💬 Original Chinese
+
+> 多个关键词不会做多词校验，统一按单个 Keyword 处理。
+
+## 🇺🇸 Natural English
+
+> Multiple keywords are not handled as a batch. The entire input is treated as a single keyword string.
+
+### Alternative Expressions
+
+* The tool doesn't support multiple keywords in one request.
+* The input is interpreted as one keyword value.
+* Batch keyword queries are not supported.
+
+### ⭐ 推荐
+
+> **Batch keyword queries are not supported.**
+
+---
+
+# Topic 7. Invalid Keyword Handling
+
+## 💬 Original Chinese
+
+> 不传 Keyword、空字符串、空格、超长都要失败，而且不扣减次数。
+
+## 🇺🇸 Natural English
+
+> Missing, blank, whitespace-only, or overlength keywords should all fail validation without consuming quota. 
+
+### 🧠 Vocabulary
+
+* **blank value** — 空值
+* **whitespace-only** — 只有空格
+* **overlength input** — 超长输入
+* **fail validation** — 校验失败
+
+---
+
+# Topic 8. Reporting Range Validation
+
+## 📌 Meeting Background
+
+The tool supports three reporting granularities: weekly, monthly, and quarterly. Each one should return points whose start and end dates align with the corresponding time period. 
+
+## 💬 Original Chinese
+
+> Reporting Range 支持 Weekly、Monthly、Quarterly。
+
+## 🇺🇸 Natural English
+
+> The reporting range supports weekly, monthly, and quarterly granularity.
+
+### ⭐ Useful
+
+**granularity**
+
+= 数据颗粒度。
+
+---
+
+## 💬 Original Chinese
+
+> Weekly 的每个 Point 是一个完整周，Monthly 是完整月，Quarterly 是完整季度。
+
+## 🇺🇸 Natural English
+
+> Each weekly point should represent a full week, each monthly point a full calendar month, and each quarterly point a full quarter.
+
+---
+
+# Topic 9. Natural-language Mapping
+
+## 💬 Original Chinese
+
+> 如果用户说“按周”“每月”“按季度”，要映射到对应的 Reporting Range。
+
+## 🇺🇸 Natural English
+
+> Natural-language expressions such as “weekly,” “every month,” or “quarterly” should map to the corresponding reporting range.
+
+### Alternative Expressions
+
+* The agent should correctly normalize natural-language time granularity.
+* User phrasing should map to the proper enum value.
+* We should test intent-to-parameter mapping.
+
+### ⭐ MCP 很实用
+
+> **We need to validate intent-to-parameter mapping.**
+
+---
+
+# Topic 10. No Default Reporting Range
+
+## 💬 Original Chinese
+
+> 如果用户没有指明周期，我们不自行默认，需要提示用户补充。
+
+## 🇺🇸 Natural English
+
+> If the user doesn't specify a reporting range, the agent shouldn't assume one. It should ask the user to clarify.
+
+### Alternative Expressions
+
+* Don't silently default the granularity.
+* The user needs to explicitly specify the reporting period.
+* The agent should ask for clarification.
+
+### ⭐ 推荐
+
+> **The agent should ask for clarification instead of making an assumption.**
+
+---
+
+# Topic 11. Default Date Window
+
+## 💬 Original Chinese
+
+> 不传 Start Date 和 End Date 的话，默认窗口期是最近 30 天。
+
+## 🇺🇸 Natural English
+
+> If no start or end date is provided, the default window is the most recent 30 days. 
+
+### Alternative Expressions
+
+* The tool defaults to the last 30 days.
+* The default lookback window is 30 days.
+
+### 🧠 Vocabulary
+
+**lookback window** = 向前回看的时间窗口
+
+---
+
+# Topic 12. Relative Date Interpretation
+
+## 💬 Original Chinese
+
+> 最近 90 天、过去三个月、上个月、今年以来，都需要转成具体的起止日期。
+
+## 🇺🇸 Natural English
+
+> Relative date expressions such as “the last 90 days,” “the past three months,” “last month,” and “year to date” should be converted into explicit start and end dates.
+
+### ⭐ 高频
+
+> **The agent should resolve relative dates into explicit date ranges.**
+
+---
+
+# Topic 13. Date Validation Rules
+
+## 💬 Original Chinese
+
+> 只传开始时间、只传结束时间、日期格式错误、日期不存在、开始晚于结束、超过三年，这些都要报错。
+
+## 🇺🇸 Natural English
+
+> The request should fail if only one boundary is provided, the date format is invalid, the date doesn't exist, the start date is after the end date, or the range exceeds three years. 
+
+### 🧠 Vocabulary
+
+**date boundary** = 日期边界
+**invalid date range** = 非法日期区间
+**maximum lookback period** = 最大回溯周期
+
+---
+
+# Topic 14. Timezone Tolerance
+
+## 📌 Meeting Background
+
+One special rule was discussed: because the backend uses a fixed UTC-based timezone, users in faster timezones may already be one calendar day ahead. Therefore, an end date one day in the future should sometimes be tolerated rather than rejected. 
+
+## 💬 Original Chinese
+
+> 为了兼容时间比较快的地区，结束时间要放宽一天。
+
+## 🇺🇸 Natural English
+
+> To accommodate users in timezones that are already a day ahead, we should allow a one-day tolerance on the end date.
+
+### Alternative Expressions
+
+* Allow a one-day timezone buffer.
+* We need to account for timezone differences.
+* Don't reject the request just because the user's local date is one day ahead.
+
+### ⭐ 很值得背
+
+> **We need to account for timezone differences.**
+
+---
+
+# Topic 15. Cross-validation Between Reporting Range and Dates
+
+## 💬 Original Chinese
+
+> Reporting Range 和日期参数要做交叉验证。
+
+## 🇺🇸 Natural English
+
+> We also need cross-validation between the reporting range and the date range.
+
+### Alternative Expressions
+
+* Validate the interaction between granularity and date boundaries.
+* Make sure the number of returned points matches the selected range.
+* The date range and reporting granularity need to be consistent.
+
+---
+
+# Topic 16. Maximum Three-year Range
+
+## 💬 Original Chinese
+
+> 三年 Weekly 理论上是 156 个周点，Monthly 是 36 个，Quarterly 是 12 个。
+
+## 🇺🇸 Natural English
+
+> Over a full three-year range, we'd expect roughly 156 weekly points, 36 monthly points, or 12 quarterly points. 
+
+### ⭐ Useful
+
+> **The point count should match the selected granularity.**
+
+---
+
+# Topic 17. Leap Year Validation
+
+## 💬 Original Chinese
+
+> 平年 2 月到 28 号，闰年到 29 号，要特殊验证。
+
+## 🇺🇸 Natural English
+
+> We should explicitly validate February boundaries for both regular years and leap years.
+
+### 🧠 Vocabulary
+
+**leap year** = 闰年
+**calendar boundary** = 日历边界
+
+---
+
+# Topic 18. Usage Quota Deduction
+
+## 💬 Original Chinese
+
+> 成功调用要扣减次数；非法参数调用失败不扣；成功调用但没数据也正常扣减。
+
+## 🇺🇸 Natural English
+
+> A successful call should consume quota. Invalid requests should not. A successful call that returns no data should still consume quota. 
+
+### Alternative Expressions
+
+* Quota should only remain unchanged when validation fails.
+* An empty result is still a successful request.
+* No data does not mean the call failed.
+
+### ⭐ 推荐
+
+> **An empty result still counts as a successful call.**
+
+---
+
+# Topic 19. Data Structure Validation
+
+## 💬 Original Chinese
+
+> 返回 JSON 要包含 Keyword、Phrase ID、Reporting Range 和 Points。
+
+## 🇺🇸 Natural English
+
+> The response JSON should contain the keyword, phrase ID, reporting range, and the list of data points.
+
+---
+
+## 💬 Original Chinese
+
+> 每个 Point 的 Start Date、End Date 和值要和 Web 端保持一致。
+
+## 🇺🇸 Natural English
+
+> Each data point should match the web result, including its start date, end date, and value. 
+
+### ⭐ 高频 QA 表达
+
+> **The API response should match the web result exactly.**
+
+---
+
+# Topic 20. Don't Misrepresent Period Data as Daily Data
+
+## 📌 Meeting Background
+
+Both history tools return period-based data rather than daily values. If a user asks about one specific day, the agent should explain that the available value belongs to the week or period containing that date, rather than pretending it is a single-day metric. 
+
+## 💬 Original Chinese
+
+> 不应该把这个周期值表述为当天的数据。
+
+## 🇺🇸 Natural English
+
+> The agent should not present a period-level value as if it were a single-day value.
+
+### Alternative Expressions
+
+* The agent should explain the data granularity clearly.
+* Don't imply daily precision when the source is weekly.
+* The response should preserve the semantics of the source data.
+
+### ⭐⭐⭐ 很重要
+
+> **Don't imply more precision than the source data actually provides.**
+
+---
+
+# Topic 21. Natural-language Test Questions
+
+## 💬 Original Chinese
+
+> 这些测试用例其实也应该用自然语言的方式去测。
+
+## 🇺🇸 Natural English
+
+> These test cases should also be validated using natural-language queries. 
+
+### Alternative Expressions
+
+* We should test realistic user phrasing.
+* Don't only validate raw parameters.
+* The agent should be tested end to end with natural-language prompts.
+
+### ⭐ 推荐
+
+> **We should test realistic user phrasing, not just raw parameters.**
+
+---
+
+# Topic 22. Add English Test Coverage
+
+## 📌 Meeting Background
+
+Dongming noticed that most generated questions were in Chinese, while many real users would interact with the agent in English. He suggested adding English test cases as well. 
+
+## 💬 Original Chinese
+
+> 我们都是测中文，有没有测英文？
+
+## 🇺🇸 Natural English
+
+> Most of our test cases are in Chinese. Do we have English coverage as well?
+
+### Alternative Expressions
+
+* We should add English-language test cases.
+* We need multilingual coverage.
+* Let's test both Chinese and English prompts.
+
+### 🧠 Vocabulary
+
+**language coverage** = 语言覆盖
+**multilingual testing** = 多语言测试
+
+---
+
+# Topic 23. Review and Improve AI-generated Test Questions
+
+## 💬 Original Chinese
+
+> 第五个问题我感觉它可能不知道要干什么。
+
+## 🇺🇸 Natural English
+
+> I think the fifth prompt is a little ambiguous. The agent may not know exactly what the user is asking for.
+
+### Alternative Expressions
+
+* The intent isn't clear enough.
+* This prompt is too ambiguous.
+* We should rewrite it to make the expected intent more explicit.
+
+### ⭐ 高频
+
+> **The user intent isn't clear enough here.**
+
+---
+
+# Topic 24. AI-generated Questions Can Mix Multiple Tools
+
+## 📌 Meeting Background
+
+Some generated prompts mixed concepts such as keyword sales, search volume, ASIN sales, predictions, and backend orders. The team noted that this could cause the agent to route to a different tool, so the test set needed to distinguish between valid mixed-tool regression cases and prompts that were simply incorrect. 
+
+## 💬 Original Chinese
+
+> 这个可能混合了其他的一些工具。
+
+## 🇺🇸 Natural English
+
+> This prompt may overlap with other tools and trigger a different route.
+
+### Alternative Expressions
+
+* The intent is mixed.
+* This may route to another tool.
+* We should separate tool-specific cases from cross-tool regression cases.
+
+### ⭐ 很实用
+
+> **We should distinguish tool-specific tests from cross-tool regression tests.**
+
+---
+
+# Topic 25. Keyword Sales Is Market-level Data
+
+## 💬 Original Chinese
+
+> Keyword Sales 是整个市场的，不是我自己后台的订单。
+
+## 🇺🇸 Natural English
+
+> Keyword Sales represents market-level sales data, not the user's own account-level orders. 
+
+### Alternative Expressions
+
+* This is market-level data rather than seller-specific data.
+* It shouldn't be compared directly with the user's backend orders.
+* These two metrics represent different scopes.
+
+### 🧠 Vocabulary
+
+**market-level data** = 市场级数据
+**seller-specific data** = 卖家自身数据
+**metric scope** = 指标范围
+
+---
+
+# Topic 26. Weekly Sales Cannot Answer a Single-day Question
+
+## 💬 Original Chinese
+
+> Keyword Sales 是过去一周的数据，没办法估某一天。
+
+## 🇺🇸 Natural English
+
+> Keyword Sales is reported on a weekly basis, so it can't provide an exact value for a single day. 
+
+### Alternative Expressions
+
+* The source doesn't provide daily granularity.
+* We shouldn't infer a daily value from a weekly metric.
+* The agent should explain the weekly reporting cadence.
+
+### ⭐ 推荐
+
+> **We shouldn't infer daily values from weekly data.**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “过测试用例”
+
+> **go through the test cases**
+
+> **review the test cases**
+
+---
+
+### 2. “工具分流”
+
+> **tool routing**
+
+> **tool selection**
+
+---
+
+### 3. “参数校验”
+
+> **parameter validation**
+
+> **input validation**
+
+---
+
+### 4. “颗粒度”
+
+> **granularity**
+
+---
+
+### 5. “按周 / 按月 / 按季度”
+
+> **weekly / monthly / quarterly**
+
+---
+
+### 6. “放宽一天”
+
+> **allow a one-day tolerance**
+
+> **add a one-day buffer**
+
+---
+
+### 7. “次数扣减”
+
+> **consume quota**
+
+> **deduct one usage**
+
+---
+
+### 8. “空数据也算调用成功”
+
+> **An empty result still counts as a successful call.**
+
+---
+
+### 9. “自然语言问题”
+
+> **natural-language query**
+
+---
+
+### 10. “用户意图不明确”
+
+> **The user intent is ambiguous.**
+
+---
+
+# ⭐ Shadowing Practice
+
+这场最值得你练 **QA + MCP Testing** 英语：
+
+> **Let's go through the test cases and make sure we have enough coverage.**
+
+> **We need to verify the tool-routing behavior.**
+
+> **Marketplace, keyword, and reporting range are required.**
+
+> **Batch keyword queries are not supported.**
+
+> **The request should fail without consuming quota.**
+
+> **The reporting range supports weekly, monthly, and quarterly granularity.**
+
+> **The agent should ask for clarification instead of making an assumption.**
+
+> **The agent should resolve relative dates into explicit date ranges.**
+
+> **We need to account for timezone differences.**
+
+> **The point count should match the selected granularity.**
+
+> **An empty result still counts as a successful call.**
+
+> **The API response should match the web result exactly.**
+
+> **Don't imply more precision than the source data actually provides.**
+
+> **We should test realistic user phrasing, not just raw parameters.**
+
+> **We should distinguish tool-specific tests from cross-tool regression tests.**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                 | 中文     |
+| -------------------------- | ------ |
+| **test coverage**          | 测试覆盖   |
+| **tool routing**           | 工具分流   |
+| **tool metadata**          | 工具元数据  |
+| **input validation**       | 入参校验   |
+| **required field**         | 必填字段   |
+| **granularity**            | 数据颗粒度  |
+| **lookback window**        | 回溯时间窗口 |
+| **relative date**          | 相对日期   |
+| **timezone buffer**        | 时区缓冲   |
+| **date boundary**          | 日期边界   |
+| **cross-validation**       | 交叉验证   |
+| **leap year**              | 闰年     |
+| **consume quota**          | 扣减次数   |
+| **empty result**           | 空数据结果  |
+| **natural-language query** | 自然语言查询 |
+| **multilingual coverage**  | 多语言覆盖  |
+| **ambiguous intent**       | 模糊意图   |
+| **cross-tool regression**  | 跨工具回归  |
+| **market-level data**      | 市场级数据  |
+| **weekly cadence**         | 按周更新频率 |
+
+## ⭐ 今天最值得背的 10 句
+
+> **Let's go through the test cases and make sure we have enough coverage.**
+
+> **We need to verify the tool-routing behavior.**
+
+> **The request should fail without consuming quota.**
+
+> **The reporting range supports weekly, monthly, and quarterly granularity.**
+
+> **The agent should ask for clarification instead of making an assumption.**
+
+> **We need to account for timezone differences.**
+
+> **An empty result still counts as a successful call.**
+
+> **Don't imply more precision than the source data actually provides.**
+
+> **We should test realistic user phrasing, not just raw parameters.**
+
+> **We shouldn't infer daily values from weekly data.**
