@@ -5751,3 +5751,595 @@ The team clarified the new code-review workflow. Developers should first run the
 
 > **Some of the findings may be false positives.**
 
+Engineering Meeting English Notebook
+Meeting #15 – API Migration, Release Risk, Rate Limiting & QA Capacity
+
+这场会议特别适合学习 Daily Standup 主持 + 技术风险讨论。几个非常高频的场景是：确认什么时候 Ready for Testing、数据差异导致风险、及时打断过深讨论、领取调研任务、第三方 API 升级、限流策略、QA 时间不足、控制晨会时长。会议本身最后也复盘了当天 Standup 达到 25 分钟，希望第二天进一步缩短。
+
+Topic 1. Reporting Development Progress
+📌 Meeting Background
+
+The TikTok Open API migration was around 70% complete. Some frontend changes were required, and integration testing plus test-environment preparation still needed additional time.
+
+💬 Original Chinese
+
+目前编码进度的话是 70%。
+
+🇺🇸 Natural English
+
+Development is about 70% complete.
+
+Alternative Expressions
+We're about 70% through development.
+The implementation is roughly 70% done.
+We're making good progress and are about 70% complete.
+⭐ 推荐
+
+We're about 70% through development.
+
+和之前学的：
+
+We're about 70% through testing.
+
+是完全一样的结构。
+
+Topic 2. Asking When Something Will Be Finished
+💬 Original Chinese
+
+这个你估计什么时候可以结束啊？我们之前是定在 9 月 15 号。
+
+🇺🇸 Natural English
+
+When do you expect this to be completed? We originally targeted September 15th.
+
+Alternative Expressions
+What's the expected completion date?
+Do you have an updated ETA?
+Are we still on track for the original target date?
+🧠 Vocabulary
+
+ETA — Estimated Time of Arrival
+
+在工作里也经常泛指：
+
+预计完成时间
+
+Do we have an ETA for this?
+
+Topic 3. Ready for Testing
+💬 Original Chinese
+
+明天下班之前，确保它可以 Ready for Testing 就 OK 了。
+
+🇺🇸 Natural English
+
+Let's make sure it's ready for testing by EOD tomorrow.
+
+Alternative Expressions
+The goal is to have it ready for QA by EOD tomorrow.
+Let's target a QA handoff by the end of tomorrow.
+As long as it's test-ready by tomorrow, we're good.
+⭐⭐⭐ 强烈建议背
+
+Let's make sure it's ready for testing by EOD tomorrow.
+
+Topic 4. Data Discrepancy Is a Risk
+📌 Meeting Background
+
+The migration still had a significant data discrepancy: the new data differed from production by nearly 400,000 creators. That issue could not be guaranteed to be resolved by the planned testing deadline.
+
+💬 Original Chinese
+
+数据量差异这个可能不太能保证。
+
+🇺🇸 Natural English
+
+We may not be able to resolve the data discrepancy by then.
+
+Alternative Expressions
+The data discrepancy is still an open risk.
+I can't guarantee that the data gap will be resolved by then.
+The implementation timeline is manageable, but the data issue is less predictable.
+⭐ Useful
+
+open risk
+
+= 目前仍然存在、尚未解决的风险。
+
+Topic 5. Stop a Deep Discussion During Standup
+
+这段非常值得你学，因为你之前一直在练怎么合理打断别人。
+
+当数据差异开始展开讨论时，Dongming 直接判断这个 Topic 已经花太久，决定会后继续。
+
+💬 Original Chinese
+
+这个时间拖得太长了，这个 Topic 我们线下 Check。
+
+🇺🇸 Natural English
+
+We're spending too much time on this topic. Let's take it offline and follow up separately.
+
+更柔和、更适合你主持晨会
+
+I think we're going a little too deep into this. Let's take it offline and follow up after the meeting.
+
+Alternative Expressions
+Let's park this for now and discuss it after the meeting.
+We can follow up separately on the details.
+Let's keep the standup moving and take this offline.
+⭐⭐⭐ 你最应该背
+
+I think we're going a little too deep into this. Let's take it offline.
+
+这句话非常适合你以后主持晨会。
+
+Topic 6. Everything Has Been Documented
+💬 Original Chinese
+
+所有涉及到的页面都已经整理到这个文档里了，是吧？
+
+🇺🇸 Natural English
+
+All the affected pages have been documented here, right?
+
+Alternative Expressions
+Does this document cover all the affected pages?
+Have we captured all the impacted areas?
+Is this the complete list of affected pages?
+⭐ 高频
+
+affected / impacted areas
+
+= 受影响范围。
+
+💬 Original Chinese
+
+你把这个 Ticket Assign 给我，我要 Follow Up 看。
+
+🇺🇸 Natural English
+
+Assign this ticket to me and I'll follow up on it.
+
+Topic 7. Picking Up Research Tasks
+📌 Meeting Background
+
+Two research tasks needed owners. Team members with more capacity were encouraged to pick them up. One involved Google Trends data; the other involved researching Amazon's beta Brand Registry API.
+
+💬 Original Chinese
+
+大家谁手里的事情比较少，可以从这两个里面去领。
+
+🇺🇸 Natural English
+
+If anyone has some bandwidth, feel free to pick up one of these two tasks.
+
+Alternative Expressions
+Is anyone available to take this on?
+Does anyone have capacity to pick this up?
+We need an owner for this research task.
+⭐ 非常实用
+
+Does anyone have bandwidth to pick this up?
+
+💬 Original Chinese
+
+这个任务分给我好了，我来调研一下。
+
+🇺🇸 Natural English
+
+You can assign this one to me. I'll look into it.
+
+Alternative Expressions
+I'll take this one.
+I can own this research task.
+I'm happy to look into this.
+Topic 8. Investigating What an API Can Do
+💬 Original Chinese
+
+我们需要看看这个 API 能做什么。
+
+🇺🇸 Natural English
+
+We need to look into what this API can do.
+
+Alternative Expressions
+We need to evaluate the API's capabilities.
+Let's explore whether this API can support our use case.
+We need to understand what functionality the API exposes.
+🧠 Vocabulary
+
+capability = 能力
+
+use case = 使用场景
+
+evaluate = 评估
+
+Topic 9. Testing Resources Aren't Available Yet
+💬 Original Chinese
+
+测试资源要到下个 Sprint 才可以开始测试，所以暂时先挂起。
+
+🇺🇸 Natural English
+
+QA capacity won't be available until the next sprint, so we'll put this on hold for now.
+
+Alternative Expressions
+Testing will have to wait until next sprint.
+This is currently blocked by QA capacity.
+We'll defer testing to the next sprint.
+⭐ 高频
+
+This is currently blocked by QA capacity.
+
+Topic 10. Customer Ticket Needs a Quick Follow-up
+💬 Original Chinese
+
+Customer Ticket 你看了，如果有更新及时跟我讲，客服在线等。
+
+🇺🇸 Natural English
+
+Please keep me posted if there are any updates on the customer ticket. Support is waiting for a response.
+
+⭐ 新的高频表达
+
+keep someone posted
+
+= 有进展及时告诉某人。
+
+Keep me posted.
+
+= 有消息告诉我。
+
+I'll keep you posted.
+
+= 有进展我会告诉你。
+
+Topic 11. Third-party API Upgrade Creates Release Risk
+📌 Meeting Background
+
+The Main App Audience refactor depended on an older third-party API. The provider wanted the team to migrate to a newer API, creating uncertainty around whether the current refactor should be released.
+
+💬 Original Chinese
+
+如果上线的话，可能还是有一定风险。
+
+🇺🇸 Natural English
+
+Releasing this now would carry some risk.
+
+Alternative Expressions
+There's some release risk here.
+Shipping this as-is may create unnecessary risk.
+It may be safer to wait for the API upgrade.
+💬 Original Chinese
+
+不如跟新的接口一起上。
+
+🇺🇸 Natural English
+
+It may make more sense to release this together with the new API integration.
+
+⭐ Useful
+
+It may make more sense to wait.
+
+比：
+
+We should wait.
+
+语气更适合讨论方案。
+
+Topic 12. Remove Something From the Current Scope
+💬 Original Chinese
+
+我们把 Audience 从 Phase 3 里面拿掉。
+
+🇺🇸 Natural English
+
+Let's remove Audience from the Phase 3 scope.
+
+Alternative Expressions
+Let's take Audience out of scope for Phase 3.
+Let's exclude Audience from this release.
+We can decouple Audience from the rest of Phase 3.
+⭐ 项目管理高频
+
+Let's take this out of scope for now.
+
+Topic 13. Don't Test Something We Won't Release
+💬 Original Chinese
+
+我觉得没有必要测了，因为测了如果不上，其实也是白测。
+
+🇺🇸 Natural English
+
+I don't think it's worth continuing the testing if we're not going to release it yet.
+
+Alternative Expressions
+There's little value in testing it right now if the implementation is going to change.
+We'd probably have to retest everything after the API upgrade anyway.
+Let's avoid duplicate testing effort.
+⭐ Useful Phrase
+
+duplicate effort
+
+= 重复劳动。
+
+Topic 14. Google Rate Limiting
+📌 Meeting Background
+
+Google Trends became unavailable after roughly 30 calls per minute. Once rate-limited, the service could remain unavailable for one or two hours. The crawler team was working on optimization, but the exact safe request threshold was not yet known.
+
+💬 Original Chinese
+
+每分钟大概调到 30 次以后，就会被 Google 限流。
+
+🇺🇸 Natural English
+
+Google starts rate-limiting us at around 30 requests per minute.
+
+Alternative Expressions
+We start hitting Google's rate limit at around 30 requests per minute.
+Google throttles the requests once we reach roughly 30 RPM.
+We're getting rate-limited at around 30 requests per minute.
+🧠 Vocabulary
+
+RPM = requests per minute
+
+💬 Original Chinese
+
+限流以后会有一两个小时都不可用。
+
+🇺🇸 Natural English
+
+Once we hit the rate limit, the service can become unavailable for one or two hours.
+
+Topic 15. Protect the Dependency at the Application Layer
+💬 Original Chinese
+
+如果应用层做这个限制，至少下一分钟还是 OK 的。
+
+🇺🇸 Natural English
+
+If we enforce rate limiting at the application layer, we can prevent the downstream service from being overwhelmed and keep it available for subsequent requests.
+
+Alternative Expressions
+We should throttle requests on our side.
+Let's protect the downstream dependency at the application layer.
+We should fail fast before hitting Google's limit.
+⭐⭐⭐ 工程会议非常值得背
+
+We should enforce rate limiting on our side.
+
+We need to protect the downstream service.
+
+Topic 16. Confirm the Limit Before Release
+💬 Original Chinese
+
+最好是在上线之前把这个确认好，因为一旦上线，后面就不好改了。
+
+🇺🇸 Natural English
+
+Ideally, we should confirm the limit before release, because it'll be harder to adjust once this is in production.
+
+Alternative Expressions
+Let's get this clarified before we go live.
+We should validate the threshold before release.
+This is something we should resolve before production.
+⭐ 高频
+
+Let's get this clarified before we go live.
+
+Topic 17. Testing Scope Is Too Large
+💬 Original Chinese
+
+提测之前，我们再确认一下到底要测哪些内容。
+
+🇺🇸 Natural English
+
+Before handing this over to QA, let's confirm the exact testing scope.
+
+Alternative Expressions
+Let's align on the regression scope before QA starts.
+We need to clarify exactly what needs to be covered.
+Let's narrow down the test scope first.
+💬 Original Chinese
+
+时间确实挺紧张的。
+
+🇺🇸 Natural English
+
+The timeline is definitely pretty tight.
+
+Alternative Expressions
+We're pretty tight on time.
+There's very little testing buffer.
+The QA schedule is tight.
+Topic 18. Code Can Be Deployed Without Enabling the Feature
+💬 Original Chinese
+
+MCP 可以先把代码发上去，但是暂时不用开放。
+
+🇺🇸 Natural English
+
+We can deploy the MCP code first without enabling the feature yet.
+
+Alternative Expressions
+We can deploy the code without exposing the feature.
+The code can go to production while the feature remains disabled.
+We can separate deployment from activation.
+⭐ 很重要的概念
+
+separate deployment from activation
+
+= 部署 ≠ 开放功能
+
+这是 Feature Flag / Gradual Rollout 场景非常常用的思路。
+
+Topic 19. No Current Blockers
+💬 Original Chinese
+
+目前没有什么阻塞的吧？
+
+🇺🇸 Natural English
+
+There aren't any blockers at the moment, right?
+
+更适合主持：
+
+Any blockers at the moment?
+
+或者：
+
+Is anything blocking your progress right now?
+
+Topic 20. Keeping the Standup Shorter
+📌 Meeting Background
+
+At the end, the host noticed the standup had run for around 25 minutes and explicitly said the team should try to improve the timing the following day.
+
+💬 Original Chinese
+
+今天时间还是有点长，25 分钟，明天争取进步一下。
+
+🇺🇸 Natural English
+
+We ran a little long today—about 25 minutes. Let's try to keep it shorter tomorrow.
+
+Alternative Expressions
+We went a bit over time today.
+Let's try to keep tomorrow's standup more concise.
+Let's aim to stay within 15 minutes tomorrow.
+⭐ 主持会议很好用
+
+We're running a little long, so let's keep the remaining updates brief.
+
+这句话甚至可以会议进行到 15 分钟时直接用，而不是等会议结束才说。
+
+📖 Grammar & Expression Notes
+1. “什么时候能结束？”
+
+Do you have an ETA?
+
+When do you expect this to be completed?
+
+2. “明天下班前”
+
+by EOD tomorrow
+
+3. “这个话题讲太深了”
+
+We're going too deep into this.
+
+然后接：
+
+Let's take it offline.
+
+4. “谁有空可以接”
+
+Does anyone have bandwidth to pick this up?
+
+5. “有进展告诉我”
+
+Keep me posted.
+
+6. “从 Scope 移出去”
+
+take it out of scope
+
+7. “重复劳动”
+
+duplicate effort
+
+8. “被限流”
+
+get rate-limited
+
+hit the rate limit
+
+9. “测试范围”
+
+testing scope
+
+regression scope
+
+10. “会议超时了”
+
+We're running over time.
+
+We're running a little long.
+
+⭐ Shadowing Practice – Standup Host Edition
+
+这次建议你重点练主持人的句子：
+
+Are we still on track for the original target date?
+
+Let's make sure it's ready for testing by EOD tomorrow.
+
+I think we're going a little too deep into this. Let's take it offline.
+
+Does this document cover all the affected areas?
+
+Does anyone have bandwidth to pick this up?
+
+Please keep me posted if there are any updates.
+
+There's some release risk here.
+
+Let's take this out of scope for now.
+
+We should enforce rate limiting on our side.
+
+Let's get this clarified before we go live.
+
+Before handing this over to QA, let's confirm the exact testing scope.
+
+Any blockers at the moment?
+
+We're running a little long, so let's keep the remaining updates brief.
+
+📚 Today's Vocabulary
+Expression	中文
+ETA	预计完成时间
+ready for testing	可以提测
+open risk	尚未解决的风险
+data discrepancy	数据差异
+take offline	会后讨论
+affected area	受影响范围
+bandwidth	工作容量
+pick up	接手
+keep me posted	有进展及时告诉我
+release risk	上线风险
+out of scope	不在当前范围
+duplicate effort	重复劳动
+rate-limit	限流
+RPM	每分钟请求数
+downstream service	下游服务
+testing scope	测试范围
+testing buffer	测试缓冲时间
+activation	功能启用
+run long	会议超时
+keep it brief	简短一点
+⭐ 今天最值得你背的 10 句
+
+Are we still on track for the original target date?
+
+Let's make sure it's ready for testing by EOD tomorrow.
+
+I think we're going a little too deep into this. Let's take it offline.
+
+Does anyone have bandwidth to pick this up?
+
+Please keep me posted if there are any updates.
+
+Let's take this out of scope for now.
+
+We should enforce rate limiting on our side.
+
+Let's get this clarified before we go live.
+
+Any blockers at the moment?
+
+We're running a little long, so let's keep the remaining updates brief.
