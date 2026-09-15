@@ -1665,3 +1665,979 @@ The team planned to complete missing requirement details, move the selected stor
 
 > **The requirement isn't set in stone.**
 
+# Engineering Meeting English Notebook
+
+## Meeting #18 – Sprint Planning, Story Points, QA Readiness & Delivery Commitment
+
+这场会议是一次很典型的 **Sprint Planning**。和前面的 Backlog Refinement 不同，这次重点不再是“需求是什么”，而是：**这个 Sprint 到底做哪些、有没有风险、什么时候提测、Story Point 怎么估、QA 能不能承接、哪些依赖会影响交付，以及团队最后是否愿意承诺这个 Sprint 范围**。会议一开始就明确了这些目标。
+
+---
+
+# Topic 1. Explaining the Purpose of Sprint Planning
+
+## 📌 Meeting Background
+
+The team clarified that Sprint Planning is used to define the work for the next two weeks, confirm that engineering and QA have a shared understanding of the requirements, estimate story points, and make sure the final sprint scope is within the team's capacity. 
+
+## 💬 Original Chinese
+
+> Planning 会议就是计划接下来两周的内容，框定我们现在要做的范围。
+
+## 🇺🇸 Natural English
+
+> Sprint planning is where we define the scope for the next two weeks.
+
+### Alternative Expressions
+
+* We use sprint planning to finalize the scope for the upcoming sprint.
+* This is where we decide what we can realistically commit to.
+* The goal is to make sure the planned work fits within the team's capacity.
+
+### ⭐ 最推荐
+
+> **This is where we decide what we can realistically commit to for the sprint.**
+
+---
+
+# Topic 2. Confirming Shared Understanding
+
+## 💬 Original Chinese
+
+> 确认研发的理解和需求是一致的。
+
+## 🇺🇸 Natural English
+
+> We need to make sure engineering's understanding is aligned with the requirement.
+
+### Alternative Expressions
+
+* Let's make sure we're all aligned on the requirement.
+* We need to confirm there are no major gaps in understanding.
+* Everyone should have the same understanding before development starts.
+
+### ⭐ 高频
+
+> **Let's make sure we're aligned on the requirement.**
+
+---
+
+# Topic 3. Story Point Estimation
+
+## 📌 Meeting Background
+
+The team discussed how story points should be estimated and how they relate to team capacity. The purpose was not to measure an individual developer's performance, but to help the team understand how much work it can reliably commit to in future sprints.  
+
+## 💬 Original Chinese
+
+> 我们会在这个会议上做 Story Point 的预估。
+
+## 🇺🇸 Natural English
+
+> We'll estimate story points during this meeting.
+
+---
+
+## 💬 Original Chinese
+
+> 后续可以知道团队 Capacity 是什么样子的。
+
+## 🇺🇸 Natural English
+
+> Over time, story points will help us understand the team's capacity more accurately.
+
+### Alternative Expressions
+
+* This helps us calibrate our sprint capacity.
+* We can use historical velocity to plan future sprints.
+* The goal is to improve planning accuracy.
+
+### 🧠 Vocabulary
+
+| Expression        | 中文     |
+| ----------------- | ------ |
+| story point       | 故事点    |
+| capacity          | 团队承载能力 |
+| velocity          | 团队迭代速度 |
+| estimate          | 估算     |
+| planning accuracy | 规划准确度  |
+
+---
+
+# Topic 4. Large Stories May Need to Be Split
+
+## 💬 Original Chinese
+
+> 如果 Story Point 很多，其实意味着 User Story 很大，是可以再拆分的。
+
+## 🇺🇸 Natural English
+
+> If a story requires too many points, that's usually a sign that it should be broken down further. 
+
+### Alternative Expressions
+
+* The story may be too large.
+* We should consider splitting it into smaller stories.
+* A high estimate may indicate the scope is too broad.
+
+### ⭐ 推荐
+
+> **A large estimate is usually a signal that the story should be split.**
+
+---
+
+# Topic 5. Using a Consistent Estimation Standard
+
+## 💬 Original Chinese
+
+> 尽量用统一的标准，这样不同 Sprint 才能看到大家完成的情况。
+
+## 🇺🇸 Natural English
+
+> We should use a consistent estimation standard so we can compare sprint performance over time.
+
+### Alternative Expressions
+
+* We need a consistent baseline.
+* The estimation method should stay consistent across sprints.
+* Otherwise, the numbers won't be meaningful.
+
+### ⭐ 高频
+
+> **We need a consistent baseline for estimation.**
+
+---
+
+# Topic 6. Pagination as a Sprint-wide Technical Story
+
+## 📌 Meeting Background
+
+Pagination was one of the larger stories in the sprint because it affected many MCP tools. The team decided not every tool necessarily needed pagination—for example, one tool could only ever return 30 items due to business rules.  
+
+## 💬 Original Chinese
+
+> 所有的工具都要加分页吗？
+
+## 🇺🇸 Natural English
+
+> Do all of the tools need pagination?
+
+---
+
+## 💬 Original Chinese
+
+> 这个最多只返回 30 条，业务上就是这么设计的，所以不需要。
+
+## 🇺🇸 Natural English
+
+> This tool only returns up to 30 items by design, so pagination isn't necessary.
+
+### Alternative Expressions
+
+* Pagination doesn't add much value here.
+* The result set is capped at 30.
+* This tool has a fixed upper limit.
+
+### 🧠 Vocabulary
+
+**capped at 30** = 上限 30 条
+
+> The result set is capped at 30 items.
+
+---
+
+# Topic 7. Estimate by Module Instead of Individual Task
+
+## 💬 Original Chinese
+
+> 我们可不可以按照模块来分？
+
+## 🇺🇸 Natural English
+
+> Could we estimate this by module instead of by individual task?
+
+### Alternative Expressions
+
+* Maybe module-level estimation would be more practical.
+* We can group the work by module.
+* That may align better with both development and QA ownership.
+
+### ⭐ 很实用
+
+> **Let's group the work by module.**
+
+---
+
+# Topic 8. Merge Everyone's Work Into One Testing Branch
+
+## 📌 Meeting Background
+
+Because several people would work on different parts of the pagination story, the team agreed to merge the work into one shared branch and deploy that branch to a test environment for QA rather than using separate environments for every developer. 
+
+## 💬 Original Chinese
+
+> 大家统一往一个分支上合。
+
+## 🇺🇸 Natural English
+
+> Let's merge everyone's changes into a shared branch.
+
+### Alternative Expressions
+
+* We'll use one integration branch.
+* Everyone should target the same testing branch.
+* QA can validate the combined changes in one environment.
+
+### 🧠 Vocabulary
+
+**integration branch** = 集成分支
+
+**shared branch** = 共享分支
+
+---
+
+# Topic 9. Defining the QA Handoff Date
+
+## 📌 Meeting Background
+
+QA asked whether each task should have a planned testing handoff date. The team agreed this would be useful and discussed using due dates to represent when development should be ready for QA. 
+
+## 💬 Original Chinese
+
+> 我们需要提前给一个提测时间吗？
+
+## 🇺🇸 Natural English
+
+> Should we define a target QA handoff date for each item?
+
+### Alternative Expressions
+
+* Should every story have a target date for QA?
+* Can we add a test-ready date?
+* Let's make the QA handoff date explicit.
+
+### ⭐ 推荐
+
+> **Let's make the QA handoff date explicit.**
+
+---
+
+# Topic 10. How Much Time QA Needs
+
+## 💬 Original Chinese
+
+> 一般一个工具给一天左右。
+
+## 🇺🇸 Natural English
+
+> QA typically needs about one day per tool.
+
+### Alternative Expressions
+
+* We should budget roughly one day of QA per tool.
+* Each tool needs about a day for testing.
+* We need to leave enough testing buffer.
+
+### ⭐ 高频
+
+> **We need to leave enough testing buffer.**
+
+---
+
+# Topic 11. Readiness Before Release
+
+## 💬 Original Chinese
+
+> 发布是 9 月 8 号，那 9 月 2 号提测应该没问题。
+
+## 🇺🇸 Natural English
+
+> If the release is scheduled for September 8th, a QA handoff by September 2nd should give us enough time.
+
+### ⭐ 适合以后做 Planning
+
+> **That should give QA enough time before the release.**
+
+---
+
+# Topic 12. Huimin's Two MCP Stories
+
+这部分是你自己的任务。会议中给你安排的是：
+
+* Keyword Sales
+* ABA SFR History
+
+其中 Keyword Sales 预计工作量更高一些，给了 **2 points**；ABA 相对简单，给了 **1 point**。两个任务当时计划一起推进，并确认 Ready for Testing 时间。
+
+## 💬 Original Chinese
+
+> 这两个相对来说比较类似，目前没有什么问题。
+
+## 🇺🇸 Natural English
+
+> These two are fairly similar, and I don't see any major issues at the moment.
+
+---
+
+## 💬 Original Chinese
+
+> 什么时候可以 Ready for Testing？
+
+## 🇺🇸 Natural English
+
+> When do you think these will be ready for testing?
+
+### Alternative Expressions
+
+* What's your target QA handoff date?
+* When do you expect to have these ready for QA?
+* Do you have an ETA for testing readiness?
+
+### ⭐ 你以后回答可以直接说
+
+> **I'm targeting Monday for QA handoff.**
+
+或者：
+
+> **I expect both of them to be ready for testing by Monday.**
+
+---
+
+# Topic 13. Document Test Scope Before Development Is Done
+
+## 💬 Original Chinese
+
+> 提测之前，把 PR / 描述简单写一下，要测哪些点。
+
+## 🇺🇸 Natural English
+
+> Before handing the work over to QA, please document the main changes and what needs to be tested. 
+
+### Alternative Expressions
+
+* Please document the regression scope.
+* QA needs enough context to understand what changed.
+* Don't rely on the ticket title alone.
+
+### ⭐ 非常值得背
+
+> **QA needs enough context to understand what changed and what needs to be validated.**
+
+---
+
+# Topic 14. Large API Migration With Little Coding Effort
+
+## 📌 Meeting Background
+
+One Main App refactor item involved dozens of APIs, but the actual development effort was small because the work was mainly routing/configuration and regression testing.  
+
+## 💬 Original Chinese
+
+> 开发其实没有什么工作量，主要是配路由和测试。
+
+## 🇺🇸 Natural English
+
+> There's very little implementation work here. Most of the effort is in routing configuration and regression testing.
+
+### ⭐ 很重要
+
+Story Point 不应该只看代码量。
+
+更完整的表达：
+
+> **The coding effort is small, but the end-to-end delivery effort still includes configuration and QA.**
+
+---
+
+# Topic 15. Testing Scope Can Be Larger Than the Feature Scope
+
+## 📌 Meeting Background
+
+For one migrated scheduled-job flow, the actual feature change was small, but because underlying logic had moved from Main App and had not yet been fully validated, QA potentially needed to regress the broader module and related notifications. 
+
+## 💬 Original Chinese
+
+> 除了功能验证以外，可能整个模块都需要回归一下。
+
+## 🇺🇸 Natural English
+
+> In addition to validating the feature itself, we may need to run regression across the broader module.
+
+### Alternative Expressions
+
+* The blast radius is larger than the immediate feature.
+* The underlying migration affects more than just this workflow.
+* QA may need broader regression coverage.
+
+### 🧠 Vocabulary
+
+**blast radius** = 改动潜在影响范围
+
+---
+
+# Topic 16. Requirement Is Not Clear Enough Yet
+
+## 💬 Original Chinese
+
+> 这个字段什么意思，我现在回答不了，需要再确认。
+
+## 🇺🇸 Natural English
+
+> I'm not able to answer that confidently yet. I need to verify it first. 
+
+### Alternative Expressions
+
+* I'm not sure yet. Let me confirm.
+* That's still an open question.
+* I don't want to guess; I'll verify it.
+
+### ⭐ 强烈推荐
+
+> **I don't want to guess. Let me verify that first.**
+
+非常适合英文技术会议。
+
+---
+
+# Topic 17. Remove a Field If the Source Doesn't Support It
+
+## 💬 Original Chinese
+
+> 如果报告里面没有这个字段，那我们就不要了。
+
+## 🇺🇸 Natural English
+
+> If the source report doesn't provide that field, we should leave it out.
+
+### Alternative Expressions
+
+* We shouldn't expose data that isn't available from the source.
+* Let's remove that field from the scope.
+* There's no reason to derive it unless there's a clear requirement.
+
+---
+
+# Topic 18. Should We Persist the Data?
+
+## 📌 Meeting Background
+
+The team debated whether account-health report data needed to be stored. Since the tool was mainly concerned with current account status and historical value was unclear, the initial direction was not to persist the data unless there was a clear reason.  
+
+## 💬 Original Chinese
+
+> 如果历史没有什么价值，我们就不用存。
+
+## 🇺🇸 Natural English
+
+> If there's no meaningful value in keeping the historical data, we don't need to persist it.
+
+### Alternative Expressions
+
+* Let's avoid persisting data unless there's a clear use case.
+* We can process it on demand.
+* Historical storage may be unnecessary here.
+
+### ⭐ 高频
+
+> **Let's avoid storing data unless there's a clear use case for it.**
+
+---
+
+# Topic 19. Synchronous vs. Asynchronous Report Flow
+
+## 📌 Meeting Background
+
+A SP-API report requires multiple steps: create the report, wait for it, download it, and parse it. That raised concerns about response time if the MCP tried to perform everything synchronously. 
+
+## 💬 Original Chinese
+
+> 用户拉这个报告可能会很久，因为要创建、拉取、下载、解析。
+
+## 🇺🇸 Natural English
+
+> The request may take quite a while because we need to create the report, wait for it to be ready, download it, and parse the result.
+
+### 🧠 Vocabulary
+
+* synchronous flow — 同步流程
+* asynchronous process — 异步流程
+* polling — 轮询
+* response time — 响应时间
+* long-running request — 长时间请求
+
+### ⭐ 技术会议表达
+
+> **This may turn into a long-running request.**
+
+---
+
+# Topic 20. Investigate Before Finalizing the Design
+
+## 💬 Original Chinese
+
+> 你可以先试一下，整个流程大概要多久。
+
+## 🇺🇸 Natural English
+
+> Let's prototype the flow first and measure how long the full request takes.
+
+### Alternative Expressions
+
+* Let's validate the latency before finalizing the design.
+* We need some real measurements.
+* Let's test the end-to-end timing first.
+
+### ⭐ 很工程化
+
+> **Let's get some real measurements before we decide.**
+
+---
+
+# Topic 21. Keep Tool Definition Explicit
+
+## 📌 Meeting Background
+
+The team noticed the requirement document still lacked concrete MCP tool names, input parameters, and output definitions. That made it difficult to communicate exactly how many tools would ship and what their contracts were. 
+
+## 💬 Original Chinese
+
+> Tool Name、入参、出参这些东西要补一下。
+
+## 🇺🇸 Natural English
+
+> We need to define the tool name, input parameters, and output schema.
+
+### Alternative Expressions
+
+* The tool contract still needs to be finalized.
+* We need a clear input/output definition.
+* The requirement isn't implementation-ready yet.
+
+### ⭐ 推荐
+
+> **The tool contract still needs to be finalized.**
+
+---
+
+# Topic 22. External Dependency Creates Schedule Risk
+
+## 💬 Original Chinese
+
+> 这个得看他们什么时候提供接口。
+
+## 🇺🇸 Natural English
+
+> This depends on when they can provide the API.
+
+### Alternative Expressions
+
+* We're blocked by an external dependency.
+* The timeline depends on the upstream team.
+* We can't give a firm date until the dependency is ready.
+
+### ⭐ 高频
+
+> **The timeline depends on the upstream dependency.**
+
+---
+
+# Topic 23. Some Notifications Are Not Technically Feasible
+
+## 📌 Meeting Background
+
+During the Amazon notification discussion, research showed that some notifications were vendor-only and some SQS subscriptions were already owned by another service, so not every originally planned notification could be supported. 
+
+## 💬 Original Chinese
+
+> 有一部分是做不了的。
+
+## 🇺🇸 Natural English
+
+> Some of these notification types aren't technically feasible for us.
+
+### Alternative Expressions
+
+* We can't support all of them.
+* Some are out of scope due to platform limitations.
+* Certain notifications aren't available to our account type.
+
+---
+
+## 💬 Original Chinese
+
+> 把能做的找出来，不能做的备注原因。
+
+## 🇺🇸 Natural English
+
+> Let's identify the ones we can support and document why the others aren't feasible.
+
+### ⭐ 很适合需求调研
+
+> **Document the feasibility and the reason for any limitations.**
+
+---
+
+# Topic 24. Integration May Be More Expensive Than Expected
+
+## 💬 Original Chinese
+
+> 跟现有 Alerts 集成的话，成本可能比较高。
+
+## 🇺🇸 Natural English
+
+> Integrating this into the existing Alerts system may require significantly more effort than expected. 
+
+### Alternative Expressions
+
+* The integration cost is higher than we expected.
+* This isn't just a simple event mapping.
+* We'd need changes to templates, notifications, and downstream flows.
+
+### ⭐ 推荐
+
+> **The integration is more involved than we initially expected.**
+
+---
+
+# Topic 25. Pull a Risky Story Out of the Sprint
+
+## 📌 Meeting Background
+
+Because the Notification story still had unresolved design questions and feasibility concerns, the team decided not to include it in the current delivery batch yet. 
+
+## 💬 Original Chinese
+
+> 这个有点风险了，先不放这一批。
+
+## 🇺🇸 Natural English
+
+> This looks too risky to commit to right now, so let's leave it out of this release batch for now.
+
+### Alternative Expressions
+
+* Let's take it out of the sprint for now.
+* We shouldn't commit to this until the design is clearer.
+* Let's defer it until we've resolved the open questions.
+
+### ⭐⭐⭐ Planning 高频
+
+> **We shouldn't commit to this until the design is clearer.**
+
+---
+
+# Topic 26. Finding the Root Cause of an AI Model Failure
+
+## 💬 Original Chinese
+
+> 我们需要定位 AI Image 为什么生成不了。
+
+## 🇺🇸 Natural English
+
+> We need to identify the root cause of why the AI image generation is failing. 
+
+### Alternative Expressions
+
+* We need to investigate why the model stopped working.
+* The old model ID may no longer be supported.
+* Let's trace when the failure first started.
+
+### ⭐ 高价值表达
+
+> **Let's trace this back to when it first started failing.**
+
+---
+
+# Topic 27. Going Back Through Historical Failures
+
+## 💬 Original Chinese
+
+> 需要再往前回溯，看之前失败的原因是什么。
+
+## 🇺🇸 Natural English
+
+> We need to go back through the earlier failures and identify what originally caused the issue.
+
+### Useful Expressions
+
+* trace it back
+* inspect historical failures
+* identify when the regression started
+* narrow down the root cause
+
+---
+
+# Topic 28. MCP Calculation Has Hidden Dependencies
+
+## 📌 Meeting Background
+
+The Listing Builder MCP discussion revealed that some values such as KPS depend not only on keywords, but also on competitors, search volume, CPS, and keyword source. This meant the supposedly standalone tool had more contextual dependencies than originally expected. 
+
+## 💬 Original Chinese
+
+> KPS 不是只看 Keyword，还依赖竞品、SV、CPS 和 Keyword Source。
+
+## 🇺🇸 Natural English
+
+> KPS isn't derived from the keyword alone. It also depends on competitor data, search volume, CPS, and keyword source.
+
+### Alternative Expressions
+
+* The calculation has several upstream dependencies.
+* This isn't a standalone metric.
+* The input contract needs to carry more context.
+
+### ⭐ 很适合 MCP 设计
+
+> **The tool needs more context than we initially expected.**
+
+---
+
+# Topic 29. Make Optional Context Explicit
+
+## 💬 Original Chinese
+
+> Keyword Source 可以做成 Optional，如果没填，就认为是用户自己加的。
+
+## 🇺🇸 Natural English
+
+> We can make `keywordSource` optional. If it's missing, we can treat the keyword as user-provided. 
+
+### 🧠 Vocabulary
+
+**optional field** — 可选字段
+
+**user-provided** — 用户提供的
+
+**default behavior** — 默认行为
+
+---
+
+# Topic 30. Could Two Tools Be Combined?
+
+## 💬 Original Chinese
+
+> 这两个是不是可以合成一个 Tool？
+
+## 🇺🇸 Natural English
+
+> Could these two capabilities be combined into a single tool? 
+
+### Alternative Expressions
+
+* Do these really need to be separate tools?
+* Could we consolidate them?
+* Are the input/output contracts similar enough to merge?
+
+### ⭐ MCP 设计很实用
+
+> **Are these capabilities distinct enough to justify separate tools?**
+
+---
+
+# Topic 31. Final Sprint Risk Check
+
+## 📌 Meeting Background
+
+At the end of planning, the team explicitly checked for delivery risks and delays. If new product requirements entered the sprint later, they would need to be reviewed against the existing commitment and potentially replace lower-priority work rather than simply being added on top. 
+
+## 💬 Original Chinese
+
+> 大家看一下自己手上的风险，有 Delay 风险就提前讲。
+
+## 🇺🇸 Natural English
+
+> Please review your own items and raise any delivery risks or potential delays early.
+
+### ⭐ 必背
+
+> **Please flag any delivery risks early.**
+
+---
+
+## 💬 Original Chinese
+
+> 如果产品中途加新需求，要看会不会影响当前 Sprint 的交付，要不要置换。
+
+## 🇺🇸 Natural English
+
+> If new product work comes in mid-sprint, we need to assess the impact on the current commitment and decide whether something else should be deprioritized.
+
+### ⭐ 高级项目表达
+
+> **New work shouldn't simply be added on top of the existing commitment.**
+
+---
+
+# Topic 32. Planning Is Done Once the Team Commits
+
+## 💬 Original Chinese
+
+> 如果没有问题，整个 Sprint 范围也就确认了。
+
+## 🇺🇸 Natural English
+
+> If there are no further concerns, we can consider the sprint scope finalized.
+
+### Alternative Expressions
+
+* We're comfortable committing to this scope.
+* This will be our committed sprint scope.
+* The sprint plan is finalized.
+
+### ⭐ Sprint Planning 收尾
+
+> **Are we all comfortable committing to this scope?**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “框定 Sprint 范围”
+
+> **define the sprint scope**
+
+> **finalize the sprint scope**
+
+---
+
+### 2. “提测时间”
+
+> **QA handoff date**
+
+> **test-ready date**
+
+---
+
+### 3. “Story 很大，需要拆”
+
+> **The story is too large and should be broken down further.**
+
+---
+
+### 4. “测试范围比需求范围大”
+
+> **The regression scope is broader than the feature scope.**
+
+---
+
+### 5. “我现在不确定，不想乱猜”
+
+> **I don't want to guess. Let me verify that first.**
+
+---
+
+### 6. “数据要不要存”
+
+> **Do we need to persist this data?**
+
+---
+
+### 7. “整个请求可能很慢”
+
+> **This may turn into a long-running request.**
+
+---
+
+### 8. “这个需求还没 Ready”
+
+> **The requirement isn't implementation-ready yet.**
+
+---
+
+### 9. “有外部依赖”
+
+> **We're blocked by an upstream dependency.**
+
+---
+
+### 10. “先不承诺”
+
+> **We shouldn't commit to this yet.**
+
+---
+
+# ⭐ Shadowing Practice – Sprint Planning Edition
+
+建议你重点练这一组：
+
+> **This is where we decide what we can realistically commit to for the sprint.**
+
+> **Let's make sure we're aligned on the requirement.**
+
+> **We need a consistent baseline for estimation.**
+
+> **A large estimate is usually a signal that the story should be split.**
+
+> **Let's make the QA handoff date explicit.**
+
+> **That should give QA enough time before the release.**
+
+> **QA needs enough context to understand what changed and what needs to be validated.**
+
+> **I don't want to guess. Let me verify that first.**
+
+> **Let's avoid storing data unless there's a clear use case for it.**
+
+> **This may turn into a long-running request.**
+
+> **Let's get some real measurements before we decide.**
+
+> **The tool contract still needs to be finalized.**
+
+> **The timeline depends on the upstream dependency.**
+
+> **The integration is more involved than we initially expected.**
+
+> **We shouldn't commit to this until the design is clearer.**
+
+> **Please flag any delivery risks early.**
+
+> **Are we all comfortable committing to this scope?**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression               | 中文        |
+| ------------------------ | --------- |
+| **sprint scope**         | Sprint 范围 |
+| **commit to**            | 承诺交付      |
+| **capacity**             | 团队容量      |
+| **velocity**             | 团队速度      |
+| **baseline**             | 基准        |
+| **QA handoff date**      | 提测日期      |
+| **testing buffer**       | 测试缓冲      |
+| **integration branch**   | 集成分支      |
+| **blast radius**         | 改动影响范围    |
+| **persist data**         | 持久化数据     |
+| **long-running request** | 长耗时请求     |
+| **implementation-ready** | 可进入开发     |
+| **upstream dependency**  | 上游依赖      |
+| **technically feasible** | 技术可行      |
+| **defer**                | 延后        |
+| **trace back**           | 回溯        |
+| **optional field**       | 可选字段      |
+| **tool contract**        | 工具输入输出契约  |
+| **delivery risk**        | 交付风险      |
+| **deprioritize**         | 降低优先级     |
+
+## ⭐ 今天最值得你背的 10 句
+
+> **This is where we decide what we can realistically commit to for the sprint.**
+
+> **Let's make sure we're aligned on the requirement.**
+
+> **A large estimate is usually a signal that the story should be split.**
+
+> **Let's make the QA handoff date explicit.**
+
+> **QA needs enough context to understand what changed and what needs to be validated.**
+
+> **I don't want to guess. Let me verify that first.**
+
+> **The tool contract still needs to be finalized.**
+
+> **The timeline depends on the upstream dependency.**
+
+> **We shouldn't commit to this until the design is clearer.**
+
+> **Please flag any delivery risks early.**
