@@ -6343,3 +6343,823 @@ Let's get this clarified before we go live.
 Any blockers at the moment?
 
 We're running a little long, so let's keep the remaining updates brief.
+
+# Engineering Meeting English Notebook
+
+## Meeting #22 – Standup, Integration Testing, Release Readiness & Environment Coordination
+
+这场会议是非常典型的 **Daily Standup**。最值得学习的是：**开发进度同步、联调、测试环境协调、是否一起发布、回归范围、上游方案未定、压测结果、测试阻塞、Mock 数据，以及配置依赖**。会议由 Yongyi 开始主持，并按成员逐个同步进度。
+
+---
+
+# Topic 1. Development Is Mostly Complete
+
+## 📌 Meeting Background
+
+The OpenAI migration work was mostly coded, and the current focus had shifted to integration testing. However, preparing enough test data—especially large-volume data—was still a challenge. 
+
+## 💬 Original Chinese
+
+> 编码的话大部分已经完成了，然后目前的话就是在集成测试。
+
+## 🇺🇸 Natural English
+
+> Most of the implementation is complete, and we're currently in integration testing.
+
+### Alternative Expressions
+
+* Most of the coding is done.
+* Development is largely complete.
+* We're now focused on integration testing.
+
+### ⭐ 推荐直接背
+
+> **Most of the implementation is complete, and we're currently in integration testing.**
+
+---
+
+## 💬 Original Chinese
+
+> 造大数据量的时候遇到一点问题，目前数据量比较有限。
+
+## 🇺🇸 Natural English
+
+> We're having some trouble generating large-volume test data, so the amount of data available for testing is still limited.
+
+### Alternative Expressions
+
+* We're currently limited by test-data availability.
+* Generating enough test data has been a challenge.
+* We don't have enough high-volume data for testing yet.
+
+### 🧠 Vocabulary
+
+**test-data availability** = 测试数据可用性
+
+**high-volume data** = 大数据量
+
+---
+
+# Topic 2. Can We Release These Changes Together?
+
+## 📌 Meeting Background
+
+The team discussed whether a newly added requirement should ship together with the existing migration work. The decision depended on whether everything could be finished within the current sprint. 
+
+## 💬 Original Chinese
+
+> 是要打算一起发吗？
+
+## 🇺🇸 Natural English
+
+> Are we planning to release these together?
+
+### Alternative Expressions
+
+* Are these supposed to ship together?
+* Do we want to bundle these into the same release?
+* Are these changes coupled for release?
+
+---
+
+## 💬 Original Chinese
+
+> 如果到时候来得及的话，看能不能一起发。
+
+## 🇺🇸 Natural English
+
+> If we can get everything ready in time, we'll try to release them together.
+
+### Alternative Expressions
+
+* If the timeline allows, we'll bundle them into the same release.
+* If we can finish within this sprint, we'll ship them together.
+* Otherwise, we'll move them to the next sprint.
+
+### ⭐ 高频
+
+> **If the timeline allows, we'll ship them together.**
+
+---
+
+# Topic 3. Same Business Behavior, Different Implementation
+
+## 📌 Meeting Background
+
+Although the API fields had changed significantly, the expected frontend behavior was intended to remain equivalent to the old flow. QA therefore needed to compare the new behavior carefully against the existing page. 
+
+## 💬 Original Chinese
+
+> 接口字段变化比较大，但前端判断条件可能只是等价于之前的。
+
+## 🇺🇸 Natural English
+
+> The API fields have changed quite a bit, but the frontend logic is intended to remain functionally equivalent to the previous implementation.
+
+### Alternative Expressions
+
+* The implementation changed, but the expected behavior should stay the same.
+* The logic has been rewritten against a new response shape.
+* We need to verify behavioral equivalence.
+
+### 🧠 Vocabulary
+
+**functionally equivalent** = 功能效果等价
+
+**behavioral equivalence** = 行为一致性
+
+**response shape** = 接口返回结构
+
+---
+
+## 💬 Original Chinese
+
+> 至于等价生不生效，还是要看测试。
+
+## 🇺🇸 Natural English
+
+> Whether the new logic is truly equivalent still needs to be verified through testing.
+
+### ⭐ 很实用
+
+> **We still need to verify that the behavior is equivalent.**
+
+---
+
+# Topic 4. Compare Against the Existing Flow
+
+## 💬 Original Chinese
+
+> 需要跟之前那个页面进行对比。
+
+## 🇺🇸 Natural English
+
+> We should compare the new behavior against the existing page.
+
+### Alternative Expressions
+
+* Use the current production behavior as the baseline.
+* Run a side-by-side comparison.
+* Validate that the new flow behaves the same as the old one.
+
+### 🧠 Vocabulary
+
+**baseline** = 对比基准
+
+**side-by-side comparison** = 并排对比
+
+---
+
+# Topic 5. Coding Is Done, but Integration Testing Hasn't Started
+
+## 💬 Original Chinese
+
+> 还没有正式联调测试，代码都差不多了。
+
+## 🇺🇸 Natural English
+
+> The code is mostly done, but we haven't started formal integration testing yet. 
+
+### Alternative Expressions
+
+* Development is nearly complete, but integration testing is still pending.
+* We're code-complete, but not integration-tested yet.
+* The next step is formal integration testing.
+
+### ⭐ 推荐
+
+> **We're nearly code-complete, but integration testing is still pending.**
+
+---
+
+# Topic 6. Find Out Which Side Owns the Missing Work
+
+## 📌 Meeting Background
+
+For the review tool, the team needed to determine whether missing APIs had not yet been implemented on the frontend or had not yet been refactored on the backend. 
+
+## 💬 Original Chinese
+
+> 现在就是要判断一下，这些接口到底是前端没实现，还是后端没有重构。
+
+## 🇺🇸 Natural English
+
+> We need to determine whether the missing work is on the frontend side or the backend refactor.
+
+### Alternative Expressions
+
+* We need to identify which side owns the gap.
+* Let's figure out whether this is a frontend or backend issue.
+* We need to clarify ownership before moving forward.
+
+### ⭐ 高频
+
+> **We need to identify which side owns the gap.**
+
+---
+
+# Topic 7. A Task Is Hard to Test
+
+## 💬 Original Chinese
+
+> 这个不是特别好测，我在想一些方案来测。
+
+## 🇺🇸 Natural English
+
+> This isn't straightforward to test, so I'm exploring a few ways to validate it. 
+
+### Alternative Expressions
+
+* This is a little tricky to test.
+* I'm still figuring out the best testing approach.
+* I need to find a reliable way to validate this.
+
+### ⭐ 推荐
+
+> **I'm still figuring out the best way to validate this.**
+
+---
+
+# Topic 8. Ask Another Team Member for Testing Ideas
+
+## 💬 Original Chinese
+
+> 如果有什么困难的话，可以问一下 Jing 那边有没有一些想法。
+
+## 🇺🇸 Natural English
+
+> If you run into any difficulties, check with Jing and see if she has any ideas.
+
+### Alternative Expressions
+
+* Feel free to get a second opinion from Jing.
+* You can sync with Jing on the testing approach.
+* Let's see if Jing has any suggestions.
+
+### 🧠 Vocabulary
+
+**second opinion** = 第二意见 / 换个人一起判断
+
+---
+
+# Topic 9. Split Work if One Area Is Too Large
+
+## 📌 Meeting Background
+
+One module involved many legacy pages or APIs, so the host suggested checking with Ivan and splitting the work if needed. 
+
+## 💬 Original Chinese
+
+> 如果涉及到比较多老页面或者老接口，可以分一下。
+
+## 🇺🇸 Natural English
+
+> If the scope includes a lot of legacy pages or APIs, we can split the work.
+
+### Alternative Expressions
+
+* We can divide the work by module.
+* Let's split the scope if it's too large.
+* We can distribute the legacy areas across multiple people.
+
+---
+
+# Topic 10. Waiting on an Upstream Decision
+
+## 📌 Meeting Background
+
+One refactoring effort depended on a meeting with an external vendor. The current API version might be too old, and the vendor could require an upgrade that would also affect the UI. The final solution had not yet been decided. 
+
+## 💬 Original Chinese
+
+> 最终方案还没有定。
+
+## 🇺🇸 Natural English
+
+> The final solution hasn't been decided yet.
+
+### Alternative Expressions
+
+* The approach is still being evaluated.
+* We're waiting for the vendor discussion before making a decision.
+* The final direction is still open.
+
+### ⭐ 高频
+
+> **The final direction is still open.**
+
+---
+
+## 💬 Original Chinese
+
+> 他们觉得我们接口版本太低，升级以后页面也可能会跟着变。
+
+## 🇺🇸 Natural English
+
+> They think our current API version is too old, and upgrading it may also require UI changes.
+
+---
+
+# Topic 11. Share the Meeting Outcome
+
+## 💬 Original Chinese
+
+> 有进展的话，我同步一下。
+
+## 🇺🇸 Natural English
+
+> I'll keep everyone posted once we have an update.
+
+### Alternative Expressions
+
+* I'll share the outcome after the meeting.
+* I'll update the team once we know more.
+* I'll keep you posted.
+
+### ⭐ 必背
+
+> **I'll keep you posted.**
+
+---
+
+# Topic 12. Load Testing Google Trends
+
+## 📌 Meeting Background
+
+After adding IP proxies, the Google Trends flow was load-tested in the test environment at roughly 500 requests per minute. Based on the current traffic expectations, the team felt rate limiting might not be necessary. 
+
+## 💬 Original Chinese
+
+> 我在测试环境压测了一下，每分钟 500 次应该是没问题了。
+
+## 🇺🇸 Natural English
+
+> I ran a load test in the test environment, and it handled around 500 requests per minute without issues.
+
+### Alternative Expressions
+
+* The service handled roughly 500 RPM successfully.
+* We tested it at around 500 requests per minute.
+* It looks stable at 500 RPM.
+
+### 🧠 Vocabulary
+
+**RPM = requests per minute**
+
+**load test** = 压测
+
+---
+
+## 💬 Original Chinese
+
+> 所以我觉得不需要限流，因为实际访问量没有那么高。
+
+## 🇺🇸 Natural English
+
+> Based on our current traffic, I don't think we need application-level rate limiting for now.
+
+### Alternative Expressions
+
+* Our real traffic is well below that threshold.
+* The current capacity appears sufficient.
+* Rate limiting may not be necessary at the moment.
+
+### ⭐ 推荐
+
+> **Our current traffic is well below that threshold.**
+
+---
+
+# Topic 13. Why the Proxy Fixed the Rate-limit Issue
+
+## 💬 Original Chinese
+
+> 之前是单 IP，所以很容易被禁掉；加了 IP 代理以后应该没问题了。
+
+## 🇺🇸 Natural English
+
+> Previously, all requests came from a single IP, so it was easy to get blocked. After introducing IP proxies, the issue appears to be resolved.
+
+### Alternative Expressions
+
+* The single-IP setup was the bottleneck.
+* The proxy pool distributes the traffic across multiple IPs.
+* We're no longer hitting the same IP-based restriction.
+
+---
+
+# Topic 14. Reporting Testing Progress
+
+## 💬 Original Chinese
+
+> 我负责的模块整体测试了 70%。
+
+## 🇺🇸 Natural English
+
+> I'm about 70% through testing for the modules I'm responsible for. 
+
+### Alternative Expressions
+
+* Testing is roughly 70% complete on my side.
+* I've completed about 70% of the test coverage.
+* I'm a little over two-thirds through testing.
+
+### ⭐ 固定句型
+
+> **I'm about X% through testing.**
+
+---
+
+# Topic 15. Coordinate Test Environments
+
+## 📌 Meeting Background
+
+Several TikTok-related modules needed testing, but there was potential overlap in environment usage. The host suggested sequencing the tests so different people could share the environment more efficiently. 
+
+## 💬 Original Chinese
+
+> 可以先测一下 TikTok 相关模块，后面我这边转测的话就可以共用测试环境了。
+
+## 🇺🇸 Natural English
+
+> You can test the TikTok-related modules first, and then we can reuse the same test environment when my changes are ready for QA.
+
+### Alternative Expressions
+
+* Let's sequence the testing to avoid environment conflicts.
+* We can share the same test environment.
+* Let's coordinate the environment usage.
+
+### ⭐ 高频
+
+> **Let's coordinate the environment usage to avoid conflicts.**
+
+---
+
+# Topic 16. Asking About Blockers
+
+## 💬 Original Chinese
+
+> 有遇到什么阻塞问题吗？
+
+## 🇺🇸 Natural English
+
+> Have you run into any blockers?
+
+### Alternative Expressions
+
+* Anything blocking you right now?
+* Are there any issues holding you up?
+* Do you see any risks at the moment?
+
+### ⭐ Standup 必背
+
+> **Any blockers at the moment?**
+
+---
+
+# Topic 17. Missing Deployment / Missing Data
+
+## 💬 Original Chinese
+
+> 有一些没有部署的，还有一些数据没有，需要构造一下。
+
+## 🇺🇸 Natural English
+
+> A few pieces haven't been deployed yet, and some of the required test data still needs to be created. 
+
+### Alternative Expressions
+
+* Some dependencies aren't deployed yet.
+* We're missing some test data.
+* We still need to mock or generate the required data.
+
+---
+
+# Topic 18. Use Mock Data for Exception Scenarios
+
+## 📌 Meeting Background
+
+For an Amazon tool, testing was nearly complete. The remaining cases involved upstream SP-API failures, so mock data was created to validate the exception scenarios. 
+
+## 💬 Original Chinese
+
+> 还剩一些 SP-API 上游异常的场景，早上帮我 Mock 了一下数据。
+
+## 🇺🇸 Natural English
+
+> The remaining cases are upstream SP-API failure scenarios, so we mocked the data to validate them.
+
+### Alternative Expressions
+
+* We need to cover upstream error scenarios.
+* Mock data lets us simulate failures that are hard to reproduce.
+* We're using mocks to validate exception handling.
+
+### 🧠 Vocabulary
+
+**upstream failure** = 上游故障
+
+**exception scenario** = 异常场景
+
+**mock data** = 模拟数据
+
+---
+
+# Topic 19. Finish the Remaining Exception Cases
+
+## 💬 Original Chinese
+
+> 我会把剩余的异常场景验证一下，没问题的话，这个工具就测试完成了。
+
+## 🇺🇸 Natural English
+
+> I'll validate the remaining exception cases after the meeting. If everything looks good, testing for this tool will be complete.
+
+### ⭐ 推荐
+
+> **If the remaining exception cases pass, testing will be complete.**
+
+---
+
+# Topic 20. Plan Your Testing Time
+
+## 💬 Original Chinese
+
+> 今天把这些按时间规划一下，然后去测一下。
+
+## 🇺🇸 Natural English
+
+> Please prioritize the remaining items and plan your testing time accordingly.
+
+### Alternative Expressions
+
+* Organize the work based on priority and available time.
+* Plan your day around the highest-priority test items.
+* Sequence the testing based on urgency.
+
+---
+
+# Topic 21. Research Task + Production Validation
+
+## 📌 Meeting Background
+
+Senhao had a research task related to Brand Registry while also supporting S3 testing and preparing to validate a scheduled job in production. 
+
+## 💬 Original Chinese
+
+> 又分了一个品牌注册的调研工作，今天我会看一下。
+
+## 🇺🇸 Natural English
+
+> I was also assigned a Brand Registry research task, and I'll look into that today.
+
+### Alternative Expressions
+
+* I'll start the research today.
+* I'll investigate the Brand Registry capability.
+* I'll do an initial feasibility check.
+
+---
+
+# Topic 22. Ask for Help If a Module Is Unfamiliar
+
+## 💬 Original Chinese
+
+> 有什么地方不太懂的话，可以及时问一下。
+
+## 🇺🇸 Natural English
+
+> If anything is unfamiliar, please reach out and ask early.
+
+### Alternative Expressions
+
+* Don't hesitate to ask if anything is unclear.
+* Check with the relevant developer if you need context.
+* Ask early rather than getting blocked.
+
+### ⭐ 推荐
+
+> **Please reach out early if anything is unclear.**
+
+---
+
+# Topic 23. Configuration Dependency
+
+## 📌 Meeting Background
+
+Near the end of the standup, Yongyi raised an Apollo configuration dependency and asked Dongming to help configure the newly added settings for two modules. 
+
+## 💬 Original Chinese
+
+> 我这边有一个 Apollo 的配置，需要你帮忙配一下。
+
+## 🇺🇸 Natural English
+
+> I have an Apollo configuration change that I need your help with.
+
+### Alternative Expressions
+
+* I need your help updating the Apollo configuration.
+* There's a configuration dependency on your side.
+* Could you help apply the new config after the meeting?
+
+### ⭐ Standup 很实用
+
+> **I have a configuration dependency that I need your help with.**
+
+---
+
+# Topic 24. Closing the Standup
+
+## 💬 Original Chinese
+
+> 大家还有什么问题吗？如果没有问题的话，就先这样。
+
+## 🇺🇸 Natural English
+
+> Does anyone have anything else to bring up? If not, let's wrap up here. 
+
+### Alternative Expressions
+
+* Anything else before we wrap up?
+* Any other blockers or questions?
+* If there's nothing else, that's it for today.
+
+### ⭐ 推荐
+
+> **Anything else before we wrap up?**
+
+---
+
+# 📖 Grammar & Expression Notes
+
+### 1. “大部分开发完成”
+
+> **Most of the implementation is complete.**
+
+比：
+
+> Most coding is finished.
+
+更自然一些。
+
+---
+
+### 2. “联调”
+
+> **integration testing**
+
+> **test the integration**
+
+---
+
+### 3. “一起发”
+
+> **ship together**
+
+> **bundle into the same release**
+
+---
+
+### 4. “效果一致”
+
+> **functionally equivalent**
+
+> **behaviorally equivalent**
+
+---
+
+### 5. “很难测”
+
+> **tricky to test**
+
+> **not straightforward to test**
+
+---
+
+### 6. “方案还没定”
+
+> **The final direction is still open.**
+
+> **The solution hasn't been finalized yet.**
+
+---
+
+### 7. “压测”
+
+> **run a load test**
+
+不要说：
+
+> ❌ pressure test the API
+
+---
+
+### 8. “测试环境冲突”
+
+> **environment conflict**
+
+> **coordinate environment usage**
+
+---
+
+### 9. “上游异常”
+
+> **upstream failure**
+
+> **upstream error scenario**
+
+---
+
+### 10. “有问题及时问”
+
+> **Reach out early if anything is unclear.**
+
+---
+
+# ⭐ Shadowing Practice – Standup Edition
+
+这场建议你重点练：
+
+> **Most of the implementation is complete, and we're currently in integration testing.**
+
+> **If the timeline allows, we'll ship them together.**
+
+> **We still need to verify that the behavior is equivalent.**
+
+> **We're nearly code-complete, but integration testing is still pending.**
+
+> **We need to identify which side owns the gap.**
+
+> **I'm still figuring out the best way to validate this.**
+
+> **The final solution hasn't been decided yet.**
+
+> **I'll keep you posted once we have an update.**
+
+> **I ran a load test, and it handled around 500 requests per minute without issues.**
+
+> **Our current traffic is well below that threshold.**
+
+> **I'm about 70% through testing.**
+
+> **Let's coordinate the environment usage to avoid conflicts.**
+
+> **Any blockers at the moment?**
+
+> **We're using mock data to validate the exception scenarios.**
+
+> **I have a configuration dependency that I need your help with.**
+
+> **Anything else before we wrap up?**
+
+---
+
+# 📚 Today's Vocabulary
+
+| Expression                   | 中文      |
+| ---------------------------- | ------- |
+| **integration testing**      | 联调      |
+| **test-data availability**   | 测试数据可用性 |
+| **ship together**            | 一起发布    |
+| **functionally equivalent**  | 功能等价    |
+| **behavioral equivalence**   | 行为一致    |
+| **baseline**                 | 对比基准    |
+| **code-complete**            | 编码完成    |
+| **ownership**                | 责任归属    |
+| **testing approach**         | 测试方案    |
+| **upstream decision**        | 上游决策    |
+| **keep someone posted**      | 有进展及时同步 |
+| **load test**                | 压测      |
+| **RPM**                      | 每分钟请求数  |
+| **threshold**                | 阈值      |
+| **proxy pool**               | 代理池     |
+| **environment conflict**     | 环境冲突    |
+| **blocker**                  | 阻塞项     |
+| **mock data**                | 模拟数据    |
+| **upstream failure**         | 上游异常    |
+| **exception scenario**       | 异常场景    |
+| **configuration dependency** | 配置依赖    |
+
+## ⭐ 今天最值得你背的 10 句
+
+> **Most of the implementation is complete, and we're currently in integration testing.**
+
+> **If the timeline allows, we'll ship them together.**
+
+> **We still need to verify that the behavior is equivalent.**
+
+> **I'm still figuring out the best way to validate this.**
+
+> **The final solution hasn't been decided yet.**
+
+> **I'll keep you posted once we have an update.**
+
+> **Our current traffic is well below that threshold.**
+
+> **Let's coordinate the environment usage to avoid conflicts.**
+
+> **Any blockers at the moment?**
+
+> **Anything else before we wrap up?**
