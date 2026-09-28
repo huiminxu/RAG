@@ -197,3 +197,45 @@ I am immensely proud of your growth.
 我对你的成长感到无比自豪。
 I am continuously grateful to work with all of you.
 我一直都非常感激能够和大家一起工作。
+
+
+二、重点短语
+英文	中文
+be available	已经可用、可以使用
+be supposed to do	据说能够；按预期应该
+save up to 40% on tokens	最多节省 40% 的 Token
+compared with	与……相比
+performance benchmarks	性能基准测试
+across the board	全面地；在所有方面
+compute power	计算能力、计算资源
+with less compute power needed	所需的计算资源更少
+be set as the default	被设置为默认选项
+those already using Opus 5	已经在使用 Opus 5 的用户
+make the switch	进行切换、改用另一个选项
+near your spend limit	接近消费额度上限
+head into the end of the month	临近月底
+significantly cheaper	便宜得多
+day-to-day Q&A	日常问答
+documentation generation	文档生成
+presentation generation	演示文稿生成
+use something first	优先使用某个东西
+encounter a message	遇到一条提示消息
+connect MCP to Claude	将 MCP 连接到 Claude
+start to get this message	开始出现这条提示
+deselect a connector	取消选择连接器
+rerun the prompt	重新运行提示词
+the message goes away	提示消息消失了
+be always on	一直处于开启状态
+
+
+三、适合工作中直接使用的句型
+Has anyone encountered this issue before?
+有人以前遇到过这个问题吗？
+I started to get this error after connecting the MCP server.
+连接 MCP 服务后，我开始遇到这个错误。
+The error goes away when I disable these two connectors and rerun the prompt.
+当我禁用这两个连接器并重新运行提示词后，错误就消失了。
+We recommend that you make the switch.
+我们建议你进行切换。
+For day-to-day tasks, use the cheaper models first.
+对于日常任务，请优先使用成本更低的模型。
